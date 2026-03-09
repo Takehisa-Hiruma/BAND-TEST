@@ -1,0 +1,22 @@
+{
+  "id": 99,
+  "name": "MANATY",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 25,
+      "date": "2025-05-09",
+      "title": "Darco vol.15",
+      "form": "IDOL",
+      "venue_id": 10,
+      "venue": "新宿Zirco Tokyo",
+      "seq": 5
+    }
+  ]
+}

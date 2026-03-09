@@ -1,0 +1,22 @@
+{
+  "id": 329,
+  "name": "ENDALL",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 122,
+      "date": "2021-11-27",
+      "title": "METAL RESURRECTION",
+      "form": "BAND",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "seq": 1
+    }
+  ]
+}

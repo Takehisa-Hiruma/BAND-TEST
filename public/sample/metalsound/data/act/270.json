@@ -1,0 +1,31 @@
+{
+  "id": 270,
+  "name": "きみかが！",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 100,
+      "date": "2022-12-08",
+      "title": "idol Wauchin",
+      "form": "IDOL",
+      "venue_id": 43,
+      "venue": "五反田G2",
+      "seq": 3
+    },
+    {
+      "event_id": 96,
+      "date": "2022-12-21",
+      "title": "水曜コレクション vol.16",
+      "form": "IDOL",
+      "venue_id": 41,
+      "venue": "四谷LOTUS",
+      "seq": 4
+    }
+  ]
+}

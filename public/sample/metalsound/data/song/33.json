@@ -1,0 +1,17 @@
+{
+  "id": 33,
+  "title": "Ray",
+  "events": [
+    {
+      "event_id": 9,
+      "date": "2025-12-07",
+      "title": "METAL RESURRECTION 7",
+      "venue_id": 9,
+      "venue": "大塚Hearts＋",
+      "form": "BAND",
+      "seq": 9,
+      "section": "main",
+      "version": "MISAE SOLO"
+    }
+  ]
+}

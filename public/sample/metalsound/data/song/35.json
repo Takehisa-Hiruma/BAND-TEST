@@ -1,0 +1,28 @@
+{
+  "id": 35,
+  "title": "Re:Start Future remix",
+  "events": [
+    {
+      "event_id": 11,
+      "date": "2025-10-26",
+      "title": "Gracemelodia",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 9,
+      "section": "SE",
+      "version": ""
+    },
+    {
+      "event_id": 10,
+      "date": "2025-11-16",
+      "title": "Moment of Converging Fates(DIZZYREVERSE)",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 10,
+      "section": "SE",
+      "version": ""
+    }
+  ]
+}

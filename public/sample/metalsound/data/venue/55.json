@@ -1,0 +1,19 @@
+{
+  "id": 55,
+  "name": "池袋CYBER",
+  "url": "",
+  "events": [
+    {
+      "id": 143,
+      "date": "2019-08-24",
+      "title": "池袋CYBER",
+      "form": "BAND"
+    },
+    {
+      "id": 141,
+      "date": "2020-01-12",
+      "title": "EQUINOX",
+      "form": "BAND"
+    }
+  ]
+}

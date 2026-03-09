@@ -1,0 +1,22 @@
+{
+  "id": 81,
+  "name": "MARKET SHOP STORE",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 31,
+      "date": "2025-02-14",
+      "title": "HELLO NEW WORLD",
+      "form": "IDOL",
+      "venue_id": 14,
+      "venue": "渋谷CHELSEA HOTEL",
+      "seq": 2
+    }
+  ]
+}

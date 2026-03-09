@@ -1,0 +1,31 @@
+{
+  "id": 181,
+  "name": "最果てのハイライト",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 81,
+      "date": "2023-05-09",
+      "title": "DA VAMP Vol.11",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 1
+    },
+    {
+      "event_id": 60,
+      "date": "2024-02-20",
+      "title": "DA VAMP Vol.31",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 2
+    }
+  ]
+}

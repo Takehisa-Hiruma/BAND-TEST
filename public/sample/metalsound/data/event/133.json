@@ -1,0 +1,212 @@
+{
+  "id": 133,
+  "date": "2018-01-28",
+  "title": "DizzFEST vol.1",
+  "sub_title": "ALL YOU NEED is METAL and LOVE",
+  "venue": "新宿WildSide Tokyo",
+  "venue_id": 19,
+  "era": "第１章（METAL）",
+  "era_id": 4,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [],
+  "lineup": [
+    {
+      "person_id": 23,
+      "name": "HOSHIMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 22,
+      "name": "HARUMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 24,
+      "name": "YONMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Bass",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 6,
+      "name": "NAKAJI",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 7,
+      "name": "Douglas",
+      "role": "Bass",
+      "position": "",
+      "ord": 6
+    },
+    {
+      "person_id": 9,
+      "name": "RIHITO",
+      "role": "Drum",
+      "position": "",
+      "ord": 7
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 57,
+      "song_title": "(SE)",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 57,
+      "song_title": "(SE)",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 1,
+      "song_title": "イジメ、ダメ、ゼッタイ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 6,
+      "song_title": "メギツネ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 32,
+      "song_title": "あわだまフィーバー",
+      "section": "main",
+      "version": "w/ KAMIBAND solo",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 20,
+      "song_title": "シンコペーション",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 72,
+      "song_title": "GJ!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 4,
+      "song_title": "紅月 -アカツキ-",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 9,
+      "song_id": 87,
+      "song_title": "Amore -蒼星-",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 10,
+      "song_id": 48,
+      "song_title": "4の歌",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 11,
+      "song_id": 13,
+      "song_title": "Over The Future",
+      "section": "main",
+      "version": "Rising Force Ver.",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 12,
+      "song_id": 51,
+      "song_title": "ド・キ・ド・キ☆モーニング",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 13,
+      "song_id": 16,
+      "song_title": "ギミチョコ!!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 14,
+      "song_id": 8,
+      "song_title": "ヘドバンギャー！！",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 15,
+      "song_id": 71,
+      "song_title": "BABYMETAL DEATH",
+      "section": "encore",
+      "version": "DIZZYMETAL ver.",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 16,
+      "song_id": 14,
+      "song_title": "Road of Resistance",
+      "section": "encore",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

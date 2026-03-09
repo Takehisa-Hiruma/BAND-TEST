@@ -1,0 +1,22 @@
+{
+  "id": 339,
+  "name": "℃-limax",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 127,
+      "date": "2019-03-09",
+      "title": "LIVE TOUR 2019 DAY1",
+      "form": "BAND",
+      "venue_id": 11,
+      "venue": "渋谷GARRET udagawa",
+      "seq": 1
+    }
+  ]
+}

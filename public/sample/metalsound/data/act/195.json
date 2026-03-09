@@ -1,0 +1,31 @@
+{
+  "id": 195,
+  "name": "HATTALLICA",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 89,
+      "date": "2023-03-12",
+      "title": "HATTALLICA結成20周年ツアー",
+      "form": "BAND",
+      "venue_id": 39,
+      "venue": "六本木CLUB Edge",
+      "seq": 2
+    },
+    {
+      "event_id": 64,
+      "date": "2023-11-25",
+      "title": "LEGEND \"1122\"",
+      "form": "BAND",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "seq": 3
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "id": 36,
+  "date": "2024-11-17",
+  "title": "ネクストカルチャーズ",
+  "sub_title": null,
+  "venue": "渋谷DIVE",
+  "venue_id": 16,
+  "era": "第３章（METAL）",
+  "era_id": 2,
+  "tour": "",
+  "tour_id": null,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "るるぱにっく!",
+      "act_id": 131
+    },
+    {
+      "seq": 2,
+      "name": "HIRAETH.Tokyo",
+      "act_id": 125
+    },
+    {
+      "seq": 3,
+      "name": "ヒップバーン",
+      "act_id": 124
+    },
+    {
+      "seq": 4,
+      "name": "YOUR ADVISORY BOAD",
+      "act_id": 129
+    },
+    {
+      "seq": 5,
+      "name": "TOROi",
+      "act_id": 120
+    },
+    {
+      "seq": 6,
+      "name": "INSRiA",
+      "act_id": 113
+    },
+    {
+      "seq": 7,
+      "name": "アイロボ",
+      "act_id": 111
+    },
+    {
+      "seq": 8,
+      "name": "幻色シアター",
+      "act_id": 116
+    },
+    {
+      "seq": 9,
+      "name": "NANONI",
+      "act_id": 121
+    },
+    {
+      "seq": 10,
+      "name": "RiBORN",
+      "act_id": 130
+    },
+    {
+      "seq": 11,
+      "name": "ビーバイユー",
+      "act_id": 123
+    },
+    {
+      "seq": 12,
+      "name": "もぐちっぷ",
+      "act_id": 128
+    },
+    {
+      "seq": 13,
+      "name": "LEVEL7",
+      "act_id": 133
+    },
+    {
+      "seq": 14,
+      "name": "MOON RABBiTS",
+      "act_id": 127
+    },
+    {
+      "seq": 15,
+      "name": "DINKY JUNK",
+      "act_id": 118
+    },
+    {
+      "seq": 16,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 17,
+      "name": "AKIARIM",
+      "act_id": 112
+    },
+    {
+      "seq": 18,
+      "name": "RED-i",
+      "act_id": 132
+    },
+    {
+      "seq": 19,
+      "name": "奏音コレクト",
+      "act_id": 115
+    },
+    {
+      "seq": 20,
+      "name": "milu milu!",
+      "act_id": 126
+    },
+    {
+      "seq": 21,
+      "name": "天空のシラバス",
+      "act_id": 119
+    },
+    {
+      "seq": 22,
+      "name": "のーぷらん。",
+      "act_id": 122
+    },
+    {
+      "seq": 23,
+      "name": "TheWORLD",
+      "act_id": 117
+    },
+    {
+      "seq": 24,
+      "name": "神薙ラビッツ",
+      "act_id": 114
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    }
+  ],
+  "setlist": []
+}

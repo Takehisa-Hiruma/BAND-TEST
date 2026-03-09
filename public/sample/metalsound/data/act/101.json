@@ -1,0 +1,31 @@
+{
+  "id": 101,
+  "name": "はるちょん",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 25,
+      "date": "2025-05-09",
+      "title": "Darco vol.15",
+      "form": "IDOL",
+      "venue_id": 10,
+      "venue": "新宿Zirco Tokyo",
+      "seq": 3
+    },
+    {
+      "event_id": 152,
+      "date": "2026-03-07",
+      "title": "Tweyelight FEST",
+      "form": "BAND",
+      "venue_id": 11,
+      "venue": "渋谷GARRET udagawa",
+      "seq": 1
+    }
+  ]
+}

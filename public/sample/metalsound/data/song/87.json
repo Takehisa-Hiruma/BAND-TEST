@@ -1,0 +1,39 @@
+{
+  "id": 87,
+  "title": "Amore -蒼星-",
+  "events": [
+    {
+      "event_id": 146,
+      "date": "2017-08-27",
+      "title": "初台theDOORS",
+      "venue_id": 51,
+      "venue": "初台theDOORS",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 134,
+      "date": "2017-10-21",
+      "title": "Only The FOXGOD Unknown",
+      "venue_id": 18,
+      "venue": "川崎セルビアンナイト",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 133,
+      "date": "2018-01-28",
+      "title": "DizzFEST vol.1",
+      "venue_id": 19,
+      "venue": "新宿WildSide Tokyo",
+      "form": "BAND",
+      "seq": 9,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

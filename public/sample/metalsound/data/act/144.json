@@ -1,0 +1,22 @@
+{
+  "id": 144,
+  "name": "平成墓嵐",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 38,
+      "date": "2024-10-28",
+      "title": "DAIDOL Vol.113",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 5
+    }
+  ]
+}

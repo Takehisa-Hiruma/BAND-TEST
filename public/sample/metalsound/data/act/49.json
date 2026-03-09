@@ -1,0 +1,58 @@
+{
+  "id": 49,
+  "name": "僕には通じない",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 45,
+      "date": "2024-07-27",
+      "title": "DAIDOL Vol.100",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 17
+    },
+    {
+      "event_id": 40,
+      "date": "2024-08-26",
+      "title": "DAIDOL PARTY",
+      "form": "IDOL",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "seq": 3
+    },
+    {
+      "event_id": 24,
+      "date": "2025-05-27",
+      "title": "last spell vol.7",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 4
+    },
+    {
+      "event_id": 22,
+      "date": "2025-07-18",
+      "title": "イナズマズナvol.6",
+      "form": "IDOL",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "seq": 8
+    },
+    {
+      "event_id": 16,
+      "date": "2025-09-23",
+      "title": "DAIDOL Vol.155",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 7
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": 73,
+  "title": "Video.3",
+  "events": [
+    {
+      "event_id": 125,
+      "date": "2019-12-08",
+      "title": "ONE MAN SHOW",
+      "venue_id": 4,
+      "venue": "吉祥寺ROCK JOINT GB",
+      "form": "BAND",
+      "seq": 12,
+      "section": "Video",
+      "version": ""
+    },
+    {
+      "event_id": 97,
+      "date": "2022-12-17",
+      "title": "DIZZYMETAL ONE MAN LIVE",
+      "venue_id": 42,
+      "venue": "横浜LiT",
+      "form": "BAND",
+      "seq": 20,
+      "section": "Video",
+      "version": ""
+    },
+    {
+      "event_id": 64,
+      "date": "2023-11-25",
+      "title": "LEGEND \"1122\"",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 17,
+      "section": "Video",
+      "version": ""
+    },
+    {
+      "event_id": 62,
+      "date": "2023-12-10",
+      "title": "FATE OF BLOOD MOON ECLIPSE",
+      "venue_id": 10,
+      "venue": "新宿Zirco Tokyo",
+      "form": "BAND",
+      "seq": 18,
+      "section": "Video",
+      "version": ""
+    }
+  ]
+}

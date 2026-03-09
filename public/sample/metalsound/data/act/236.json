@@ -1,0 +1,31 @@
+{
+  "id": 236,
+  "name": "ルミキスex",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 98,
+      "date": "2022-12-13",
+      "title": "DAIDOL vol.28",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    },
+    {
+      "event_id": 79,
+      "date": "2023-05-14",
+      "title": "DAIDOL Vol.46",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    }
+  ]
+}

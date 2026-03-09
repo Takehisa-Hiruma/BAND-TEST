@@ -1,0 +1,49 @@
+{
+  "id": 235,
+  "name": "なんちゃらアイドル",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 106,
+      "date": "2022-10-17",
+      "title": "SPICE GIRLS VOL11",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 4
+    },
+    {
+      "event_id": 86,
+      "date": "2023-04-11",
+      "title": "SPICE GIRLS vol.17",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 6
+    },
+    {
+      "event_id": 77,
+      "date": "2023-05-14",
+      "title": "ND EXTRA!!",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 4
+    },
+    {
+      "event_id": 79,
+      "date": "2023-05-14",
+      "title": "DAIDOL Vol.46",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 6
+    }
+  ]
+}

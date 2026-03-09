@@ -1,0 +1,22 @@
+{
+  "id": 204,
+  "name": "VICTORIUS",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 67,
+      "date": "2023-09-11",
+      "title": "ヴィクトリアス",
+      "form": "BAND",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "seq": 2
+    }
+  ]
+}

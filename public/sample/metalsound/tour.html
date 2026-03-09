@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tour</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; }
+    table { border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 4px 8px; white-space: nowrap; }
+    img { max-width: 300px; border: 1px solid #ccc; margin: 10px 0; }
+    #content { margin: 20px;}
+    html, body { margin: 0 !important; }
+
+
+    .lightbox[hidden]{ display:none; }
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.8);
+      z-index: 999999;
+      overflow: hidden;
+      touch-action: none;
+    }
+    .lightbox img{
+      position: fixed;
+      display: block;
+      margin: 0 !important;
+      border: none;
+      width: auto !important;
+      height: auto !important;
+      max-width: none !important;
+      max-height: none !important;
+      box-sizing: content-box;
+    }
+    body.lb-lock{
+      overflow: hidden;
+      touch-action: none;
+    }
+    #gallery {
+      display:flex; flex-wrap:wrap; gap:8px; align-items:flex-start;
+    }
+    #gallery img {
+      width: 160px;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity .2s ease;
+    }
+
+
+  </style>
+</head>
+<body>
+  <a href="index.html">← 検索に戻る</a>
+  <div id="content"></div>
+
+  <!-- Lightbox Overlay（共通） -->
+  <div id="lightbox" class="lightbox" hidden>
+    <img id="lightbox-img" alt="">
+  </div>
+
+  <script>
+    function getId() {
+      return new URLSearchParams(location.search).get('id');
+    }
+
+    function getParams() {
+      const p = new URLSearchParams(location.search);
+      return { id: p.get("id") };
+    }
+
+    function normalizeUrl(u) {
+      const s = String(u || '').trim();
+      if (!s || /^\s*javascript:/i.test(s)) return '';
+      try {
+        const url = new URL(s.includes('://') ? s : `https://${s}`);
+        return url.toString();
+      } catch {
+        return '';
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[c]));
+    }
+
+
+    async function collectGalleryImages(id) {
+      const base = 'image';
+      const list = [];
+
+      for (let i = 1; i <= 25; i++) {
+        const path = `${base}/tour_${id}_${i}.webp`;
+        const ok = await imgExists(path, 4000); // タイムアウト4s（必要なら調整）
+        if (!ok) break; // 欠番以降は非表示の要件に合致
+        list.push(path);
+      }
+      return list;
+    }
+
+    function imgExists(src, timeoutMs = 4000) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        // ヒント（描画はあとで）：ブラウザ最適化
+        img.decoding = 'async';
+        img.loading = 'eager';        // ここでの存在確認は即時でOK
+        // 低優先度なら: img.fetchPriority = 'low'; // 必要なら
+
+        let ended = false;
+        const done = (v) => { if (!ended) { ended = true; resolve(v); } };
+
+        const to = setTimeout(() => done(false), timeoutMs);
+        img.onload = () => { clearTimeout(to); done(true); };
+        img.onerror = () => { clearTimeout(to); done(false); };
+
+        // キャッシュを効かせたいならキャッシュバスターは付けない
+        img.src = src;
+      });
+    }
+
+    async function main() {
+      const id = getId();
+      if (!id) return;
+
+      const tour = await fetch(`data/tour/${encodeURIComponent(id)}.json`).then(r => r.json());
+      let html = '';
+
+      html += `<h1>${escapeHtml(tour.name)}</h1>`;
+
+      // Tour 画像（存在しなければ非表示 / クリックで拡大）
+      const imgPath = `image/tour_${encodeURIComponent(id)}.webp`;
+      html += `
+        <p>
+          <img class="zoomable" src="${imgPath}" alt="${escapeHtml(tour.name)}"
+               onerror="this.style.display='none'">
+        </p>
+      `;
+
+
+
+
+      if (Array.isArray(tour.events) && tour.events.length) {
+        html += `<h3>イベント一覧</h3>`;
+        html += `<table>
+          <tr><th>日付</th><th>タイトル</th><th>形態</th></tr>`;
+        tour.events.forEach(ev => {
+          html += `<tr>
+            <td>${escapeHtml(ev.date)}</td>
+            <td><a href="event.html?id=${encodeURIComponent(ev.id)}">${escapeHtml(ev.title)}</a></td>
+            <td>${escapeHtml(ev.form)}</td>
+          </tr>`;
+        });
+        html += `</table>`;
+      } else {
+        html += `<p>イベントなし</p>`;
+      }
+
+      document.getElementById('content').innerHTML = html;
+      const div = document.getElementById('content');
+
+
+      // ▼ ギャラリー画像一覧
+      const gallery = await collectGalleryImages(id);
+      if (gallery.length > 0) {
+        // コンテナを先に挿入（wrapでOK。枠ゴースト防止はJS側で制御）
+        div.insertAdjacentHTML(
+          'beforeend',
+          '<h3>ギャラリー</h3><div id="gallery" style="display:flex;flex-wrap:wrap;gap:8px;"></div>'
+        );
+        const container = document.getElementById('gallery');
+
+        // 画像：いったん透明で挿入 → onloadで可視化、onerrorで削除
+        gallery.forEach((src, idx) => {
+          const img = document.createElement('img');
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.alt = '';
+          img.dataset.idx = String(idx); // スライド用にインデックス保持
+          img.style.opacity = '0'; // フェードインだけ
+
+          // ロード成功 → 表示
+          img.onload = () => { img.style.opacity = '1'; };
+          // 失敗 → DOMから除去（= 枠ゴーストなし）
+          img.onerror = () => { img.remove(); };
+
+          // クリック → 既存のライトボックス＋スライドを利用
+          img.addEventListener('click', () => {
+            __anchorEl     = img;
+            currentGallery = gallery;                // 既存の変数を更新
+            currentIndex   = Number(img.dataset.idx);
+            openGalleryImage();                      // 既存の関数を呼ぶ（lbを開く）
+          });
+
+          container.appendChild(img); // 先に差し込む
+          img.src = src;              // 最後にsrcセット（onload取りこぼし防止）
+        });
+      }
+
+      // ▼ ギャラリー用の変数
+      let currentGallery = [];
+      let currentIndex = 0;
+
+      // ▼ ギャラリー表示関数（ライトボックスを流用）
+      function openGalleryImage() {
+        const src = currentGallery[currentIndex];
+        if (!lb.hidden) {          // 表示中は画像だけ差し替え
+          lbImg.src = src;
+          lbImg.alt = '';
+          return;
+        }
+        openLightbox(src, '');     // 初回のみ
+      }
+
+
+      // ▼ ここから追記：クリックで拡大
+      const img = document.getElementById('member-photo');
+      if (img) {
+        // img.addEventListener('click', () => openLightbox(img.src, img.alt));
+        img.addEventListener('click', () => { __anchorEl = img; openLightbox(img.src, img.alt); });
+      }
+
+    }
+
+    /* 起動 */
+    main();
+
+
+    // /* === Lightbox Core（共通） === */
+
+    const lb   = document.getElementById('lightbox');
+    const lbImg= document.getElementById('lightbox-img');
+
+    let __locked = false;
+    let __bound  = false;
+
+    function lockScroll(){
+      if (__locked) return;
+      document.body.classList.add('lb-lock');
+
+      // ★ 祖先の transform/filter/perspective 影響を断つ（“ページにフィット”化の原因を消す）
+      const html = document.documentElement;
+      html.style.setProperty('transform',   'none', 'important');
+      html.style.setProperty('filter',      'none', 'important');
+      html.style.setProperty('perspective', 'none', 'important');
+      document.body.style.setProperty('transform',   'none', 'important');
+      document.body.style.setProperty('filter',      'none', 'important');
+      document.body.style.setProperty('perspective', 'none', 'important');
+
+      __locked = true;
+    }
+
+    function unlockScroll(){
+      if (!__locked) return;
+      document.body.classList.remove('lb-lock');
+
+      // 元に戻す
+      const html = document.documentElement;
+      html.style.removeProperty('transform');
+      html.style.removeProperty('filter');
+      html.style.removeProperty('perspective');
+      document.body.style.removeProperty('transform');
+      document.body.style.removeProperty('filter');
+      document.body.style.removeProperty('perspective');
+
+      __locked = false;
+    }
+
+    function ensureAtBodyRoot(node){
+      // body直下に強制（fixedの基準ブレを確実に断つ）
+      if (node.parentNode !== document.body) {
+        document.body.appendChild(node);
+      }
+    }
+
+    // 画面（viewport）情報
+    function getViewportBox(){
+      const vv = window.visualViewport;
+      if (vv) return { x: vv.offsetLeft, y: vv.offsetTop, w: vv.width, h: vv.height };
+      return { x: 0, y: 0, w: window.innerWidth, h: window.innerHeight };
+    }
+
+    // naturalサイズを画面に「必ず収める」サイズへ（拡大しない）
+    function computeFittedSize(nw, nh, vw, vh, pad = 16){
+      const maxW = Math.max(0, vw - pad);
+      const maxH = Math.max(0, vh - pad);
+      const scale = Math.min(maxW / nw, maxH / nh, 1);
+      return { w: Math.floor(nw * scale), h: Math.floor(nh * scale) };
+    }
+
+    // ★ 他のCSSを全無視して viewport にフィット＆中央配置（すべて !important 指定）
+    function hardFitAndCenter(){
+      const { x, y, w: vw, h: vh } = getViewportBox();
+      const nw = lbImg.naturalWidth  || 0;
+      const nh = lbImg.naturalHeight || 0;
+      if (!nw || !nh) return;
+
+      const pad = 16; // 画面端の余白（不要なら 0）
+      const { w, h } = computeFittedSize(nw, nh, vw, vh, pad);
+
+      // オーバーレイ自体も固定＆全画面（干渉を受けないよう !important）
+      lb.style.setProperty('position',  'fixed',     'important');
+      lb.style.setProperty('inset',     '0',         'important');
+      lb.style.setProperty('overflow',  'hidden',    'important');
+      lb.style.setProperty('background','rgba(0,0,0,.8)', 'important');
+      lb.style.setProperty('z-index',   '999999',    'important');
+
+      // 画像：固定配置 + px でサイズ＆座標を直指定。transformは使わない
+      lbImg.style.setProperty('position', 'fixed',   'important');
+      lbImg.style.setProperty('margin',   '0',       'important');
+      lbImg.style.setProperty('border',   'none',    'important');
+
+      lbImg.style.setProperty('max-width',  'none',  'important');
+      lbImg.style.setProperty('max-height', 'none',  'important');
+      lbImg.style.setProperty('width',    w + 'px',  'important');
+      lbImg.style.setProperty('height',   h + 'px',  'important');
+
+      // 中央座標（px）
+      const left = x + (vw - w) / 2;
+      const top  = y + (vh - h) / 2;
+      lbImg.style.setProperty('left',    left + 'px', 'important');
+      lbImg.style.setProperty('top',     top  + 'px', 'important');
+      lbImg.style.setProperty('transform','none',     'important');
+    }
+
+    function bindViewportEvents(){
+      if (__bound) return;
+      __bound = true;
+      const vv = window.visualViewport;
+      if (vv) {
+        vv.addEventListener('resize', () => { if (!lb.hidden) hardFitAndCenter(); }, { passive: true });
+        vv.addEventListener('scroll', ()  => { if (!lb.hidden) hardFitAndCenter(); }, { passive: true });
+      } else {
+        window.addEventListener('resize', () => { if (!lb.hidden) hardFitAndCenter(); }, { passive: true });
+      }
+    }
+
+    function openLightbox(src, alt=''){
+      if (lb.hidden) {
+        lockScroll();
+        ensureAtBodyRoot(lb);
+        bindViewportEvents();
+      }
+
+      lbImg.removeAttribute('style');
+
+      lbImg.onload = () => { hardFitAndCenter(); };
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lb.hidden = false;
+
+      if (lbImg.complete) Promise.resolve().then(hardFitAndCenter);
+    }
+
+    function closeLightbox(){
+      lb.hidden = true;
+      lbImg.src = '';
+      unlockScroll();
+    }
+
+    lb.addEventListener('click', closeLightbox);
+    lbImg.addEventListener('click', () => {});
+
+
+  </script>
+
+  <div style="margin-top:20px;">
+    <a id="reportLink" target="_blank">このページの誤りを報告</a>
+  </div>
+
+  <script>
+    /* === Zoomable 入口（委譲で統一） === */
+    document.addEventListener('click', (e) => {
+      const img = e.target.closest('img.zoomable');
+      if (!img) return;
+      openLightbox(img.src, img.alt || '');
+    });
+  </script>
+
+  <script src="settings.js"></script>
+  <script>
+    // Google Form の URL を生成（現在のページURLを自動付与）
+    const formURL =
+      `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url&entry.${ENTRY_ID}=`
+      + encodeURIComponent(location.href);
+    document.getElementById("reportLink").href = formURL;
+  </script>
+</body>
+</html>

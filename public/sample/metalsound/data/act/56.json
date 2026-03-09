@@ -1,0 +1,22 @@
+{
+  "id": 56,
+  "name": "ΩMG",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 17,
+      "date": "2025-10-08",
+      "title": "IDOL RIOT",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 3
+    }
+  ]
+}

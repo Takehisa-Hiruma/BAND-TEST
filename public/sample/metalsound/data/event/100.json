@@ -1,0 +1,68 @@
+{
+  "id": 100,
+  "date": "2022-12-08",
+  "title": "idol Wauchin",
+  "sub_title": null,
+  "venue": "五反田G2",
+  "venue_id": 43,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 2,
+      "name": "せろとにん×ばくだん",
+      "act_id": 273
+    },
+    {
+      "seq": 3,
+      "name": "きみかが！",
+      "act_id": 270
+    },
+    {
+      "seq": 4,
+      "name": "Amazing Story",
+      "act_id": 269
+    },
+    {
+      "seq": 5,
+      "name": "LOG BOOK",
+      "act_id": 274
+    },
+    {
+      "seq": 6,
+      "name": "POP CANDY",
+      "act_id": 275
+    },
+    {
+      "seq": 7,
+      "name": "XuXu",
+      "act_id": 276
+    },
+    {
+      "seq": 8,
+      "name": "百鬼乙女",
+      "act_id": 196
+    },
+    {
+      "seq": 9,
+      "name": "レプスルプス",
+      "act_id": 277
+    },
+    {
+      "seq": 10,
+      "name": "のーぷらん。",
+      "act_id": 122
+    }
+  ],
+  "lineup": [],
+  "setlist": []
+}

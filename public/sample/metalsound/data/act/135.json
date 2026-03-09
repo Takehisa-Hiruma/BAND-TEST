@@ -1,0 +1,22 @@
+{
+  "id": 135,
+  "name": "LABOnes.",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 37,
+      "date": "2024-11-16",
+      "title": "あみい生誕祭",
+      "form": "IDOL",
+      "venue_id": 22,
+      "venue": "秋葉原COSMICLAB",
+      "seq": 2
+    }
+  ]
+}

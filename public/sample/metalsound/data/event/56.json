@@ -1,0 +1,87 @@
+{
+  "id": 56,
+  "date": "2024-02-26",
+  "title": "MOSH PIT!",
+  "sub_title": null,
+  "venue": "渋谷VIDENT",
+  "venue_id": 25,
+  "era": "第３章（METAL）",
+  "era_id": 2,
+  "tour": "",
+  "tour_id": null,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "メメント",
+      "act_id": 179
+    },
+    {
+      "seq": 2,
+      "name": "水に似タ感情",
+      "act_id": 178
+    },
+    {
+      "seq": 3,
+      "name": "8bit BRAIN",
+      "act_id": 158
+    },
+    {
+      "seq": 4,
+      "name": "ワガマき",
+      "act_id": 180
+    },
+    {
+      "seq": 5,
+      "name": "高貴な絶対零度",
+      "act_id": 177
+    },
+    {
+      "seq": 6,
+      "name": "9DaysGlitchiClubTokyo",
+      "act_id": 150
+    },
+    {
+      "seq": 7,
+      "name": "mistress",
+      "act_id": 176
+    },
+    {
+      "seq": 8,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    }
+  ],
+  "setlist": []
+}

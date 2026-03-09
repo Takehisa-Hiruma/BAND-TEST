@@ -1,0 +1,31 @@
+{
+  "id": 112,
+  "name": "AKIARIM",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 58,
+      "date": "2024-01-28",
+      "title": "KAMIKAZE GENERATION",
+      "form": "IDOL",
+      "venue_id": 27,
+      "venue": "下北沢シャングリラ",
+      "seq": 3
+    },
+    {
+      "event_id": 36,
+      "date": "2024-11-17",
+      "title": "ネクストカルチャーズ",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 17
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 212,
+  "name": "LOILO",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 70,
+      "date": "2023-07-26",
+      "title": "Darco",
+      "form": "IDOL",
+      "venue_id": 10,
+      "venue": "新宿Zirco Tokyo",
+      "seq": 4
+    }
+  ]
+}

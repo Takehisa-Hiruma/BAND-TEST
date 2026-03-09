@@ -1,0 +1,61 @@
+{
+  "id": 38,
+  "title": "METALIZM",
+  "events": [
+    {
+      "event_id": 48,
+      "date": "2024-06-30",
+      "title": "VIXEN_FEST 2024",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 6,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 47,
+      "date": "2024-09-08",
+      "title": "METAL RESURRECTION 5",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 7,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 39,
+      "date": "2024-10-13",
+      "title": "Grace melodia",
+      "venue_id": 17,
+      "venue": "渋谷Guilty",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 28,
+      "date": "2025-02-22",
+      "title": "Shared Universe Vol.4",
+      "venue_id": 20,
+      "venue": "心斎橋PANHEAD GROOVE",
+      "form": "BAND",
+      "seq": 7,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 27,
+      "date": "2025-03-30",
+      "title": "METAL RESURRECTION 6",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 8,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": 67,
+  "title": "Mirror Mirror",
+  "events": [
+    {
+      "event_id": 73,
+      "date": "2023-09-03",
+      "title": "LEGEND \"2001\"",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "form": "BAND",
+      "seq": 6,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 63,
+      "date": "2023-10-22",
+      "title": "LINER LINER",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 64,
+      "date": "2023-11-25",
+      "title": "LEGEND \"1122\"",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 6,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 62,
+      "date": "2023-12-10",
+      "title": "FATE OF BLOOD MOON ECLIPSE",
+      "venue_id": 10,
+      "venue": "新宿Zirco Tokyo",
+      "form": "BAND",
+      "seq": 9,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

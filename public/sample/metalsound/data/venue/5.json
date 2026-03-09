@@ -1,0 +1,37 @@
+{
+  "id": 5,
+  "name": "大塚Deepa",
+  "url": "https://otsukadeepa.jp/",
+  "events": [
+    {
+      "id": 116,
+      "date": "2022-06-21",
+      "title": "Otsuka IDOL Unite vol.8",
+      "form": "IDOL"
+    },
+    {
+      "id": 99,
+      "date": "2022-11-13",
+      "title": "OTSUKA DAIGO Vol.5",
+      "form": "BAND"
+    },
+    {
+      "id": 90,
+      "date": "2023-02-21",
+      "title": "IDOL DEEGO",
+      "form": "IDOL"
+    },
+    {
+      "id": 73,
+      "date": "2023-09-03",
+      "title": "LEGEND \"2001\"",
+      "form": "BAND"
+    },
+    {
+      "id": 4,
+      "date": "2025-09-28",
+      "title": "THE GRACEFUL DESCENT",
+      "form": "BAND"
+    }
+  ]
+}

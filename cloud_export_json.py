@@ -112,22 +112,24 @@ def main():
         # }
         # write_json(PRJ_ROOT / "index.json", meta)
 
-        # プレースホルダ index.html（任意・既存があればスキップ）
-        ih = PRJ_ROOT / "index.html"
-        if not ih.exists():
-            ih.write_text(
-                "<!doctype html><meta charset='utf-8'>"
-                "<title>Archive</title>"
-                "<h1>Archive</h1>"
-                "<p>data: ./data/events.jsonevents.json</a></p>",
-                encoding="utf-8"
-            )
+        # # プレースホルダ index.html（任意・既存があればスキップ）
+        # ih = PRJ_ROOT / "index.html"
+        # if not ih.exists():
+        #     ih.write_text(
+        #         """<!doctype html>
+        # <meta charset="utf-8">
+        # <title>Archive</title>
+        # <h1>Archive</h1>
+        # <p>data: <a href="./data/events.json">events.json</a></p>
+        # """,
+        #         encoding="utf-8"
+        #     )
 
     # ----------------------------------------
     # 曲一覧（検索用）
     # ----------------------------------------
     songs = qall(cur, "SELECT id, title FROM songs ORDER BY id")
-    write_json(PRJ_ROOT / "songs.json", songs)
+    write_json(PRJ_DATA / "songs.json", songs)
 
     # ----------------------------------------
     # メンバー一覧（検索用）
@@ -147,14 +149,14 @@ def main():
         FROM people
         ORDER BY id
     """)
-    write_json(PRJ_ROOT / "people.json", people)
+    write_json(PRJ_DATA / "people.json", people)
 
 
     # ----------------------------------------
     # 会場一覧（検索用）
     # ----------------------------------------
     venues = qall(cur, "SELECT id, name, COALESCE(url,'') AS url FROM venues ORDER BY id")
-    write_json(PRJ_ROOT / "venues.json", venues)
+    write_json(PRJ_DATA / "venues.json", venues)
 
     # ----------------------------------------
     # 対バン一覧（検索用）
@@ -164,7 +166,7 @@ def main():
         FROM acts
         ORDER BY name COLLATE NOCASE
     """)
-    write_json(PRJ_ROOT / "acts.json", acts)
+    write_json(PRJ_DATA / "acts.json", acts)
 
 
     # ============================================
@@ -261,7 +263,7 @@ def main():
             "setlist": setlist
         }
 
-        write_json(PRJ_ROOT / "event" / f"{eid}.json", event_json)
+        write_json(PRJ_DATA / "event" / f"{eid}.json", event_json)
 
     # ============================================
     #  曲 → 出演イベント一覧（song/{id}.json）
@@ -298,7 +300,7 @@ def main():
         })
 
     for sid, rows in song_map.items():
-        write_json(PRJ_ROOT / "song" / f"{sid}.json", {
+        write_json(PRJ_DATA / "song" / f"{sid}.json", {
             "id": sid,
             "title": song_title_map[sid],
             "events": rows
@@ -345,7 +347,7 @@ def main():
     for p in people:
         pid = p["id"]
         rows = mem_map.get(pid, [])
-        write_json(PRJ_ROOT / "people" / f"{pid}.json", {
+        write_json(PRJ_DATA / "people" / f"{pid}.json", {
             "id": pid,
             "name": p["name"],
             "events": rows,
@@ -383,7 +385,7 @@ def main():
             "events": evs
         }
 
-        write_json(PRJ_ROOT / "venue" / f"{vid}.json", venue_json)
+        write_json(PRJ_DATA / "venue" / f"{vid}.json", venue_json)
 
     # ============================================
     #  Era → イベント一覧（era/{id}.json）
@@ -406,7 +408,7 @@ def main():
             "events": evs
         }
 
-        write_json(PRJ_ROOT / "era" / f"{eid}.json", era_json)
+        write_json(PRJ_DATA / "era" / f"{eid}.json", era_json)
 
     # ============================================
     #  Tour → イベント一覧（tour/{id}.json）
@@ -429,7 +431,7 @@ def main():
             "events": evs
         }
 
-        write_json(PRJ_ROOT / "tour" / f"{tid}.json", tour_json)
+        write_json(PRJ_DATA / "tour" / f"{tid}.json", tour_json)
 
     # ============================================
     #  Act → 出演イベント一覧（act/{id}.json）
@@ -481,7 +483,7 @@ def main():
         }
 
 
-        write_json(PRJ_ROOT / "act" / f"{aid}.json", act_json)
+        write_json(PRJ_DATA / "act" / f"{aid}.json", act_json)
 
 
     # ============================================
@@ -494,7 +496,7 @@ def main():
         FROM setlist
         ORDER BY event_id, seq
     """)
-    write_json(PRJ_ROOT / "setlist.json", rows)
+    write_json(PRJ_DATA / "setlist.json", rows)
 
     # ============================================
     #  lineup.json（検索用）
@@ -504,7 +506,7 @@ def main():
         FROM lineup
         ORDER BY event_id, ord
     """)
-    write_json(PRJ_ROOT / "lineup.json", rows)
+    write_json(PRJ_DATA / "lineup.json", rows)
 
     # bandsevent.json
     rows = qall(cur, """
@@ -512,7 +514,7 @@ def main():
         FROM bandsevent
         ORDER BY event_id, seq
     """)
-    write_json(PRJ_ROOT / "bandsevent.json", rows)
+    write_json(PRJ_DATA / "bandsevent.json", rows)
 
 
     # ルートの軽いメタ（UI/ポータル側で使いやすい）
@@ -537,10 +539,10 @@ def main():
             "image":       "./image/"
         }
     }
-    write_json(PRJ_ROOT / "index.json", meta)
+    write_json(PRJ_DATA / "index.json", meta)
 
     # プレースホルダ index.html（任意・既存があればスキップ）
-    ih = PRJ_ROOT / "index.html"
+    ih = PRJ_DATA / "index.html"
     if not ih.exists():
         ih.write_text(
             """<!doctype html><meta charset='utf-8'>

@@ -1,0 +1,17 @@
+{
+  "id": 52,
+  "title": "Video.1 FUTURE METAL",
+  "events": [
+    {
+      "event_id": 48,
+      "date": "2024-06-30",
+      "title": "VIXEN_FEST 2024",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 1,
+      "section": "Video",
+      "version": ""
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 292,
+  "name": "銀幕さんの LUNA SEA",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 109,
+      "date": "2022-09-04",
+      "title": "Legends In Hearts",
+      "form": "BAND",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "seq": 1
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": 107,
+  "name": "終末のステラ",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 95,
+      "date": "2023-01-13",
+      "title": "DA VAMP Vol.3",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 1
+    },
+    {
+      "event_id": 45,
+      "date": "2024-07-27",
+      "title": "DAIDOL Vol.100",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 15
+    },
+    {
+      "event_id": 38,
+      "date": "2024-10-28",
+      "title": "DAIDOL Vol.113",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 1
+    },
+    {
+      "event_id": 35,
+      "date": "2025-02-24",
+      "title": "NO DOUBT!! vol.23",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    },
+    {
+      "event_id": 153,
+      "date": "2026-02-24",
+      "title": "NO DOUBT!! vol.23",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    }
+  ]
+}

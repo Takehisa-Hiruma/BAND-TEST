@@ -1,0 +1,40 @@
+{
+  "id": 150,
+  "name": "9DaysGlitchiClubTokyo",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 101,
+      "date": "2022-12-08",
+      "title": "夜神乃空生誕祭",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    },
+    {
+      "event_id": 56,
+      "date": "2024-02-26",
+      "title": "MOSH PIT!",
+      "form": "IDOL",
+      "venue_id": 25,
+      "venue": "渋谷VIDENT",
+      "seq": 6
+    },
+    {
+      "event_id": 40,
+      "date": "2024-08-26",
+      "title": "DAIDOL PARTY",
+      "form": "IDOL",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "seq": 6
+    }
+  ]
+}

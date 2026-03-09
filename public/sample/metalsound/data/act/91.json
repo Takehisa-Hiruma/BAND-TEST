@@ -1,0 +1,49 @@
+{
+  "id": 91,
+  "name": "FullMooN",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 121,
+      "date": "2022-02-12",
+      "title": "Crazy Fest ヴァレンタインSP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 5
+    },
+    {
+      "event_id": 108,
+      "date": "2022-09-11",
+      "title": "CrazyFest 秋の大運動会SP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 9
+    },
+    {
+      "event_id": 63,
+      "date": "2023-10-22",
+      "title": "LINER LINER",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    },
+    {
+      "event_id": 29,
+      "date": "2025-01-04",
+      "title": "Metamorphose Festival",
+      "form": "BAND",
+      "venue_id": 15,
+      "venue": "下北沢MOSAiC",
+      "seq": 5
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": 74,
+  "name": "Mellows",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 29,
+      "date": "2025-01-04",
+      "title": "Metamorphose Festival",
+      "form": "BAND",
+      "venue_id": 15,
+      "venue": "下北沢MOSAiC",
+      "seq": 12
+    },
+    {
+      "event_id": 27,
+      "date": "2025-03-30",
+      "title": "METAL RESURRECTION 6",
+      "form": "BAND",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "seq": 2
+    },
+    {
+      "event_id": 34,
+      "date": "2026-02-22",
+      "title": "Hot\"444\"Voice Vol.2",
+      "form": "IDOL",
+      "venue_id": 21,
+      "venue": "渋谷FOWS",
+      "seq": 1
+    }
+  ]
+}

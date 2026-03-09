@@ -1,0 +1,22 @@
+{
+  "id": 217,
+  "name": "Lifesta",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 69,
+      "date": "2023-07-20",
+      "title": "TOKYO GIRLS Connection",
+      "form": "IDOL",
+      "venue_id": 13,
+      "venue": "渋谷Star lounge",
+      "seq": 5
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "id": 32,
+  "date": "2024-12-01",
+  "title": "Shared Universe Vol.3",
+  "sub_title": "MISAMETAL BIRTHDAY SPECIAL",
+  "venue": "川崎セルビアンナイト",
+  "venue_id": 18,
+  "era": "第３章（METAL）",
+  "era_id": 2,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "LUMiRiSE",
+      "act_id": 11
+    },
+    {
+      "seq": 2,
+      "name": "椎名ひかり",
+      "act_id": 62
+    },
+    {
+      "seq": 3,
+      "name": "Risky Melody",
+      "act_id": 26
+    },
+    {
+      "seq": 4,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Guitar（上手）",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 6,
+      "name": "NAKAJI",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 6
+    },
+    {
+      "person_id": 7,
+      "name": "Douglas",
+      "role": "Bass",
+      "position": "",
+      "ord": 7
+    },
+    {
+      "person_id": 9,
+      "name": "RIHITO",
+      "role": "Drum",
+      "position": "",
+      "ord": 8
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 36,
+      "song_title": "Video.1",
+      "section": "Video",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 41,
+      "song_title": "DA DA DANCE",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 6,
+      "song_title": "メギツネ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 2,
+      "song_title": "Distortion",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 46,
+      "song_title": "Catch me if you can",
+      "section": "main",
+      "version": "w/ KAMIBAND solo",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 48,
+      "song_title": "4の歌",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 4,
+      "song_title": "紅月 -アカツキ-",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 7,
+      "song_title": "RATATATA",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 9,
+      "song_id": 3,
+      "song_title": "いいね！",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 10,
+      "song_id": 26,
+      "song_title": "KARATE",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 11,
+      "song_id": 14,
+      "song_title": "Road of Resistance",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 12,
+      "song_id": 8,
+      "song_title": "ヘドバンギャー！！",
+      "section": "encore",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 13,
+      "song_id": 1,
+      "song_title": "イジメ、ダメ、ゼッタイ",
+      "section": "encore",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

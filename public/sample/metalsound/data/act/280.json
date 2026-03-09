@@ -1,0 +1,31 @@
+{
+  "id": 280,
+  "name": "NMINI2K",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 102,
+      "date": "2022-09-30",
+      "title": "DAIDOL FEST Vol.1",
+      "form": "IDOL",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "seq": 1
+    },
+    {
+      "event_id": 106,
+      "date": "2022-10-17",
+      "title": "SPICE GIRLS VOL11",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 3
+    }
+  ]
+}

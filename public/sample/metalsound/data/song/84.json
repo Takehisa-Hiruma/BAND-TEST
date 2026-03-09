@@ -1,0 +1,61 @@
+{
+  "id": 84,
+  "title": "悪夢の輪舞曲",
+  "events": [
+    {
+      "event_id": 132,
+      "date": "2018-04-22",
+      "title": "DizzFEST vol.2",
+      "venue_id": 18,
+      "venue": "川崎セルビアンナイト",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 131,
+      "date": "2018-07-01",
+      "title": "DizzFEST vol.3",
+      "venue_id": 4,
+      "venue": "吉祥寺ROCK JOINT GB",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 130,
+      "date": "2018-12-09",
+      "title": "\"THE ONE\" -man show-",
+      "venue_id": 4,
+      "venue": "吉祥寺ROCK JOINT GB",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 97,
+      "date": "2022-12-17",
+      "title": "DIZZYMETAL ONE MAN LIVE",
+      "venue_id": 42,
+      "venue": "横浜LiT",
+      "form": "BAND",
+      "seq": 9,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 91,
+      "date": "2023-02-12",
+      "title": "METAL RESURRECTION 3",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

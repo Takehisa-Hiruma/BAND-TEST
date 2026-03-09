@@ -1,0 +1,208 @@
+{
+  "id": 84,
+  "date": "2023-04-29",
+  "title": "SHARED UNIVERSE VOL.1",
+  "sub_title": null,
+  "venue": "心斎橋BIGTWIN DINER SHOVEL",
+  "venue_id": 37,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "東名阪 SPRING TOUR 2023",
+  "tour_id": 2,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 10,
+      "name": "AKAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Guitar（上手）",
+      "position": "",
+      "ord": 6
+    },
+    {
+      "person_id": 6,
+      "name": "NAKAJI",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 7
+    },
+    {
+      "person_id": 7,
+      "name": "Douglas",
+      "role": "Bass",
+      "position": "",
+      "ord": 8
+    },
+    {
+      "person_id": 9,
+      "name": "RIHITO",
+      "role": "Drum",
+      "position": "",
+      "ord": 9
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 71,
+      "song_title": "BABYMETAL DEATH",
+      "section": "main",
+      "version": "DIZZYMETAL ver.",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 2,
+      "song_title": "Distortion",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 51,
+      "song_title": "ド・キ・ド・キ☆モーニング",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 3,
+      "song_title": "いいね！",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 10,
+      "song_title": "PA PA YA!!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 80,
+      "song_title": "BxMxC",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 57,
+      "song_title": "(SE)",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 4,
+      "song_title": "紅月 -アカツキ-",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 9,
+      "song_id": 57,
+      "song_title": "(SE)",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 10,
+      "song_id": 5,
+      "song_title": "Monochrome",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 11,
+      "song_id": 6,
+      "song_title": "メギツネ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 12,
+      "song_id": 57,
+      "song_title": "(SE)",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 13,
+      "song_id": 56,
+      "song_title": "THE ONE",
+      "section": "main",
+      "version": "Legend S Ver.",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 14,
+      "song_id": 14,
+      "song_title": "Road of Resistance",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

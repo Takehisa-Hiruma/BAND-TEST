@@ -1,0 +1,72 @@
+{
+  "id": 31,
+  "date": "2025-02-14",
+  "title": "HELLO NEW WORLD",
+  "sub_title": "Buzzer01&. presents.",
+  "venue": "渋谷CHELSEA HOTEL",
+  "venue_id": 14,
+  "era": "第３章（METAL）",
+  "era_id": 2,
+  "tour": "",
+  "tour_id": null,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "EMANON",
+      "act_id": 64
+    },
+    {
+      "seq": 2,
+      "name": "MARKET SHOP STORE",
+      "act_id": 81
+    },
+    {
+      "seq": 3,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 4,
+      "name": "82回目の終身刑",
+      "act_id": 66
+    },
+    {
+      "seq": 5,
+      "name": "Buzzer01&.",
+      "act_id": 4
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    }
+  ],
+  "setlist": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": 293,
+  "name": "Buddha TOKYO",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 117,
+      "date": "2022-05-15",
+      "title": "DAIDOL VOL.14",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 3
+    }
+  ]
+}

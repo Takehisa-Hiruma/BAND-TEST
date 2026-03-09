@@ -1,0 +1,83 @@
+{
+  "id": 83,
+  "title": "Kagerou",
+  "events": [
+    {
+      "event_id": 141,
+      "date": "2020-01-12",
+      "title": "EQUINOX",
+      "venue_id": 55,
+      "venue": "池袋CYBER",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": "w/ KAMIBAND solo"
+    },
+    {
+      "event_id": 99,
+      "date": "2022-11-13",
+      "title": "OTSUKA DAIGO Vol.5",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 91,
+      "date": "2023-02-12",
+      "title": "METAL RESURRECTION 3",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 89,
+      "date": "2023-03-12",
+      "title": "HATTALLICA結成20周年ツアー",
+      "venue_id": 39,
+      "venue": "六本木CLUB Edge",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 53,
+      "date": "2024-05-11",
+      "title": "Free Festival 2024",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": "w/ KAMIBAND solo"
+    },
+    {
+      "event_id": 48,
+      "date": "2024-06-30",
+      "title": "VIXEN_FEST 2024",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": "w/ KAMIBAND solo"
+    },
+    {
+      "event_id": 4,
+      "date": "2025-09-28",
+      "title": "THE GRACEFUL DESCENT",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": "w/ KAMIBAND solo"
+    }
+  ]
+}

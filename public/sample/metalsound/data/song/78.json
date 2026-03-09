@@ -1,0 +1,28 @@
+{
+  "id": 78,
+  "title": "Divine Attack -神撃-",
+  "events": [
+    {
+      "event_id": 75,
+      "date": "2023-06-11",
+      "title": "LINER LINER",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 9,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 74,
+      "date": "2023-06-24",
+      "title": "SPICE GIRLS -EXTRA-",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 7,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

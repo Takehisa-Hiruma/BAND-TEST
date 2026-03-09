@@ -1,0 +1,105 @@
+{
+  "id": 19,
+  "title": "Crazy J",
+  "events": [
+    {
+      "event_id": 48,
+      "date": "2024-06-30",
+      "title": "VIXEN_FEST 2024",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 12,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 43,
+      "date": "2024-08-11",
+      "title": "炎のRockAventers3 Day1",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 47,
+      "date": "2024-09-08",
+      "title": "METAL RESURRECTION 5",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 8,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 39,
+      "date": "2024-10-13",
+      "title": "Grace melodia",
+      "venue_id": 17,
+      "venue": "渋谷Guilty",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 28,
+      "date": "2025-02-22",
+      "title": "Shared Universe Vol.4",
+      "venue_id": 20,
+      "venue": "心斎橋PANHEAD GROOVE",
+      "form": "BAND",
+      "seq": 8,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 2,
+      "date": "2025-06-15",
+      "title": "Shared Universe Vol.5",
+      "venue_id": 4,
+      "venue": "吉祥寺ROCK JOINT GB",
+      "form": "BAND",
+      "seq": 6,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 20,
+      "date": "2025-07-13",
+      "title": "Rebirth of the World",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 6,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 21,
+      "date": "2025-08-10",
+      "title": "炎のRock Avengers5",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "form": "BAND",
+      "seq": 6,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 10,
+      "date": "2025-11-16",
+      "title": "Moment of Converging Fates(DIZZYREVERSE)",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 8,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

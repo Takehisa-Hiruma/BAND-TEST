@@ -1,0 +1,245 @@
+{
+  "id": 48,
+  "date": "2024-06-30",
+  "title": "VIXEN_FEST 2024",
+  "sub_title": null,
+  "venue": "西川口Hearts",
+  "venue_id": 2,
+  "era": "第３章（METAL）",
+  "era_id": 2,
+  "tour": "",
+  "tour_id": null,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "PABYMETAL",
+      "act_id": 164
+    },
+    {
+      "seq": 2,
+      "name": "空斗アキラ",
+      "act_id": 165
+    },
+    {
+      "seq": 3,
+      "name": "並バンド",
+      "act_id": 166
+    },
+    {
+      "seq": 4,
+      "name": "BERRYMETAL",
+      "act_id": 167
+    },
+    {
+      "seq": 5,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Guitar（上手）",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 6,
+      "name": "NAKAJI",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 6
+    },
+    {
+      "person_id": 7,
+      "name": "Douglas",
+      "role": "Bass",
+      "position": "",
+      "ord": 7
+    },
+    {
+      "person_id": 9,
+      "name": "RIHITO",
+      "role": "Drum",
+      "position": "",
+      "ord": 8
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 52,
+      "song_title": "Video.1 FUTURE METAL",
+      "section": "Video",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 41,
+      "song_title": "DA DA DANCE",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 6,
+      "song_title": "メギツネ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 20,
+      "song_title": "シンコペーション",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 83,
+      "song_title": "Kagerou",
+      "section": "main",
+      "version": "w/ KAMIBAND solo",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 38,
+      "song_title": "METALIZM",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 26,
+      "song_title": "KARATE",
+      "section": "main",
+      "version": "feat.BERRYMETAL",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 4,
+      "song_title": "紅月 -アカツキ-",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 9,
+      "song_id": 54,
+      "song_title": "メタり!!",
+      "section": "main",
+      "version": "w/ KAMIBAND solo",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 10,
+      "song_id": 8,
+      "song_title": "ヘドバンギャー！！",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 11,
+      "song_id": 7,
+      "song_title": "RATATATA",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 12,
+      "song_id": 19,
+      "song_title": "Crazy J",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 13,
+      "song_id": 47,
+      "song_title": "Shine",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 14,
+      "song_id": 9,
+      "song_title": "Arkadia",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 15,
+      "song_id": 14,
+      "song_title": "Road of Resistance",
+      "section": "encore",
+      "version": "feat.BERRYMETAL、並バンド、空斗アキラ、PABYMETAL",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 16,
+      "song_id": 56,
+      "song_title": "THE ONE",
+      "section": "encore",
+      "version": "feat.BERRYMETAL、並バンド、空斗アキラ、PABYMETAL",
+      "note": "",
+      "performer": []
+    }
+  ]
+}

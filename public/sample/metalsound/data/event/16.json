@@ -1,0 +1,155 @@
+{
+  "id": 16,
+  "date": "2025-09-23",
+  "title": "DAIDOL Vol.155",
+  "sub_title": null,
+  "venue": "新宿ANTIKNOCK",
+  "venue_id": 6,
+  "era": "第一期（REVERSE）",
+  "era_id": 1,
+  "tour": "",
+  "tour_id": null,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "ZIGA",
+      "act_id": 54
+    },
+    {
+      "seq": 2,
+      "name": "TIGHT",
+      "act_id": 53
+    },
+    {
+      "seq": 3,
+      "name": "世界逆転宣言！",
+      "act_id": 52
+    },
+    {
+      "seq": 4,
+      "name": "僕と契約してライヴ信者になってよ。",
+      "act_id": 51
+    },
+    {
+      "seq": 5,
+      "name": "Village in Maier",
+      "act_id": 50
+    },
+    {
+      "seq": 6,
+      "name": "DIZZYREVERSE",
+      "act_id": 1
+    },
+    {
+      "seq": 7,
+      "name": "僕には通じない",
+      "act_id": 49
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 1,
+      "name": "UYU",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 2,
+      "name": "MAI",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 3,
+      "name": "MISAE",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 4,
+      "name": "NEAR",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 30,
+      "song_title": "Opening",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 21,
+      "song_title": "Dawn of a New World",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 22,
+      "song_title": "VICTORIΛ (feat. 秘京 凛 from LOILO)",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 28,
+      "song_title": "走れ未来へ!!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 24,
+      "song_title": "TOGARE remix",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 25,
+      "song_title": "TOGARE",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 31,
+      "song_title": "Arrowlight",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 27,
+      "song_title": "コールマイヒーロー",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

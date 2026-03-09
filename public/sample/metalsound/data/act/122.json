@@ -1,0 +1,31 @@
+{
+  "id": 122,
+  "name": "のーぷらん。",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 100,
+      "date": "2022-12-08",
+      "title": "idol Wauchin",
+      "form": "IDOL",
+      "venue_id": 43,
+      "venue": "五反田G2",
+      "seq": 10
+    },
+    {
+      "event_id": 36,
+      "date": "2024-11-17",
+      "title": "ネクストカルチャーズ",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 22
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": 205,
+  "name": "FATE GEAR",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 103,
+      "date": "2022-11-05",
+      "title": "FATE GEAR レコ発ツアー東京編",
+      "form": "BAND",
+      "venue_id": 24,
+      "venue": "目黒鹿鳴館",
+      "seq": 3
+    },
+    {
+      "event_id": 67,
+      "date": "2023-09-11",
+      "title": "ヴィクトリアス",
+      "form": "BAND",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "seq": 3
+    }
+  ]
+}

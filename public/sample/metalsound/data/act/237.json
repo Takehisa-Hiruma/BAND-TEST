@@ -1,0 +1,31 @@
+{
+  "id": 237,
+  "name": "DAHLIA NOISE 360°",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 77,
+      "date": "2023-05-14",
+      "title": "ND EXTRA!!",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 1
+    },
+    {
+      "event_id": 79,
+      "date": "2023-05-14",
+      "title": "DAIDOL Vol.46",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 3
+    }
+  ]
+}

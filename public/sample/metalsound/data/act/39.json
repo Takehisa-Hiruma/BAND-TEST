@@ -1,0 +1,22 @@
+{
+  "id": 39,
+  "name": "強くてニューゲーム",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 13,
+      "date": "2025-11-21",
+      "title": "The LUNA-lit Deer",
+      "form": "IDOL",
+      "venue_id": 10,
+      "venue": "新宿Zirco Tokyo",
+      "seq": 4
+    }
+  ]
+}

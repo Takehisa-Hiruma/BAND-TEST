@@ -1,0 +1,49 @@
+{
+  "id": 86,
+  "name": "CHEMICAL X",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 45,
+      "date": "2024-07-27",
+      "title": "DAIDOL Vol.100",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 11
+    },
+    {
+      "event_id": 33,
+      "date": "2024-12-17",
+      "title": "Made in Heaven vol.23",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 4
+    },
+    {
+      "event_id": 30,
+      "date": "2025-01-22",
+      "title": "last spell vol.5",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 5
+    },
+    {
+      "event_id": 24,
+      "date": "2025-05-27",
+      "title": "last spell vol.7",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 7
+    }
+  ]
+}

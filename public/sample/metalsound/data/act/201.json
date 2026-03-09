@@ -1,0 +1,22 @@
+{
+  "id": 201,
+  "name": "Tick☆tik",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 65,
+      "date": "2023-10-29",
+      "title": "NAGISA Twenty!",
+      "form": "IDOL",
+      "venue_id": 29,
+      "venue": "大塚Hearts NEXT",
+      "seq": 2
+    }
+  ]
+}

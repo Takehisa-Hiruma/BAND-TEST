@@ -1,0 +1,22 @@
+{
+  "id": 305,
+  "name": "小原涼",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 108,
+      "date": "2022-09-11",
+      "title": "CrazyFest 秋の大運動会SP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 8
+    }
+  ]
+}

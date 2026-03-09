@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>readme.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///c%3A/Users/005058/buppan/DIZZY-DB/file%3A/C%3A/Users/005058/buppan/venv/markdown-style.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E4%BD%95%E3%81%8C%E5%87%BA%E6%9D%A5%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%AA%E3%82%8B">何が出来るようになる？</h1>
+<p>こんなサイトが <strong>無料で</strong> 作れます。</p>
+<p><a href="https://DIZZY-DB.pages.dev/">https://DIZZY-DB.pages.dev/</a></p>
+<br>
+<h2 id="%E4%BD%95%E3%82%92%E3%81%99%E3%82%8B%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AA%E3%81%AE">何をするサイトなの？</h2>
+<p>バンドの活動履歴アーカイブを公開出来ます。</p>
+<ul>
+<li>参加イベント</li>
+<li>バンドメンバー</li>
+<li>セットリスト</li>
+<li>対バン情報</li>
+<li>ライブハウス</li>
+</ul>
+<p>の情報を入力して横断検索することが可能です。</p>
+<p>オフィシャルアーカイブとしても、ファンサイトでも利用できるかと。</p>
+<br>
+<h2 id="%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E4%BB%95%E7%B5%84%E3%81%BF">どういう仕組み？</h2>
+<ul>
+<li>python アプリで DB に情報を入力、json として出力します。</li>
+<li>git プロジェクトとして GitHub にコミット（アップロード）します。</li>
+<li>Cloudflare 経由で GitHub Pages を参照します。</li>
+</ul>
+<p>なんだか難しそうですね。でも仕組みなんて気にしなくて良いです。</p>
+<br>
+<h2 id="%E5%87%BA%E6%9D%A5%E3%81%AA%E3%81%84%E3%81%93%E3%81%A8%E3%81%AF">出来ないことは？</h2>
+<ul>
+<li>サイト上やスマホでの情報更新は出来ません。</li>
+</ul>
+<p>PCでDB更新 ⇒ json出力 ⇒ git add/commit/push　する必要があります。</p>
+<p>なんだか難しそうですね。でも PC でこのページを見ているなら大丈夫です。</p>
+<br>
+<h2 id="%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E9%96%89%E3%81%98%E3%82%8B%E3%81%AB%E3%81%AF">サイトを閉じるには？</h2>
+<ul>
+<li>Cloudflare アカウントを削除すればサイトを閉鎖出来ます</li>
+<li>GitHub アカウントを削除すればデータも削除されます</li>
+<li>手元の PC に元データが残るだけになります　　←これが肝であり資産であり。無くすと最初の情報収集から。</li>
+</ul>
+<p><br><br></p>
+<h1 id="%F0%9F%8E%B8-%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB">🎸 環境構築マニュアル</h1>
+<p>このマニュアルでは、以下の作業を順番に行います。</p>
+<ol>
+<li>Google アカウントを作る</li>
+<li>GitHub アカウントを作る</li>
+<li>GitHub に空のリポジトリを作る</li>
+<li>Git をインストールする</li>
+<li>Git の初期設定をする</li>
+<li>Python をインストールする</li>
+<li>プロジェクトフォルダを作る</li>
+<li>Git を初期化して GitHub に初回 push</li>
+<li>GitHub Pages を公開する</li>
+</ol>
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%90%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99">１－０．事前準備</h1>
+<p>工程をスムーズに進めるために準備しておきます。</p>
+<br>
+<h3 id="1-0-1%E8%80%83%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8F%E4%BA%8B">1-0-1.考えておく事</h3>
+<table>
+<thead>
+<tr>
+<th>アカウント名</th>
+<th>パスワード</th>
+<th>生年月日</th>
+<th>プロジェクト名</th>
+<th>ニックネーム</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>karinomeado0101</td>
+<td>karinop@ssw0rd</td>
+<td>2000/01/01</td>
+<td>BANDNAME</td>
+<td>NICKNAME</td>
+</tr>
+</tbody>
+</table>
+<p>以下適宜読み替えて進めて下さい。</p>
+<br>
+<h4 id="%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E5%90%8D">アカウント名</h4>
+<ul>
+<li>アルファベット（a-z）、数字（0-9）、およびピリオド（.）のみが使用できます</li>
+</ul>
+<h4 id="%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89">パスワード</h4>
+<ul>
+<li>Google アカウントで使います。忘れないように！</li>
+</ul>
+<h4 id="%E7%94%9F%E5%B9%B4%E6%9C%88%E6%97%A5">生年月日</h4>
+<ul>
+<li>未成年（13歳以下）にしてしまうと Google アカウントがいちいち面倒になりますので注意！</li>
+</ul>
+<h4 id="%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E5%90%8D">プロジェクト名</h4>
+<ul>
+<li>わりとおもてに出てくるかもしれないのでカコイイやつを</li>
+</ul>
+<h4 id="%E3%83%8B%E3%83%83%E3%82%AF%E3%83%8D%E3%83%BC%E3%83%A0">ニックネーム</h4>
+<ul>
+<li>内部的に１回しか使わないので割と適当</li>
+</ul>
+<BR>
+<h3 id="1-0-2%E6%A7%8B%E6%88%90%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">1-0-2.構成ファイル</h3>
+<ul>
+<li><strong>別途入手した ZIP ファイル（Python スクリプト + HTML テンプレート）</strong></li>
+</ul>
+<p><br><br></p>
+<h1 id="%EF%BC%91%E3%83%BC%EF%BC%91google-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B%E7%84%A1%E6%96%99--%EF%BC%93%E5%88%86">１ー１．Google アカウントを作る（無料）- （３分）</h1>
+<p>忘れないようにすべて同じ Google アカウントを使います。</p>
+<p>（既にお持ちであれば省略出来ます）</p>
+<br>
+<h2 id="1-1-1-google-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A8%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%AE%E4%BD%9C%E6%88%90">1-1-1. Google アカウントとメールアドレスの作成</h2>
+<p>1-0-1. のアカウント名とパスワード、生年月日を使って作成</p>
+<p><a href="https://accounts.google.com/signup">https://accounts.google.com/signup</a> を開く</p>
+<br>
+<h4 id="google-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90">Google アカウントを作成</h4>
+<ul>
+<li>姓：省略</li>
+<li>名：karinomeado0101　　←読み替えてね</li>
+</ul>
+<h4 id="%E5%9F%BA%E6%9C%AC%E6%83%85%E5%A0%B1">基本情報</h4>
+<ul>
+<li>生年月日：2000/01/01　　←読み替えてね</li>
+<li>性別：回答しない</li>
+</ul>
+<h4 id="%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E4%BD%9C%E6%88%90">メールアドレスを作成</h4>
+<ul>
+<li>自分で Gmail アドレスを作成</li>
+<li>karinomeado0101@gmail.com　　←読み替えてね</li>
+</ul>
+<h4 id="%E5%AE%89%E5%85%A8%E3%81%AA%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE%E4%BD%9C%E6%88%90">安全なパスワードの作成</h4>
+<ul>
+<li>karinop@ssw0rd　　←読み替えてね</li>
+</ul>
+<h4 id="%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E6%83%85%E5%A0%B1%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84">アカウントを作成する前に情報を確認してください</h4>
+<ul>
+<li>スマートフォンで確認コードを受け取る</li>
+</ul>
+<h4 id="%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%81%A8%E5%88%A9%E7%94%A8%E8%A6%8F%E7%B4%84">プライバシーと利用規約</h4>
+<ul>
+<li>同意する</li>
+</ul>
+<h4 id="%E5%AE%8C%E4%BA%86">完了</h4>
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%92github-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B%E7%84%A1%E6%96%99--%EF%BC%93%E5%88%86">１－２．GitHub アカウントを作る（無料）- （３分）</h1>
+<p>GitHub は「公開フォルダ」みたいなものです</p>
+<br>
+<h2 id="1-2-1-github-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90">1-2-1. GitHub アカウント作成</h2>
+<p>Google アカウントでログインします</p>
+<ul>
+<li>
+<p><a href="https://github.com">https://github.com</a> を開く</p>
+</li>
+<li>
+<p>右上の <strong>Sign in</strong></p>
+</li>
+<li>
+<p><strong>“Continue with Google”</strong> を押す</p>
+</li>
+<li>
+<p>Google アカウントを選ぶ</p>
+</li>
+<li>
+<p>GitHub にログイン</p>
+</li>
+<li>
+<p>次へ</p>
+</li>
+</ul>
+<br>
+<h3 id="sign-up-for-github">Sign up for GitHub</h3>
+<h4 id="email">Email</h4>
+<ul>
+<li>gmail のアドレスである事を確認</li>
+</ul>
+<h4 id="username">Username</h4>
+<ul>
+<li>「<strong>GitHubのユーザー名</strong>」となります　　⇒　以下「〇〇〇〇」となりますのでメモ</li>
+<li>可能であればメールアカウントと同じにすると判り易いかも</li>
+</ul>
+<h4 id="your-countryregion">Your Country/Region</h4>
+<ul>
+<li>Japan でオッケー</li>
+</ul>
+<h4 id="email-preferences">Email preferences</h4>
+<ul>
+<li>メールによるお知らせを受信するならチェック</li>
+</ul>
+<h4 id="create-account">Create Account &gt;</h4>
+<ul>
+<li>パズルを（Visual/Audio）から選択して完成させる　←　わりと難しいかも</li>
+</ul>
+<h3 id="%E5%AE%8C%E4%BA%86">完了</h3>
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%93-github-%E3%81%AB%E7%A9%BA%E3%81%AE%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B--%EF%BC%92%E5%88%86">１－３. GitHub に空のリポジトリを作る- （２分）</h1>
+<p>リポジトリは「保管庫」みたいなもので。</p>
+<br>
+<h3 id="new-repository">New Repository</h3>
+<ul>
+<li>GitHub 右上の <strong>＋</strong></li>
+<li><strong>New repository</strong></li>
+</ul>
+<br>
+<h3 id="create-a-new-repository">Create a new repository</h3>
+<ol>
+<li>General</li>
+</ol>
+<ul>
+<li>Owner はさっきの <strong>GitHubユーザー名</strong> のまま</li>
+<li>Repository name に 1-0-1. の <strong>BANDNAME</strong> を入力  　　←読み替えてね</li>
+</ul>
+<ol start="2">
+<li>Configuration は弄らなくてOK</li>
+</ol>
+<pre class="hljs"><code><div>　　Public
+　　off
+　　No .gitignore
+　　No License
+</div></code></pre>
+<ol start="3">
+<li><strong>Create repository</strong> を押す</li>
+</ol>
+<br>
+<h3 id="%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90%E5%AE%8C%E4%BA%86">リポジトリの作成完了</h3>
+<p><s>Quitck setup に表示されているコマンドは 1-8-4. 辺りで使うので</s></p>
+<pre class="hljs"><code><div>https://github.com/〇〇〇〇/BANDNAME.git  　　←読み替えてね
+</div></code></pre>
+<p>の「〇〇〇〇」は 1-2-1. の「<strong>GitHub のユーザー名</strong>」になります。</p>
+<p>このページは 1-8-4. あたりで使うかもなので閉じなければ後で楽かも？</p>
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%94git-%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E7%84%A1%E6%96%99--%EF%BC%93%E5%88%86">１－４．Git をインストールする（無料）- （３分）</h1>
+<p>ちなみにですが「ギット」と読みます</p>
+<br>
+<h2 id="1-4-1-macos-%E3%81%AE%E5%A0%B4%E5%90%88">1-4-1. macOS の場合</h2>
+<ol>
+<li>「ターミナル」を開く</li>
+<li>次を入力：</li>
+</ol>
+<pre class="hljs"><code><div>xcode-select --install
+</div></code></pre>
+<ol start="3">
+<li>「インストールしますか？」と出たら <strong>インストール</strong> を押す</li>
+<li>完了</li>
+</ol>
+<br>
+<h2 id="1-4-2-windows-%E3%81%AE%E5%A0%B4%E5%90%88">1-4-2. Windows の場合</h2>
+<p><a href="https://git-scm.com/install/">https://git-scm.com/install/</a></p>
+<p>setup 用の .exe をダウンロード、DoubleClick してインストール</p>
+<BR>
+<img width="600" alt="Windows" src="git_windows.png">
+<p><br><br></p>
+<h2 id="1-4-3-%E5%8B%95%E4%BD%9C%E7%A2%BA%E8%AA%8D">1-4-3. 動作確認</h2>
+<p>Terminal または コマンドプロンプトにて、</p>
+<pre class="hljs"><code><div>git -v　（← v は小文字）
+</div></code></pre>
+<p>バージョンが帰ってくれば正常です。</p>
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%95git-%E3%81%AE%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A%E3%82%92%E3%81%99%E3%82%8B--%EF%BC%95%E5%88%86">１－５．Git の初期設定をする- （５分）</h1>
+<p>Git の設定から GitHub 認証用の SSH 公開鍵登録まで</p>
+<br>
+<p>なんだか難しそうですね。楽する為なのでがんばりましょう</p>
+<br>
+<h2 id="1-5-1-github-%E3%81%AE%E8%A8%AD%E5%AE%9A">1-5-1. GitHub の設定</h2>
+<p>ターミナル、またはコマンドプロンプトで次を入力</p>
+<pre class="hljs"><code><div>git config --global user.name &quot;NICKNAME&quot;　　←読み替えてね
+git config --global user.email &quot;karinomeado0101@gmail.com&quot;　　←読み替えてね
+</div></code></pre>
+<p><br><br></p>
+<h2 id="1-5-2-ssh%E3%81%AE%E8%A8%AD%E5%AE%9A">1-5-2. SSHの設定</h2>
+<p>鍵のセットを作ります。南京錠とその鍵　的な</p>
+<br>
+<h3 id="1-5-2-0-ssh%E9%8D%B5%E3%81%AE%E7%A2%BA%E8%AA%8D">1-5-2-0. SSH鍵の確認</h3>
+<p>既存のSSH関連ファイルが <strong>無い事</strong> を確認します。</p>
+<h4 id="macos%E3%81%AE%E5%A0%B4%E5%90%88">macOSの場合</h4>
+<p>Terminal で以下のコマンドをうちます。</p>
+<pre class="hljs"><code><div>open ~/.ssh
+</div></code></pre>
+<h4 id="windows%E3%81%AE%E5%A0%B4%E5%90%88">Windowsの場合</h4>
+<p>エクスプローラで以下のフォルダを開きます。</p>
+<pre class="hljs"><code><div>%HOMEPATH%/.ssh
+</div></code></pre>
+<p>開いた .ssh フォルダにファイル「id_ed25519」が存在すれば次の 1-5-2-1. は <strong>必ず飛ばしてください</strong>。</p>
+<br>
+<h3 id="1-5-2-1-ssh%E9%8D%B5%E3%81%AE%E4%BD%9C%E6%88%90">1-5-2-1. SSH鍵の作成</h3>
+<p>macOS の場合は Terminal で、Windows の場合は Git bash で、</p>
+<pre class="hljs"><code><div>ssh-keygen -t ed25519 -C &quot;karinomeado0101@gmail.com&quot;
+</div></code></pre>
+<pre class="hljs"><code><div>Enter file in which to save the key (/path/ユーザー名/.ssh/id_ed25519):　　　←ココと
+Enter passphrase (empty for no passphrase):　　　←ココと
+Enter same passphrase again:　　　←ココと
+</div></code></pre>
+<p>Enter を３回押すだけ。</p>
+<p>ちなみに Windows の Git bash はココから起動します
+<br>
+<img width="200" alt="Windows" src="git_bash1.png"></p>
+<br>
+<h3 id="1-5-2-2-ssh-%E5%85%AC%E9%96%8B%E9%8D%B5%E3%81%AE%E7%99%BB%E9%8C%B2">1-5-2-2. SSH 公開鍵の登録</h3>
+<p>扉に南京錠を設置するイメージ</p>
+<h4 id="macos-%E3%81%AE%E5%A0%B4%E5%90%88">macOS の場合</h4>
+<p>Terminal で以下のコマンドをうちます。</p>
+<pre class="hljs"><code><div>open ~/.ssh
+</div></code></pre>
+<h4 id="windows-%E3%81%AE%E5%A0%B4%E5%90%88">Windows の場合</h4>
+<p>エクスプローラで以下のフォルダを開きます。</p>
+<pre class="hljs"><code><div>%HOMEPATH%/.ssh
+</div></code></pre>
+<p>そこには</p>
+<ul>
+<li>id_ed25519</li>
+<li>id_ed25519.pub</li>
+</ul>
+<p>２つのファイルがあります。</p>
+<p>※ファイル「id_ed25519」が無い場合は 1-5-2-1. を実行します。さっき飛ばした場合も実行してください。</p>
+<h4 id="%E7%A7%98%E5%AF%86%E9%8D%B5">秘密鍵</h4>
+<p>id_ed25519　は超大事なファイル。物理鍵とか印鑑とかパスワードのイメージ。</p>
+<br>
+<p>とはいえ。<strong>無くしたら作り直せばいい</strong> レベル感ではある。多少面倒なくらい。</p>
+<br>
+<h4 id="%E5%85%AC%E9%96%8B%E9%8D%B5">公開鍵</h4>
+<p>id_ed25519.pub　は南京錠とか口座番号とかユーザー名とか。こちらを GitHub に登録します。</p>
+<br>
+<h4 id="github-%E3%81%AB%E5%85%AC%E9%96%8B%E9%8D%B5%E3%81%AE%E7%99%BB%E9%8C%B2">GitHub に公開鍵の登録</h4>
+<p>id_ed25519.pub の中身（テキストファイルです）を</p>
+<p>https://github.com/settings/ssh/new</p>
+<p>の key 欄にペーストして「Add SSH Key」します。</p>
+<p>Title はわりと何でもいいかも。判別出れば良いんじゃ無いかな？</p>
+<img width="600" alt="git_ssh2" src="git_ssh2.png">
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%96-python-%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E7%84%A1%E6%96%99--%EF%BC%93%E5%88%86">１－６. Python をインストールする（無料）- （３分）</h1>
+<p>データの更新に必要です。</p>
+<br>
+<h2 id="1-6-1-python-%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">1-6-1. python のインストール</h2>
+<p>互換性を考慮し 3.11 系をダウンロードしてインストールします</p>
+<h3 id="macos">macOS</h3>
+<p><a href="https://www.python.org/downloads/macos/">https://www.python.org/downloads/macos/</a></p>
+<img width="600" alt="macOS" src="python_macOS.png">
+<h3 id="windows">Windows</h3>
+<p><a href="https://www.python.org/downloads/windows/">https://www.python.org/downloads/windows/</a></p>
+<img width="600" alt="Windows" src="python_windows.png">
+<br>
+<p>インストールが完了したら Terminal または コマンドプロンプトにて、</p>
+<pre class="hljs"><code><div>python -V　（← V は大文字）
+</div></code></pre>
+<p>ダウンロードしてインストールしたはずのバージョン（3.11.9 とか）が返ってくれば正常です。</p>
+<br>
+<p>なんかこんな感じになっちゃって困ったら、、、</p>
+<pre class="hljs"><code><div>Python 3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)] on win32
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+</div></code></pre>
+<p>「 quit() 」と入力すれば抜けられます</p>
+<pre class="hljs"><code><div>&gt;&gt;&gt; quit()
+&gt;　　　←元に戻った
+</div></code></pre>
+<p><br><br></p>
+<h2 id="1-6-2-python-%E3%81%AE%E8%A8%AD%E5%AE%9A">1-6-2. python の設定</h2>
+<h3 id="1-6-2-1-%E4%BB%AE%E6%83%B3%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%9C%E6%88%90%E4%BD%9C%E6%88%90%E3%81%AF%EF%BC%91%E5%9B%9E%E3%81%A0%E3%81%91%E3%81%A7%E5%8F%AF">1-6-2-1. 仮想環境の作成（作成は１回だけで可）</h3>
+<pre class="hljs"><code><div>cd
+python -m venv .venv
+</div></code></pre>
+<br>
+<h3 id="1-6-2-2-%E4%BB%AE%E6%83%B3%E7%92%B0%E5%A2%83%E3%81%AE%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%99%E3%83%BC%E3%83%88%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E9%83%BD%E5%BA%A6">1-6-2-2. 仮想環境のアクティベート（環境を使用する都度）</h3>
+<p>macOS の場合</p>
+<pre class="hljs"><code><div>source .venv/bin/activate
+</div></code></pre>
+<p>Windows の場合</p>
+<pre class="hljs"><code><div>.venv/scripts/activate
+</div></code></pre>
+<p>プロンプト前に (.venv) が付与されれば成功です。</p>
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%97-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%82%92%E4%BD%9C%E3%82%8B--%EF%BC%91%E5%88%86">１－７. プロジェクトフォルダを作る- （１分）</h1>
+<pre class="hljs"><code><div>cd Documents
+mkdir BANDNAME　　←読み替えてね
+</div></code></pre>
+<p>既にフォルダが存在している場合は、別のプロジェクト名としてください。　BANDNAME-DB  とか</p>
+<p>このフォルダに <strong>入手した ZIP ファイル</strong> を展開します。</p>
+<pre class="hljs"><code><div>BANDNAME　　←読み替えてね
+  │  .gitattributes　　（macOSでは見えないかも）
+  │  .gitignore　　　　（macOSでは見えないかも）
+  │  event_editor_tk.py　　←大事なファイル
+  │  export_json.py　　　　←大事なファイル
+  │
+  └─site　　　　　　←大事なフォルダ
+        act.html
+        era.html
+        event-song.html
+        event.html
+        index.html
+        people.html
+        song.html
+        tour.html
+        venue.html
+</div></code></pre>
+<p>こんな <strong>感じ</strong> になるはず。（版によって構成が異なる場合があります）</p>
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%98-git-%E3%82%92%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%97%E3%81%A6-github-%E3%81%AB%E5%88%9D%E5%9B%9E-push--%EF%BC%92%E5%88%86">１－８. Git を初期化して GitHub に初回 push- （２分）</h1>
+<p>BANDNAME フォルダで実行します　　←読み替えてね</p>
+<br>
+<h2 id="1-8-1-git-%E3%82%92%E5%88%9D%E6%9C%9F%E5%8C%96">1-8-1. Git を初期化</h2>
+<pre class="hljs"><code><div>git init
+</div></code></pre>
+<h2 id="1-8-2-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E7%99%BB%E9%8C%B2">1-8-2. ファイルを登録</h2>
+<pre class="hljs"><code><div>git add .
+</div></code></pre>
+<h2 id="1-8-3-%E6%9C%80%E5%88%9D%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88">1-8-3. 最初のコミット</h2>
+<pre class="hljs"><code><div>git commit -m &quot;first commit&quot;
+</div></code></pre>
+<h2 id="1-8-4-github-%E3%81%A8%E7%B4%90%E3%81%A5%E3%81%91%E3%82%8B%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E8%A8%AD%E5%AE%9A">1-8-4. GitHub と紐づける（リモート設定）</h2>
+<p><s>1-3-5. で開いたままの GitHub リポジトリ作成画面に表示されているコマンドを使う：</s></p>
+<p>1-3. あたりで開きっぱなしだったブラウザ（のどこか）に表示されているかもしれない。</p>
+<pre class="hljs"><code><div>git remote add origin git@github.com:〇〇〇〇/BANDNAME.git　　←読み替えてね
+git branch -M main
+</div></code></pre>
+<h2 id="1-8-5-%E5%88%9D%E5%9B%9E-push%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89">1-8-5. 初回 push（アップロード）</h2>
+<pre class="hljs"><code><div>git push -u origin main
+</div></code></pre>
+<p>これで GitHub のプロジェクトにファイルがアップロードされました。</p>
+<hr>
+<p><br><br></p>
+<h1 id="%EF%BC%91%EF%BC%8D%EF%BC%99-github-pages-%E3%82%92%E5%85%AC%E9%96%8B%E3%81%99%E3%82%8B--%EF%BC%92%E5%88%86">１－９. GitHub Pages を公開する- （２分）</h1>
+<ol>
+<li>GitHubのリポジトリページ</li>
+</ol>
+<p>https://github.com/〇〇〇〇/BANDNAME　　←読み替えてね</p>
+<ol start="2">
+<li>上部タブ右側の 「 <strong>Sttings</strong> 」</li>
+<li>左側メニュー Code and automation にある「 <strong>Pages</strong> 」</li>
+</ol>
+<p>Build and deployment の <strong>Branch</strong></p>
+<pre class="hljs"><code><div>None → main
+/(root)
+</div></code></pre>
+<p>で <strong>save</strong></p>
+<pre class="hljs"><code><div>Your site is ready to be published at:
+https://〇〇〇〇.github.io/BANDNAME/　　←読み替えてね
+</div></code></pre>
+<p>最初は “building…” と出て、30秒〜1分くらいで “published” に変わると公開完了。</p>
+<p>で、実際にブラウザでサイトにアクセスできるようになるのは、、、第２章のデータ入力が終わった後に、、、</p>
+<p><br><br>
+<br><br>
+<br><br>
+<br><br></p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h1 id="%F0%9F%8E%B8-%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB%E7%AC%AC%EF%BC%92%E7%AB%A0">🎸 環境構築マニュアル（第２章）</h1>
+<p>このマニュアルでは、以下の作業を順番に行います。</p>
+<ol>
+<li>データ入力アプリを起動する</li>
+<li>データを入力する</li>
+<li>入力したデータを更新する</li>
+<li>更新したデータをアップロード（push）する</li>
+<li>実際にアクセス</li>
+</ol>
+<br>
+<p>今後何度も繰り返すことになる地道だけど最も大事な章です。</p>
+<p><br><br></p>
+<h1 id="%EF%BC%92%EF%BC%8D%EF%BC%91%E3%83%87%E3%83%BC%E3%82%BF%E5%85%A5%E5%8A%9B%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B">２－１．データ入力アプリを起動する</h1>
+<h2 id="2-1-1-python-%E4%BB%AE%E6%83%B3%E7%92%B0%E5%A2%83%E3%81%AE%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%99%E3%83%BC%E3%83%88">2-1-1. python 仮想環境のアクティベート</h2>
+<p>python 仮想環境を起動します。</p>
+<h3 id="macos-%E3%81%AE%E5%A0%B4%E5%90%88">macOS の場合</h3>
+<pre class="hljs"><code><div>cd
+source .venv/bin/activate
+</div></code></pre>
+<h3 id="windows-%E3%81%AE%E5%A0%B4%E5%90%88">Windows の場合</h3>
+<pre class="hljs"><code><div>cd
+.venv/scripts/activate
+</div></code></pre>
+<p>プロンプト前に (.venv) が付与されれば成功です。</p>
+<br>
+<h2 id="2-1-2-%E3%83%87%E3%83%BC%E3%82%BF%E5%85%A5%E5%8A%9B%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E8%B5%B7%E5%8B%95">2-1-2. データ入力アプリの起動</h2>
+<p>プロジェクトフォルダに移動して、python スクリプトを起動します。</p>
+<pre class="hljs"><code><div>cd Documents
+cd BANDNAME　　←読み替えてね
+python event_editor_tk.py
+</div></code></pre>
+<p>GUI アプリが起動します</p>
+<p><br><br></p>
+<h1 id="%EF%BC%92%EF%BC%8D%EF%BC%92-%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%85%A5%E5%8A%9B%E3%81%99%E3%82%8B">２－２. データを入力する</h1>
+<p><strong>入力</strong>　⇒　更新　⇒　アップロード</p>
+<br>
+<h2 id="2-2-0-%E7%94%A8%E6%84%8F%E3%81%97%E3%81%A6%E3%81%8A%E3%81%8F%E3%82%82%E3%81%AE">2-2-0. 用意しておくもの</h2>
+<p>バンドの活動記録</p>
+<ul>
+<li>
+<p>メンバー情報</p>
+<pre><code>名前とパートぐらいは
+</code></pre>
+</li>
+<li>
+<p>イベント情報</p>
+<pre><code>日付・ハコ・対バンが書かれたフライヤーとか
+</code></pre>
+</li>
+<li>
+<p>セットリスト</p>
+<pre><code>あるとグッとデータベースっぽくなります
+</code></pre>
+</li>
+</ul>
+<p>とりあえず１件あれば</p>
+<br>
+<h2 id="2-2-1-%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%85%A5%E5%8A%9B">2-2-1. マスターデータを入力</h2>
+<h3 id="%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%87%E3%83%BC%E3%82%BF%E3%81%A8%E3%81%AF">マスターデータとは</h3>
+<ul>
+<li>
+<p>People タブ</p>
+<pre><code>バンドメンバーを登録します
+</code></pre>
+</li>
+<li>
+<p>Act タブ</p>
+<pre><code>対バン（出演バンド）を登録します
+</code></pre>
+</li>
+<li>
+<p>Venue タブ</p>
+<pre><code>会場（ライブハウス）を登録します
+</code></pre>
+</li>
+<li>
+<p>Song タブ</p>
+<pre><code>演奏曲を登録します
+</code></pre>
+</li>
+<li>
+<p>Roles タブ</p>
+<pre><code>役割（パート）を登録します
+</code></pre>
+</li>
+<li>
+<p>Era タブ</p>
+<pre><code>「章」や「期」を登録します
+</code></pre>
+</li>
+<li>
+<p>Tour タブ</p>
+<pre><code>ツアー名やシリーズ名を登録します
+</code></pre>
+</li>
+</ul>
+<br>
+<h2 id="2-2-2-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%85%A5%E5%8A%9B">2-2-2. イベントデータを入力</h2>
+<p><strong>イベントタブ</strong> の左上「 <strong>イベント編集</strong> 」でイベントを入力して <strong>保存</strong> します</p>
+<p><strong>イベント編集</strong> 下の <strong>イベント一覧</strong> に表示されるので <strong>選択</strong> してウィンドウ右側の「 <strong>出演者</strong> 」「 <strong>対バン</strong> 」「 <strong>セトリ編集</strong> 」を入力（ほぼプルダウンから選択して登録）します</p>
+<p><br><br></p>
+<h1 id="%EF%BC%92%EF%BC%8D%EF%BC%93%E5%85%A5%E5%8A%9B%E3%81%97%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%9B%B4%E6%96%B0%E3%81%99%E3%82%8B">２－３．入力したデータを更新する</h1>
+<p>入力　⇒　<strong>更新</strong>　⇒　アップロード</p>
+<br>
+<h2 id="2-3-1-%E6%9B%B4%E6%96%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%87%BA%E5%8A%9B">2-3-1. 更新データの出力</h2>
+<p>「 <strong>イベント編集</strong> 」にある「 <strong>Publish JSON</strong> 」をクリックすると更新データが出力されます　　　←割と重要　っていうか <strong>いちいち必須</strong> レベル</p>
+<h2 id="2-3-2-%E6%9B%B4%E6%96%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E7%A2%BA%E8%AA%8D">2-3-2. 更新データの確認</h2>
+<p>「 <strong>イベント編集</strong> 」にある「 <strong>Web参照</strong> 」をクリックするとブラウザが起動して更新を確認することが出来ます</p>
+<p><br><br></p>
+<h1 id="%EF%BC%92%EF%BC%8D%EF%BC%94-%E6%9B%B4%E6%96%B0%E3%81%97%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89push%E3%81%99%E3%82%8B">２－４. 更新したデータをアップロード（push）する</h1>
+<p>入力　⇒　更新　⇒　<strong>アップロード</strong></p>
+<br>
+<h2 id="2-4-1-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E7%99%BB%E9%8C%B2">2-4-1. ファイルを登録</h2>
+<p>BANDNAME フォルダで実行します　　←読み替えてね</p>
+<pre class="hljs"><code><div>git add .　　　　←変更・更新ファイルの抽出
+</div></code></pre>
+<h2 id="2-4-2-%E6%9C%80%E5%88%9D%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88">2-4-2. 最初のコミット</h2>
+<pre class="hljs"><code><div>git commit -m &quot;作業記録&quot;　　　←抽出されたファイルをメッセージ付きで記録
+</div></code></pre>
+<h2 id="2-4-3-push%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89">2-4-3. push（アップロード）</h2>
+<pre class="hljs"><code><div>git push　　　　←記録されたファイルのアップロード
+</div></code></pre>
+<p>これで GitHub のプロジェクトにファイルがアップロードされました。</p>
+<p>この３つのコマンドは今後何度も何度もお世話になるので覚えてしまうと良いでしょう。</p>
+<p><br><br></p>
+<h1 id="%EF%BC%92%EF%BC%8D%EF%BC%95-%E5%AE%9F%E9%9A%9B%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9">２－５. 実際にアクセス</h1>
+<p>GitHub Pages が</p>
+<pre class="hljs"><code><div>https://〇〇〇〇.github.io/BANDNAME/　　←読み替えてね
+</div></code></pre>
+<p>こんな感じの表示だったら、、、実際は</p>
+<pre class="hljs"><code><div>https://〇〇〇〇.github.io/BANDNAME/site/　　←読み替えてね
+</div></code></pre>
+<p>にアクセスすることで表示されると思います。</p>
+<p>このままでは Git ユーザー名「〇〇〇〇」や、プロジェクト名「BANDNAME」がバッチリ出ちゃってて、正直気持ち悪いので第３章も読んでね。</p>
+<p><br><br>
+<br><br>
+<br><br>
+<br><br></p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h1 id="%F0%9F%8E%B8-%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB%E7%AC%AC%EF%BC%93%E7%AB%A0">🎸 環境構築マニュアル（第３章）</h1>
+<p>このマニュアルでは、以下の作業を順番に行います。</p>
+<ol>
+<li>Cloudflare アカウントを作る</li>
+<li>Cloudflare Pages で Git リポジトリをインポートする</li>
+<li>GitHub を Private にする</li>
+<li>アクセス確認をする</li>
+</ol>
+<br>
+<p>？？？　また何言ってるのか判りませんけど、ここまで来たなら出来ます。</p>
+<br>
+<h2 id="cloudflare-%E3%81%A8%E3%81%AF">Cloudflare とは？</h2>
+<p>サイトを超快適・超便利にしてくれます</p>
+<ul>
+<li>サイトが超早くなる！</li>
+<li>独自ドメインの設定が簡単！</li>
+<li>https が自動で付く！</li>
+<li>攻撃に強くなる！</li>
+<li>障害に強くなる！</li>
+</ul>
+<p>使わない理由が無いぐらい強力な CDN（コンテンツ配信ネットワーク）です</p>
+<br>
+<br>
+<h1 id="%EF%BC%93%EF%BC%8D%EF%BC%91-cloudflare-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B%E7%84%A1%E6%96%99">３－１. Cloudflare アカウントを作る（無料）</h1>
+<p>Google アカウントでログインします</p>
+<ol>
+<li><a href="https://dash.cloudflare.com/sign-up">https://dash.cloudflare.com/sign-up</a> を開く</li>
+<li><strong>Google で続行</strong> を選択</li>
+<li>Google アカウントを選ぶ</li>
+<li>国は <strong>Japan</strong>、利用目的は <strong>個人</strong> を選択</li>
+<li>完了</li>
+</ol>
+<p><br><br></p>
+<h1 id="%EF%BC%93%EF%BC%8D%EF%BC%92-cloudflare-pages-%E3%81%A7-git%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B">３－２. Cloudflare Pages で Gitリポジトリをインポートする</h1>
+<p>Cloudflare で GitHub Pages を連携します</p>
+<ol>
+<li>画面右上の <strong>＋ 追加</strong> にある <strong>Pages</strong> をクリック</li>
+<li><strong>既存の Git リポジトリをインポートする</strong> を <strong>始める</strong></li>
+<li><strong>GitHubタブ</strong> の <strong>GitHubアカウント</strong> を「〇〇〇〇」とする　　←読み替えてね</li>
+<li><strong>リポジトリを選択する</strong> では <strong>BANDNAME</strong> を選択する　　←読み替えてね</li>
+<li><strong>セットアップの開始</strong> を押下する</li>
+</ol>
+<p>成功すればアクセス URL は</p>
+<pre class="hljs"><code><div>https://BANDNAME.pages.dev/　　←読み替えてね
+</div></code></pre>
+<p>こんな感じの URL が表示されるので早速アクセスしてみましょう。</p>
+<p>場合によっては数分待つかもしれません。のんびり行きましょう。</p>
+<p><br><br></p>
+<h1 id="%EF%BC%93%EF%BC%8D%EF%BC%93-github-%E3%82%92-private-%E3%81%AB%E3%81%99%E3%82%8B">３－３. GitHub を Private にする</h1>
+<ol>
+<li><a href="https://github.com/">https://github.com/</a>　にアクセスします</li>
+<li>左メニュー「Top repositories」にあるリポジトリ「BANDNAME」をクリックします　　←読み替えてね</li>
+<li>中央画面「General」の下の方「Danger Zone」にある「<strong>Change visibility</strong>」を「<strong>Change to Private</strong>」します</li>
+</ol>
+<ul>
+<li>4回ぐらい英語のボタン押さなきゃダメかも。</li>
+</ul>
+<p><br><br></p>
+<h1 id="%EF%BC%93%EF%BC%8D%EF%BC%94-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E7%A2%BA%E8%AA%8D%E3%82%92%E3%81%99%E3%82%8B">３－４. アクセス確認をする</h1>
+<p>ブラウザ、もしくはスマホから確認します</p>
+<br>
+<h2 id="3-4-1-github-pages-%E3%81%A7%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%E3%81%93%E3%81%A8">3-4-1. GitHub Pages でアクセスできないこと</h2>
+<pre class="hljs"><code><div>https://〇〇〇〇.github.io/BANDNAME/site/　　←読み替えてね
+</div></code></pre>
+<p>でアクセス出来なくなっていることを確認します。404 Not Found とか出てればオッケー。</p>
+<br>
+<h2 id="3-4-2-cloudflare-%E3%81%A7%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8">3-4-2. Cloudflare でアクセスできること</h2>
+<pre class="hljs"><code><div>https://BANDNAME.pages.dev/　　←読み替えてね
+</div></code></pre>
+<p>GitHub を Private にしてもアクセスできることを確認します</p>
+<p>更新・変更の場合、反映に時間が掛かる場合がありますので焦らなくても。ところでちゃんと Publish JSON した？</p>
+<br>
+<hr>
+<p>ここまででほぼ全ての設定が完了しました！</p>
+<p>あとはただただコンテンツを充実させるため第２章（データ入力 ⇒ 更新 ⇒ アップロード）を繰り返します</p>
+<p><br><br>
+<br><br>
+<br><br>
+<br><br></p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h1 id="%F0%9F%8E%B8-%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB%E7%AC%AC%EF%BC%94%E7%AB%A0">🎸 環境構築マニュアル（第４章）</h1>
+<p>このマニュアルでは、以下の作業を任意で行います。</p>
+<ol>
+<li>settings.js の編集</li>
+<li>search.html について</li>
+<li>トップ右上 README の削除</li>
+<li>独自ドメインの利用</li>
+<li>問い合わせフォームの作り方</li>
+<li>画像の取り扱い</li>
+</ol>
+<br>
+<p>やらなくても良いけど、やると便利なカスタマイズ編</p>
+<br>
+<h1 id="%EF%BC%94%EF%BC%8D%EF%BC%91-settingsjs%E3%81%AE%E7%B7%A8%E9%9B%86">４－１. settings.jsの編集</h1>
+<p>サイトを設置した際に変更する値を settings.js というファイルに変数として持たせています。</p>
+<br>
+<h3 id="4-1-1-sitetitle">4-1-1. SITE_TITLE</h3>
+<p>サイトのタイトルを書き換えられます</p>
+<pre class="hljs"><code><div>/** ページタイトル（&lt;title&gt; と &lt;h1&gt; に同じ文言を適用） */
+const SITE_TITLE = &quot;BANDNAME SEARCH&quot;;
+</div></code></pre>
+<br>
+<h3 id="4-1-2-homeurlhomelabel">4-1-2. HOME_URL、HOME_LABEL</h3>
+<p>戻りたいサイトの URL と文言の指定をします</p>
+<pre class="hljs"><code><div>/** （任意）戻るリンク設定：未定義 / 空ならリンクは出さない */
+const HOME_URL   = &quot;https://www.BANDNAME.com/&quot;;
+const HOME_LABEL = &quot;サイトへ戻る&quot;;
+</div></code></pre>
+<br>
+<h3 id="4-1-3-formidentryid">4-1-3. FORM_ID、ENTRY_ID</h3>
+<p>画面下の問い合わせ用 Google フォームで利用している FORM_ID / ENTRY_ID をまとめて書いておきます。</p>
+<pre class="hljs"><code><div>// googleform
+const FORM_ID  = &quot;1FAIpQLScoYyPTdZQnwZT2*********8rwRNJKe9145A9jgZZTa1Ydg&quot;;
+const ENTRY_ID = &quot;13******99&quot;;
+</div></code></pre>
+<p>問い合わせフォームの作り方は　4-5. 辺りで。</p>
+<br>
+<h1 id="%EF%BC%94%EF%BC%8D%EF%BC%92-searchhtml-%E3%81%A8%E3%81%AF">４－２. search.html とは？</h1>
+<p>元サイトに検索窓を追加する為のサンプルコードです。</p>
+<p>既存のコンテンツを壊す事無く、データベース検索機能を追加できるって事です。</p>
+<p>こんなヤツ ↓ を設置できます。</p>
+  <input id="q" type="search" placeholder="イベント / 曲 / 出演者 / 会場 etc...">
+  <button id="search-btn">検索</button>
+  <script>
+    const SEARCH_URL = "https://DIZZY-DB.pages.dev";
+
+    function go() {
+      const v = document.getElementById("q").value || "";
+      location.href = SEARCH_URL + "?q=" + encodeURIComponent(v);
+    }
+
+    document.getElementById("search-btn").onclick = go;
+    document.getElementById("q").addEventListener("keydown", e => {
+      if (e.key === "Enter") go();
+    });
+  </script>
+<br>
+<h3 id="searchurl">SEARCH_URL</h3>
+<p>SEARCH_URL をこの検索サイトの URL に書き換えてから style（見栄え）、div（検索窓）、script（本体） 要素を移植します。</p>
+<pre class="hljs"><code><div>const SEARCH_URL = &quot;https://BANDNAME.pages.dev/&quot;;　　←読み替えてね
+</div></code></pre>
+<br>
+<br>
+<h1 id="%EF%BC%94%EF%BC%8D%EF%BC%93-%E3%83%88%E3%83%83%E3%83%97%E5%8F%B3%E4%B8%8A-readme-%E3%81%AE%E5%89%8A%E9%99%A4%E6%8E%A8%E5%A5%A8">４－３. トップ右上 README の削除（推奨）</h1>
+<p>index.html の 42行目あたり、</p>
+<pre class="hljs"><code><div>&lt;a href=&quot;readme.html&quot; class=&quot;readme-link&quot;&gt;README&lt;/a&gt;
+</div></code></pre>
+<p>をコメントアウトか削除する事で readme を隠せます</p>
+<p>コメントアウト例</p>
+<pre class="hljs"><code><div>&lt;!-- &lt;a href=&quot;readme.html&quot; class=&quot;readme-link&quot;&gt;README&lt;/a&gt; --&gt;
+</div></code></pre>
+<br>
+<br>
+<h1 id="%EF%BC%94%EF%BC%8D%EF%BC%94-%E7%8B%AC%E8%87%AA%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E5%88%A9%E7%94%A8">４－４. 独自ドメインの利用</h1>
+<p>もし独自ドメインをお持ちであれば、github.io とか pages.dev とかでは無く</p>
+<ul>
+<li>BANDNAME.com/search/</li>
+</ul>
+<p>とか</p>
+<ul>
+<li>BANDNAME.jp/search/</li>
+</ul>
+<p>とかにすることが可能です。Cloudflare でサクッと出来ます。応相談。</p>
+<br>
+<br>
+<h1 id="%EF%BC%94%EF%BC%8D%EF%BC%95-%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AE%E4%BD%9C%E3%82%8A%E6%96%B9">４－５. 問い合わせフォームの作り方</h1>
+<p>ページ下にある「このページの誤りを報告」からのジャンプ先フォームを設定します。</p>
+<p>フォームにはクリックされたページの情報と、自由記述フォーム（その他任意）を設置する想定です。</p>
+<br>
+<h2 id="4-5-1-google%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AB%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3">4-5-1. Googleフォームにログイン</h2>
+<p>ブラウザで下記サイトを開きます。アカウントの選択は 1-1. で作成したアカウントで。</p>
+<p><a href="https://docs.google.com/forms/">https://docs.google.com/forms/</a></p>
+<br>
+<h2 id="4-5-2-%E6%96%B0%E3%81%97%E3%81%84%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%82%92%E4%BD%9C%E6%88%90">4-5-2. 新しいフォームを作成</h2>
+<h3 id="%E7%A9%BA%E7%99%BD%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%82%92%E4%BD%9C%E6%88%90%E3%81%97%E3%81%BE%E3%81%99">空白のフォームを作成します</h3>
+<ul>
+<li>無題のフォームが開いています</li>
+</ul>
+<h3 id="%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB%E3%81%A8%E8%AA%AC%E6%98%8E%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%99">タイトルと説明を変更します</h3>
+<ul>
+<li>後からでも変更可能です</li>
+</ul>
+<h3 id="%E3%83%A9%E3%82%B8%E3%82%AA%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%92%E8%A8%98%E8%BF%B0%E5%BC%8F%E7%9F%AD%E6%96%87%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%99">「ラジオボタン」を「記述式（短文）」に変更します</h3>
+<ul>
+<li>ココはクリックされた URL（事前リンク）が入る項目になります</li>
+<li>必要に応じて「必須」や「説明」を入力すると良いでしょう</li>
+</ul>
+<h3 id="%E8%B3%AA%E5%95%8F%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%99">質問を追加します</h3>
+<ul>
+<li>ツールチップの「＋」をクリックすると追加されます</li>
+</ul>
+<h3 id="%E3%83%A9%E3%82%B8%E3%82%AA%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%92%E6%AE%B5%E8%90%BD%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%99">「ラジオボタン」を「段落」に変更します</h3>
+<ul>
+<li>ユーザーが自由記述可能な項目になります</li>
+<li>必要に応じて「必須」や「説明」を入力すると良いでしょう</li>
+</ul>
+<br>
+<h2 id="4-5-3-%E4%BA%8B%E5%89%8D%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%AE%E8%A8%AD%E7%BD%AE%E3%81%A8formidentryid%E3%81%AE%E5%8F%96%E5%BE%97">4-5-3.  事前リンクの設置とFORM_ID、ENTRY_IDの取得</h2>
+<p>体裁が整えられたら「事前リンク」を設置します</p>
+<br>
+<h3 id="%E6%9C%80%E5%88%9D%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AB%E4%BB%AE%E5%85%A5%E5%8A%9B">最初のフォームに仮入力</h3>
+<ul>
+<li>何でも構わないので文字列を入力します</li>
+</ul>
+<h3 id="%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E5%8F%B3%E4%B8%8A%E5%85%AC%E9%96%8B%E3%83%9C%E3%82%BF%E3%83%B3%E5%8F%B3%E3%81%AE%EF%BC%93%E7%82%B9%E3%81%8B%E3%82%89%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AB%E4%BA%8B%E5%89%8D%E5%85%A5%E5%8A%9B%E3%81%99%E3%82%8B%E3%82%92%E9%81%B8%E6%8A%9E">ウィンドウ右上「公開」ボタン右の３点から「フォームに事前入力する」を選択</h3>
+<ul>
+<li>「リンクを取得」ボタンをクリック、ウィンドウ下に出て来る「リンクをコピー」をクリックする</li>
+</ul>
+<h3 id="id%E3%81%AE%E5%85%A5%E6%89%8B">IDの入手</h3>
+<p>クリップボードにコピーされた文字列をテキストエディタ等で確認すると</p>
+<pre class="hljs"><code><div>https://docs.google.com/forms/d/e/**ココがFORM_ID**/viewform?usp=pp_url&amp;entry.**ココがENTRY_ID**=入力した文字列
+</div></code></pre>
+<blockquote>
+<p>forms/d/e/　と　/viewform の間の長めの文字列が <strong>FORM_ID</strong>　（まず変わらない）</p>
+<p>entry.　後の数字が <strong>ENTRY_ID</strong>　（変わる可能性あり）</p>
+</blockquote>
+<p>となりますので　<strong>4-1-3.</strong>（ settings.js ）に記載しておきます</p>
+<BR>
+<p>これで、クリックしたページのリンクが予め入力されている報告フォームが稼働します</p>
+<p>つまりどのページに関しての報告かを伝えなくていいし聞かなくても済むと。双方ストレスレス。</p>
+<p>質問を作り直したりした場合は <strong>ENTRY_ID が変わります</strong> ので再取得する必要が出てくる場合があります。</p>
+<p>フォームを作り直した場合は <strong>FORM_ID</strong> が変わります。</p>
+<br>
+<h2 id="4-5-4-%E3%83%A1%E3%83%BC%E3%83%AB%E9%80%9A%E7%9F%A5">4-5-4. メール通知</h2>
+<p>頂いた報告はフォームの回答ページに蓄積されます。入力・送信された場合にメールによる通知を希望する場合は</p>
+<blockquote>
+<p>「回答」タブの「新しい回答についてのメール通知を受け取る」</p>
+</blockquote>
+<p>にチェックを入れます</p>
+<p><br><br></p>
+<h1 id="%EF%BC%94%EF%BC%8D%EF%BC%96-%E7%94%BB%E5%83%8F%E3%81%AE%E5%8F%96%E3%82%8A%E6%89%B1%E3%81%84">４－６. 画像の取り扱い</h1>
+<p>site フォルダ内にある image フォルダに決められたファイル名で置けば表示される仕組みです。置けば良いだけ。</p>
+<br>
+<h2 id="4-6-1-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%90%8D">4-6-1. ファイル名</h2>
+<p><strong>英数小文字</strong> 厳守。記号は「_」と「.」のみ下記参照。</p>
+<p>大文字が混ざると表示されないと思いますので「Web参照」では表示されちゃう Windows 界隈の人要注意。</p>
+<h3 id="%E6%8E%A5%E9%A0%AD%E8%BE%9E">接頭辞</h3>
+<p>画像ファイル表示は以下のカテゴリで対応しています</p>
+<ul>
+<li>act</li>
+<li>event</li>
+<li>people</li>
+<li>song</li>
+<li>venue</li>
+</ul>
+<h3 id="%E6%8E%A5%E5%B0%BE%E8%BE%9E">接尾辞</h3>
+<p>「_」(アンダースコア)後に id を振る事で指定した id のカバーアートとして表示されます。</p>
+<h3 id="%E9%80%A3%E7%95%AA">連番</h3>
+<p>ギャラリー表示は以下のカテゴリに対応しています</p>
+<ul>
+<li>act</li>
+<li>people</li>
+<li>event　　　　（※1）</li>
+<li>event_song　（※2）</li>
+</ul>
+<p>接頭辞 + 接尾辞 の後ろに「_」(アンダースコア)で連番を振るとギャラリーに表示されます。</p>
+<p>開始は 1 から。欠番があると以降は表示されません。最大値は 25 。変更可能応相談。</p>
+<p>（※1）event_(id)_(n).webp は機能しません　⇒　event_song_(id)_*_(n).webp を勝手に表示します<br>
+（※2）event_song_(id)_(seq)_(n).webp　seq は曲順です　イベントの曲毎のギャラリーを作れます</p>
+<br>
+<h2 id="4-6-2-%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88">4-6-2. 画像フォーマット</h2>
+<p>WebP形式 <strong>のみ</strong> 対応です。拡張子は .webp（全て小文字）</p>
+<br>
+<p><br><br>
+<br><br>
+<br><br>
+<br><br></p>
+<hr>
+<hr>
+<hr>
+<hr>
+<!-- from:USERNAME since:2024-01-01 until:2025-01-01
+
+
+Parsec
+Jump Desktop
+
+ChatGPT Free、Perplexity
+
+https://chat.openai.com/ -->
+</body>
+</html>

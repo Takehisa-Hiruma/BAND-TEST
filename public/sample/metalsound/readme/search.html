@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>検索テストページ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 500px;
+    }
+    input[type="search"] {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>検索テスト</h1>
+
+  <div class="search-box">
+    <input
+      id="q"
+      type="search"
+      placeholder="イベント / 曲 / 出演者 / 会場 etc..."
+      enterkeyhint="search"
+    >
+    <button onclick="go()">検索</button>
+  </div>
+
+  <script>
+    // ★ ここをあなたの検索サイトの URL に！！
+    const SEARCH_URL = "https://DIZZY-DB.pages.dev";  
+
+    function go() {
+      const q = document.getElementById('q').value || "";
+      const url = SEARCH_URL + "?q=" + encodeURIComponent(q);
+      location.href = url;
+    }
+
+    // Enter キーで検索
+    document.getElementById('q').addEventListener('keydown', (e) => {
+      if (e.key === "Enter") go();
+    });
+  </script>
+
+
+
+<!--　　シンプルなのはコチラ　　-->
+<!-- 
+
+  <input id="q" type="search" placeholder="イベント / 曲 / 出演者 / 会場 etc...">
+  <button id="search-btn">検索</button>
+
+  <script>
+    const SEARCH_URL2= "https://DIZZY-DB.pages.dev"; // ← あなたの検索サイトURL
+
+    function go() {
+      const v = document.getElementById("q").value || "";
+      location.href = SEARCH_URL2 + "?q=" + encodeURIComponent(v);
+    }
+
+    document.getElementById("search-btn").onclick = go;
+    document.getElementById("q").addEventListener("keydown", e => {
+      if (e.key === "Enter") go();
+    });
+  </script> -->
+
+
+</body>
+</html>

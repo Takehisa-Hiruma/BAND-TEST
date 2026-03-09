@@ -1,0 +1,67 @@
+{
+  "id": 182,
+  "name": "酔生夢死",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 95,
+      "date": "2023-01-13",
+      "title": "DA VAMP Vol.3",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 3
+    },
+    {
+      "event_id": 90,
+      "date": "2023-02-21",
+      "title": "IDOL DEEGO",
+      "form": "IDOL",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "seq": 3
+    },
+    {
+      "event_id": 88,
+      "date": "2023-03-17",
+      "title": "NEARMETAL生誕祭",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 4
+    },
+    {
+      "event_id": 81,
+      "date": "2023-05-09",
+      "title": "DA VAMP Vol.11",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 5
+    },
+    {
+      "event_id": 82,
+      "date": "2023-06-03",
+      "title": "武蔵野音楽祭",
+      "form": "IDOL",
+      "venue_id": 35,
+      "venue": "吉祥寺SHUFFLE",
+      "seq": 1
+    },
+    {
+      "event_id": 60,
+      "date": "2024-02-20",
+      "title": "DA VAMP Vol.31",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 3
+    }
+  ]
+}

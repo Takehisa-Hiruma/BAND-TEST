@@ -1,0 +1,90 @@
+{
+  "id": 96,
+  "date": "2022-12-21",
+  "title": "水曜コレクション vol.16",
+  "sub_title": "東京演劇女子. おみたろう爆誕Live",
+  "venue": "四谷LOTUS",
+  "venue_id": 41,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "姫川ひかり",
+      "act_id": 265
+    },
+    {
+      "seq": 2,
+      "name": "わーゆう",
+      "act_id": 268
+    },
+    {
+      "seq": 3,
+      "name": "Amazing Story",
+      "act_id": 269
+    },
+    {
+      "seq": 4,
+      "name": "きみかが！",
+      "act_id": 270
+    },
+    {
+      "seq": 5,
+      "name": "星海らら",
+      "act_id": 266
+    },
+    {
+      "seq": 6,
+      "name": "別所あみか",
+      "act_id": 264
+    },
+    {
+      "seq": 7,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 8,
+      "name": "THAT's So",
+      "act_id": 263
+    },
+    {
+      "seq": 9,
+      "name": "山本尚未",
+      "act_id": 262
+    },
+    {
+      "seq": 10,
+      "name": "東京演劇女子.",
+      "act_id": 224
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    }
+  ],
+  "setlist": []
+}

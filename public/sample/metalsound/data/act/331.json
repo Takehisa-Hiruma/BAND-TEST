@@ -1,0 +1,22 @@
+{
+  "id": 331,
+  "name": "SPECIAL SESSION BAND",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 126,
+      "date": "2019-06-22",
+      "title": "LEGEND-Y",
+      "form": "BAND",
+      "venue_id": 24,
+      "venue": "目黒鹿鳴館",
+      "seq": 2
+    }
+  ]
+}

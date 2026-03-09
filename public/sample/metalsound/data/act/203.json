@@ -1,0 +1,31 @@
+{
+  "id": 203,
+  "name": "PARADOXX",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 108,
+      "date": "2022-09-11",
+      "title": "CrazyFest 秋の大運動会SP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 3
+    },
+    {
+      "event_id": 63,
+      "date": "2023-10-22",
+      "title": "LINER LINER",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 5
+    }
+  ]
+}

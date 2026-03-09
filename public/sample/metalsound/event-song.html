@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Song Detail</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; }
+    table { border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 4px 8px; white-space: nowrap; }
+    img { max-width: 300px; border: 1px solid #ccc; margin: 10px 0; }
+    #content { margin: 20px;}
+    /* 横ズレ抑制（対応ブラウザのみ・安全） */
+    html, body { margin: 0 !important; }
+
+    .lightbox[hidden]{ display:none; }
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.8);
+      z-index: 999999;
+      overflow: hidden;
+      touch-action: none;
+    }
+    .lightbox img{
+      position: fixed;
+      display: block;
+      margin: 0 !important;
+      border: none;
+      width: auto !important;
+      height: auto !important;
+      max-width: none !important;
+      max-height: none !important;
+      box-sizing: content-box;
+    }
+    body.lb-lock{
+      overflow: hidden;
+      touch-action: none;
+    }
+    #gallery {
+      display:flex; flex-wrap:wrap; gap:8px; align-items:flex-start;
+    }
+    #gallery img {
+      width: 160px;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity .2s ease;
+    }
+
+  </style>
+
+  <style>
+    /* Lineup は border なし */
+    table.lineup-table {
+      border-collapse: collapse;
+      margin: 6px 0 12px;
+    }
+    table.lineup-table td {
+      border: none !important;
+      padding: 2px 6px;
+    }
+  </style>
+</head>
+<body>
+  <a id="back-event" href="#">← イベントに戻る</a> |
+  <a id="back-song" href="#">曲の全履歴を見る</a>
+
+  <div id="content"></div>
+
+  <!-- Lightbox Overlay（共通） -->
+  <div id="lightbox" class="lightbox" hidden>
+    <img id="lightbox-img" alt="">
+  </div>
+
+  <script>
+    function getParams() {
+      const p = new URLSearchParams(location.search);
+      return {
+        event: p.get("event"),
+        song:  p.get("song"),
+        seq:   p.get("seq")
+      };
+    }
+
+    async function fileExists(url) {
+      try {
+        const r = await fetch(url, { method:'HEAD', cache:'no-cache' });
+        return r.ok;
+      } catch { return false; }
+    }
+
+
+    function normalizeUrl(u) {
+      const s = String(u || '').trim();
+      if (!s || /^\s*javascript:/i.test(s)) return '';
+      try {
+        const url = new URL(s.includes('://') ? s : `https://${s}`);
+        return url.toString();
+      } catch {
+        return '';
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s ?? '').replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[m]));
+    }
+
+
+    async function collectGalleryImages(id, seq) {
+      const base = 'image';
+      const list = [];
+
+      for (let i = 1; i <= 25; i++) {
+        const path = `${base}/people_${id}_${seq}_${i}.webp`;
+        const ok = await imgExists(path, 4000); // タイムアウト4s（必要なら調整）
+        if (!ok) break; // 欠番以降は非表示の要件に合致
+        list.push(path);
+      }
+      return list;
+    }
+
+    function imgExists(src, timeoutMs = 4000) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        // ヒント（描画はあとで）：ブラウザ最適化
+        img.decoding = 'async';
+        img.loading = 'eager';        // ここでの存在確認は即時でOK
+        // 低優先度なら: img.fetchPriority = 'low'; // 必要なら
+
+        let ended = false;
+        const done = (v) => { if (!ended) { ended = true; resolve(v); } };
+
+        const to = setTimeout(() => done(false), timeoutMs);
+        img.onload = () => { clearTimeout(to); done(true); };
+        img.onerror = () => { clearTimeout(to); done(false); };
+
+        // キャッシュを効かせたいならキャッシュバスターは付けない
+        img.src = src;
+      });
+    }
+
+
+    async function main() {
+      const { event, song, seq } = getParams();
+      if (!event || !song) return;
+
+      // イベント詳細を取得
+      const ev = await fetch(`data/event/${encodeURIComponent(event)}.json`).then(r => r.json());
+
+      // 対象の曲を探す
+      const s = (ev.setlist || []).find(x => String(x.song_id) === String(song) && String(x.seq) === String(seq));
+      if (!s) {
+        document.getElementById("content").innerHTML = "<p>データが見つかりません。</p>";
+        return;
+      }
+
+      // 曲名
+      const title = s.song_title;
+
+      // この曲の全出演イベント（song/{id}.json）
+      const songDetail   = await fetch(`data/song/${encodeURIComponent(song)}.json`).then(r => r.json());
+      const otherEvents  = (songDetail.events || []).filter(e => e.event_id != Number(event));
+
+      // performer（Lineup と同じ2列テーブルで整形）
+      let perf = "";
+      if (s.performer && s.performer.length) {
+        perf += `<table class="lineup-table">`;
+        s.performer.forEach(p => {
+          const role = p.position ? `${p.role}（${p.position}）` : p.role;
+          perf += `
+            <tr>
+              <td>${escapeHtml(role)}</td>
+              <td>：<a href="people.html?id=${encodeURIComponent(p.person_id)}">${escapeHtml(p.name)}</a></td>
+            </tr>`;
+        });
+        perf += `</table>`;
+      }
+
+      // HTML 出力
+      let html = "";
+      html += `<h1>${escapeHtml(title)}</h1>`;
+
+      // タイトルにイベント詳細へのリンク
+      const eventLink = (ev?.id != null)
+        ? `<a href="event.html?id=${encodeURIComponent(ev.id)}">${escapeHtml(ev.title)}</a>`
+        : escapeHtml(ev.title || "");
+
+      // 会場名に会場詳細へのリンク（venue_id があればリンク、なければ文字だけ）
+      const venueLink = (ev?.venue_id != null)
+        ? `<a href="venue.html?id=${encodeURIComponent(ev.venue_id)}">${escapeHtml(ev.venue || "")}</a>`
+        : escapeHtml(ev.venue || "");
+
+      html += `<p>${escapeHtml(ev.date)} 「${eventLink}」の ${escapeHtml(seq)} 曲目</p>`;
+      html += `<p>会場: ${venueLink}</p>`;
+      html += `<p>Version: ${escapeHtml(s.version || "")}</p>`;
+      html += `<p>Note: ${escapeHtml(s.note || "")}</p>`;
+
+      html += `<h3>Performer</h3>`;
+      html += `<p>${perf}</p>`;
+
+      // この曲の他の出演イベント（表形式）
+      if (otherEvents.length > 0) {
+        html += `<h3>この曲の他の出演イベント</h3>`;
+        html += `<table>
+          <tr>
+            <th>日付</th>
+            <th>イベント</th>
+            <th>会場</th>
+            <th>#</th>
+          </tr>`;
+        otherEvents.forEach(e => {
+          html += `
+            <tr>
+              <td>${escapeHtml(e.date)}</td>
+              <td><a href="event.html?id=${encodeURIComponent(e.event_id)}">${escapeHtml(e.title)}</a></td>
+              <td><a href="venue.html?id=${encodeURIComponent(e.venue_id)}">${escapeHtml(e.venue)}</a></td>
+              <td><a href="event-song.html?event=${encodeURIComponent(e.event_id)}&song=${encodeURIComponent(song)}&seq=${encodeURIComponent(e.seq)}">${escapeHtml(e.seq)}</a></td>
+            </tr>`;
+        });
+        html += `</table>`;
+      }
+
+      const content = document.getElementById("content");
+      content.innerHTML = html;
+
+      // ▼ ギャラリーを描画（ある時だけ見出し＋一覧）
+      const gallery = await collectGalleryImages(event, seq);
+      if (Array.isArray(gallery) && gallery.length > 0) {
+        content.insertAdjacentHTML(
+          'beforeend',
+          '<h3>ギャラリー</h3><div id="gallery" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>'
+        );
+        const container = document.getElementById('gallery');
+
+        for (const src of gallery) {
+          const img = document.createElement('img');
+          img.className = 'zoomable';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.alt = '';
+          img.style.cssText = 'width:160px;height:auto;border:1px solid #ccc;border-radius:4px;cursor:zoom-in;opacity:0;';
+          img.onload  = () => { img.style.opacity = '1'; };
+          img.onerror = () => { img.remove(); };
+          img.src = src;
+          container.appendChild(img);
+        }
+      }
+
+      // 戻りリンク
+      document.getElementById("back-event").href = `event.html?id=${encodeURIComponent(event)}`;
+      document.getElementById("back-song").href  = `song.html?id=${encodeURIComponent(song)}`;
+    }
+
+    /* 起動 */
+    main();
+
+
+    // /* === Lightbox Core（共通） === */
+
+    const lb   = document.getElementById('lightbox');
+    const lbImg= document.getElementById('lightbox-img');
+
+    let __locked = false;
+    let __bound  = false;
+
+    function lockScroll(){
+      if (__locked) return;
+      document.body.classList.add('lb-lock');
+
+      // ★ 祖先の transform/filter/perspective 影響を断つ（“ページにフィット”化の原因を消す）
+      const html = document.documentElement;
+      html.style.setProperty('transform',   'none', 'important');
+      html.style.setProperty('filter',      'none', 'important');
+      html.style.setProperty('perspective', 'none', 'important');
+      document.body.style.setProperty('transform',   'none', 'important');
+      document.body.style.setProperty('filter',      'none', 'important');
+      document.body.style.setProperty('perspective', 'none', 'important');
+
+      __locked = true;
+    }
+
+    function unlockScroll(){
+      if (!__locked) return;
+      document.body.classList.remove('lb-lock');
+
+      // 元に戻す
+      const html = document.documentElement;
+      html.style.removeProperty('transform');
+      html.style.removeProperty('filter');
+      html.style.removeProperty('perspective');
+      document.body.style.removeProperty('transform');
+      document.body.style.removeProperty('filter');
+      document.body.style.removeProperty('perspective');
+
+      __locked = false;
+    }
+
+    function ensureAtBodyRoot(node){
+      // body直下に強制（fixedの基準ブレを確実に断つ）
+      if (node.parentNode !== document.body) {
+        document.body.appendChild(node);
+      }
+    }
+
+    // 画面（viewport）情報
+    function getViewportBox(){
+      const vv = window.visualViewport;
+      if (vv) return { x: vv.offsetLeft, y: vv.offsetTop, w: vv.width, h: vv.height };
+      return { x: 0, y: 0, w: window.innerWidth, h: window.innerHeight };
+    }
+
+    // naturalサイズを画面に「必ず収める」サイズへ（拡大しない）
+    function computeFittedSize(nw, nh, vw, vh, pad = 16){
+      const maxW = Math.max(0, vw - pad);
+      const maxH = Math.max(0, vh - pad);
+      const scale = Math.min(maxW / nw, maxH / nh, 1);
+      return { w: Math.floor(nw * scale), h: Math.floor(nh * scale) };
+    }
+
+    // ★ 他のCSSを全無視して viewport にフィット＆中央配置（すべて !important 指定）
+    function hardFitAndCenter(){
+      const { x, y, w: vw, h: vh } = getViewportBox();
+      const nw = lbImg.naturalWidth  || 0;
+      const nh = lbImg.naturalHeight || 0;
+      if (!nw || !nh) return;
+
+      const pad = 16; // 画面端の余白（不要なら 0）
+      const { w, h } = computeFittedSize(nw, nh, vw, vh, pad);
+
+      // オーバーレイ自体も固定＆全画面（干渉を受けないよう !important）
+      lb.style.setProperty('position',  'fixed',     'important');
+      lb.style.setProperty('inset',     '0',         'important');
+      lb.style.setProperty('overflow',  'hidden',    'important');
+      lb.style.setProperty('background','rgba(0,0,0,.8)', 'important');
+      lb.style.setProperty('z-index',   '999999',    'important');
+
+      // 画像：固定配置 + px でサイズ＆座標を直指定。transformは使わない
+      lbImg.style.setProperty('position', 'fixed',   'important');
+      lbImg.style.setProperty('margin',   '0',       'important');
+      lbImg.style.setProperty('border',   'none',    'important');
+
+      lbImg.style.setProperty('max-width',  'none',  'important');
+      lbImg.style.setProperty('max-height', 'none',  'important');
+      lbImg.style.setProperty('width',    w + 'px',  'important');
+      lbImg.style.setProperty('height',   h + 'px',  'important');
+
+      // 中央座標（px）
+      const left = x + (vw - w) / 2;
+      const top  = y + (vh - h) / 2;
+      lbImg.style.setProperty('left',    left + 'px', 'important');
+      lbImg.style.setProperty('top',     top  + 'px', 'important');
+      lbImg.style.setProperty('transform','none',     'important');
+    }
+
+    function bindViewportEvents(){
+      if (__bound) return;
+      __bound = true;
+      const vv = window.visualViewport;
+      if (vv) {
+        vv.addEventListener('resize', () => { if (!lb.hidden) hardFitAndCenter(); }, { passive: true });
+        vv.addEventListener('scroll', ()  => { if (!lb.hidden) hardFitAndCenter(); }, { passive: true });
+      } else {
+        window.addEventListener('resize', () => { if (!lb.hidden) hardFitAndCenter(); }, { passive: true });
+      }
+    }
+
+    function openLightbox(src, alt=''){
+      if (lb.hidden) {
+        lockScroll();
+        ensureAtBodyRoot(lb);
+        bindViewportEvents();
+      }
+
+      lbImg.removeAttribute('style');
+
+      lbImg.onload = () => { hardFitAndCenter(); };
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lb.hidden = false;
+
+      if (lbImg.complete) Promise.resolve().then(hardFitAndCenter);
+    }
+
+    function closeLightbox(){
+      lb.hidden = true;
+      lbImg.src = '';
+      unlockScroll();
+    }
+
+    lb.addEventListener('click', closeLightbox);
+    lbImg.addEventListener('click', () => {});
+
+  </script>
+
+<div style="margin-top:20px;">
+  <a id="reportLink" target="_blank">このページの誤りを報告</a>
+</div>
+
+<script>
+  // zoomable 画像のクリック委譲（ギャラリーを開く）
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('img.zoomable');
+    if (!img) return;
+    openLightbox(img.src, img.alt || '');
+  });
+  </script>
+
+  <script src="settings.js"></script>
+<script>
+  // Google Form の URL を生成（現在のページURLを自動付与）
+  const formURL =
+    `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url&entry.${ENTRY_ID}=`
+    + encodeURIComponent(location.href);
+  document.getElementById("reportLink").href = formURL;
+</script>
+</body>
+</html>

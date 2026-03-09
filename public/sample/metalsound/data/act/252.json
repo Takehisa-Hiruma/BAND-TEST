@@ -1,0 +1,22 @@
+{
+  "id": 252,
+  "name": "NEARMETAL",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 88,
+      "date": "2023-03-17",
+      "title": "NEARMETAL生誕祭",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 2
+    }
+  ]
+}

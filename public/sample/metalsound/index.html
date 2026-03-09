@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TEST SEARCH</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; margin: 20px; }
+    input { width: 320px; padding: 8px 10px; font-size: 16px; }
+    .toolbar { margin-top:12px; gap:8px; display:flex; flex-wrap:wrap; }
+    .block { margin-top: 28px; }
+    .item { margin: 8px 0; }
+    a { text-decoration: none; font-weight: bold; color: #0b57d0; }
+    a:hover { text-decoration: underline; }
+    .label { color: #666; font-size: 12px; }
+    mark { background: #ffee6e; padding: 0 2px; border-radius: 2px; }
+    .readme-link {
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      font-weight: bold;
+      color: #0b57d0;
+      text-decoration: none;
+    }
+    .readme-link:hover {
+      text-decoration: underline;
+    }
+
+    .toplinks{
+      position:fixed; top:20px; right:20px;
+      display:flex; justify-content:flex-end; align-items:center; gap:20px;
+      z-index:9999;
+    }
+    .toplinks a{ font-weight:bold; color:#0b57d0; text-decoration:none; }
+    .toplinks a:hover{ text-decoration:underline; }
+    .toplinks .readme-link{ order:1; }
+    .toplinks .home-link{  order:2; }
+
+  </style>
+  <script src="settings.js"></script>
+</head>
+<body>
+<a href="readme/readme.html" class="readme-link">README</a>
+<h1>TEST SEARCH</h1>
+<input id="q" placeholder="イベント / 曲 / 出演者 / 会場 etc...">
+
+<!-- ボタンは自動生成される（COMMANDSから） -->
+<div id="toolbar" class="toolbar"></div>
+
+<div id="result"></div>
+
+<script>
+/* ====== 状態 ====== */
+let events = [], songs = [], people = [], venues = [], acts = [];
+let bandsevent = [], setlist = [];
+let eventActsCount = new Map();   // event_id(Number) -> 出演アクト数
+let songPlayCount  = new Map();   // song_id(Number)  -> 総演奏回数
+let songEventCount = new Map();   // song_id(Number)  -> 演奏イベント数(Set size)
+let dataReady = null;
+
+/* ====== ユーティリティ ====== */
+function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function highlight(text, regex){ if(!text) return ''; const safe=escapeHtml(text); return regex? safe.replace(regex,m=>`<mark>${m}</mark>`): safe; }
+
+/* ====== クエリ解析（AND/OR + フレーズ） ====== */
+function parseQuery(q){
+  const raw=(q||'').trim(); if(!raw) return {mode:'AND',tokens:[]};
+  const phraseRegex=/"([^"]+)"/g; const phrases=[]; let m;
+  while((m=phraseRegex.exec(raw))!==null) phrases.push(m[1]);
+  const tmp=raw.replace(/"[^"]+"/g,' ');
+  const hasExplicitOr = /\bor\b/i.test(tmp) || tmp.includes('|') || /^or:\s*/i.test(raw);
+  let normalized = raw.replace(/^or:\s*/i,'').replace(/\|/g,' ').replace(/\bor\b/ig,' ').replace(/"[^"]+"/g,' ');
+  const words = normalized.split(/\s+/).filter(Boolean);
+  const MIN_LEN = 2; // 英数字は2文字以上（誤爆抑制）
+  const tokens=[...phrases,...words].filter(tok=>{
+    const t=tok.trim(); if(!t) return false;
+    if(/^[A-Za-z0-9]+$/.test(t)) return t.length>=MIN_LEN;
+    return t.length>=1;
+  });
+  return {mode: hasExplicitOr?'OR':'AND', tokens};
+}
+function buildMatcher(tokens,mode){
+  if(!tokens.length) return ()=>false;
+  const lowers=tokens.map(t=>t.toLowerCase());
+  return mode==='OR'
+    ? (text)=>{ if(!text) return false; const t=String(text).toLowerCase(); return lowers.some(tok=>t.includes(tok)); }
+    : (text)=>{ if(!text) return false; const t=String(text).toLowerCase(); return lowers.every(tok=>t.includes(tok)); };
+}
+function makeQueryRegex(q){
+  const {tokens}=parseQuery(q); if(!tokens.length) return null;
+  const parts=tokens.map(escapeRegExp).sort((a,b)=>b.length-a.length);
+  return new RegExp(`(${parts.join('|')})`,'ig');
+}
+
+/* ====== 検索対象の全文化 ====== */
+function eventText(ev){ return [ev.title,ev.sub_title,ev.venue,ev.era,ev.tour,ev.form,ev.date].filter(Boolean).join(' '); }
+function songText(s){ return [s.title].filter(Boolean).join(' '); }
+function personText(p){ return [p.name].filter(Boolean).join(' '); }
+function venueText(v){ return [v.name].filter(Boolean).join(' '); }
+function actText(a){ return [a.name].filter(Boolean).join(' '); }
+
+/* ====== データ読み込み ====== */
+async function loadAll(){
+  const base="data";
+  const [e,s,p,v,a,be,sl]=await Promise.all([
+    fetch(`${base}/events.json`).then(r=>r.json()),
+    fetch(`${base}/songs.json`).then(r=>r.json()),
+    fetch(`${base}/people.json`).then(r=>r.json()),
+    fetch(`${base}/venues.json`).then(r=>r.json()),
+    fetch(`${base}/acts.json`).then(r=>r.json()),
+    fetch(`${base}/bandsevent.json`).then(r=>r.json()),
+    fetch(`${base}/setlist.json`).then(r=>r.json()),
+  ]);
+  events=e; songs=s; people=p; venues=v; acts=a; bandsevent=be; setlist=sl;
+
+  // event_id ごとの出演アクト数（Numberに統一）
+  eventActsCount = new Map();
+  for(const row of bandsevent){
+    const evId=Number(row.event_id);
+    eventActsCount.set(evId,(eventActsCount.get(evId)||0)+1);
+  }
+
+  // song_id ごとの総演奏回数 & ユニークイベント数（Numberに統一）
+  songPlayCount = new Map();
+  const tmpMap = new Map(); // sid -> Set(eid)
+  for(const row of setlist){
+    const sid=Number(row.song_id), eid=Number(row.event_id);
+    songPlayCount.set(sid,(songPlayCount.get(sid)||0)+1);
+    if(!tmpMap.has(sid)) tmpMap.set(sid,new Set());
+    tmpMap.get(sid).add(eid);
+  }
+  songEventCount = new Map([...tmpMap.entries()].map(([sid,set])=>[sid,set.size]));
+}
+dataReady = loadAll();
+
+/* ====== コマンド・レジストリ（ここに1行追加するだけで拡張できる） ====== */
+const COMMANDS = {
+  events: {
+    label: 'イベント一覧',
+    handler: ({events}) => ({ events: [...events].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))) })
+  },
+  songs: {
+    label: '曲一覧',
+    handler: ({songs}) => ({ songs: [...songs].sort((a,b)=>String(a.title||'').localeCompare(String(b.title||''),'ja')) })
+  },
+  member: {
+    label: 'メンバー一覧',
+    handler: ({ people }) => ({
+      people: [...people]
+        .filter(p => String(p.left_on || '').trim() == '')
+        .sort((a, b) =>
+          String(a.name || '').localeCompare(String(b.name || ''), 'ja')
+        )
+    })
+  },
+  venues: {
+    label: '会場一覧',
+    handler: ({venues}) => ({ venues: [...venues].sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'ja')) })
+  },
+  acts: {
+    label: '出演者一覧',
+    handler: ({acts}) => ({ acts: [...acts].sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'ja')) })
+  },
+
+  // ワンマン（acts=1 のイベントのみ）
+  oneman: {
+    label: 'ワンマン',
+    handler: ({events}) => ({
+      events: [...events]
+        .filter(ev => (eventActsCount.get(Number(ev.id))||0) === 1)
+        .sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')))
+    })
+  },
+
+  // 演奏回数の多い曲（デフォルト：>1 を表示）※mode=all/gt1/eq1 をクエリで指定可
+  songsByPlays: {
+    label: '演奏回数の多い曲',
+    handler: ({songs}, {params}) => {
+      let mode = params.mode || 'gt0'; // 既定は 2回以上表示
+      const rows = songs.map(s=>{
+        const sid=Number(s.id);
+        return { ...s, count: Number(songPlayCount.get(sid)||0) };
+      });
+      let filtered = rows;
+      if(mode==='gt1') filtered = rows.filter(r=>r.count>1);
+      if(mode==='eq1') filtered = rows.filter(r=>r.count===1);
+      return {
+        songs: filtered.sort((a,b)=> b.count - a.count || String(a.title||'').localeCompare(String(b.title||''),'ja'))
+      };
+    }
+  },
+
+
+  // 例）出演回数が多い出演者（必要になったら使う）
+  actsByCount: {
+    label: '出演回数の多い出演者',
+    handler: ({acts}) => {
+      // act_id -> 出演イベント数(ユニーク)
+      const map = new Map(); // act_id -> Set(event_id)
+      for(const r of bandsevent){
+        const aid=Number(r.act_id), eid=Number(r.event_id);
+        if(!map.has(aid)) map.set(aid,new Set());
+        map.get(aid).add(eid);
+      }
+      const ranked = acts.map(a=>({ ...a, count: (map.get(Number(a.id))?.size||0) }))
+                         .sort((x,y)=> y.count - x.count || String(x.name||'').localeCompare(String(y.name||''),'ja'));
+      return { acts: ranked };
+    }
+  },
+};
+
+/* ====== ツールバー自動生成 ====== */
+async function renderToolbar(){
+  await dataReady;
+  const bar=document.getElementById('toolbar');
+  bar.innerHTML = Object.entries(COMMANDS)
+    .map(([key,def])=>`<button type="button" data-cmd="${key}">${def.label}</button>`)
+    .join('');
+  bar.addEventListener('click', async (e)=>{
+    const key=e.target?.dataset?.cmd; if(!key) return;
+    await runCmd(key);
+  });
+}
+dataReady.then(renderToolbar);
+
+async function runCmd(kindWithQuery){
+  await dataReady;
+  const qEl = document.getElementById('q');
+  // 検索窓は触らない（＝表示上は空のまま）
+  // もし既に入力が残っていたらクリアしたい場合は↓の1行を有効化
+  qEl.value = '';   // ← 残文字が邪魔ならこの1行は残す。不要なら消す。
+  // 入力欄からフォーカスを外しておきたいなら↓（任意）
+  qEl.blur();
+
+  const out = searchAll(`cmd:${kindWithQuery}`);
+  // ハイライトは不要なので第2引数は null（または空文字）に
+  render(out, null);
+}
+
+
+
+
+/* ====== 検索（コマンド＋通常） ====== */
+function searchAll(q){
+  // --- コマンド（cmd:...）をディスパッチ ---
+  if(typeof q==='string' && q.startsWith('cmd:')){
+    const rest = q.slice(4);                   // e.g. "songsByPlays?mode=eq1"
+    const [kind, query=''] = rest.split('?');
+    const params = Object.fromEntries(new URLSearchParams(query));
+    const baseOut = { events:[], songs:[], people:[], venues:[], acts:[], eras:[], tours:[] };
+    const entry = COMMANDS[kind];
+    if(entry && typeof entry.handler==='function'){
+      const partial = entry.handler(
+        { events, songs, people, venues, acts },
+        { params }
+      ) || {};
+      return Object.assign(baseOut, partial);
+    }
+    return baseOut;
+  }
+
+  // --- 通常の AND/OR 横断検索 ---
+  const {mode, tokens} = parseQuery(q);
+  if(!tokens.length) return null;
+
+  const out = { events:[], songs:[], people:[], venues:[], acts:[], eras:[], tours:[] };
+  const lowerQ = (q||'').toLowerCase();
+  const hasBand = /\bband\b/.test(lowerQ);
+  const hasIdol = /\bidol\b/.test(lowerQ);
+  const match = buildMatcher(tokens, mode);
+
+  out.events = events.filter(ev=>{
+    if(match(eventText(ev))) return true;
+    if(hasBand && (ev.form||'').toUpperCase()==='BAND') return true;
+    if(hasIdol && (ev.form||'').toUpperCase()==='IDOL') return true;
+    return false;
+  }).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+
+  out.songs  = songs.filter(s=>match(songText(s)));
+  out.people = people.filter(p=>match(personText(p)));
+  out.venues = venues.filter(v=>match(venueText(v)));
+  out.acts   = acts.filter(a=>match(actText(a)));
+
+  const eraMap=new Map(), tourMap=new Map();
+  events.forEach(ev=>{
+    if(ev.era && ev.era_id && match(ev.era))  eraMap.set(ev.era_id,{id:ev.era_id,name:ev.era});
+    if(ev.tour&& ev.tour_id&& match(ev.tour)) tourMap.set(ev.tour_id,{id:ev.tour_id,name:ev.tour});
+  });
+  out.eras = [...eraMap.values()];
+  out.tours= [...tourMap.values()];
+
+  return out;
+}
+
+
+  function render(out, q){
+    const box=document.getElementById('result');
+    if(!out){ box.innerHTML=''; return; }
+    const regex=makeQueryRegex(q);
+    let html='';
+
+    // イベント
+    if(out.events.length){
+      html += `<div class="block"><h2>イベント</h2>`;
+      out.events.forEach(ev=>{
+        html += `
+        <div class="item">
+          <a href="event.html?id=${ev.id}">${highlight(ev.title || '(無題)', regex)}</a>
+          <div class="label">${escapeHtml(ev.date || '')} / ${highlight(ev.venue || '', regex)} / ${escapeHtml(ev.form || '')}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // 曲
+    if(out.songs.length){
+      html += `<div class="block"><h2>曲</h2>`;
+      out.songs.forEach(s=>{
+        html += `
+        <div class="item">
+          <a href="song.html?id=${s.id}">${highlight(s.title, regex)}</a>
+          ${typeof s.count === 'number' ? `<div class="label">演奏回数: ${s.count}</div>` : ''}
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // メンバー
+    if(out.people.length){
+      html += `<div class="block"><h2>メンバー</h2>`;
+      out.people.forEach(p=>{
+        html += `
+        <div class="item">
+          <a href="people.html?id=${p.id}">${highlight(p.name, regex)}</a>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // 会場
+    if(out.venues.length){
+      html += `<div class="block"><h2>会場</h2>`;
+      out.venues.forEach(v=>{
+        html += `
+        <div class="item">
+          <a href="venue.html?id=${v.id}">${highlight(v.name, regex)}</a>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // Era
+    if(out.eras.length){
+      html += `<div class="block"><h2>Era</h2>`;
+      out.eras.forEach(e=>{
+        html += `
+        <div class="item">
+          <a href="era.html?id=${e.id}">${highlight(e.name, regex)}</a>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // Tour
+    if(out.tours.length){
+      html += `<div class="block"><h2>Tour</h2>`;
+      out.tours.forEach(t=>{
+        html += `
+        <div class="item">
+          <a href="tour.html?id=${t.id}">${highlight(t.name, regex)}</a>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // 出演アーティスト
+    if(out.acts.length){
+      html += `<div class="block"><h2>出演アーティスト</h2>`;
+      out.acts.forEach(a=>{
+        html += `
+        <div class="item">
+          <a href="act.html?id=${a.id}">${highlight(a.name, regex)}</a>
+          ${typeof a.count === 'number' ? `<div class="label">出演回数: ${a.count}</div>` : ''}
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    box.innerHTML = html || "<p>該当なし</p>";
+  }
+
+
+/* ====== 入力イベント（デバウンス） ====== */
+let timer=null;
+document.getElementById('q').addEventListener('input', async (e)=>{
+  const q=e.target.value;
+  clearTimeout(timer);
+  timer=setTimeout(async ()=>{
+    await dataReady;
+    const out=searchAll(q);
+    render(out,q);
+  },200);
+});
+</script>
+
+<script>
+  // URLパラメータ取得ユーティリティ
+  function getParams() {
+    return new URLSearchParams(location.search);
+  }
+
+  async function initSearchFromURL() {
+    // データ読み込み待ち
+    if (typeof dataReady !== 'undefined') {
+      await dataReady;
+    }
+
+    const params = getParams();
+    const q   = params.get('q')   || '';
+    const cmd = params.get('cmd') || '';
+
+    // 入力欄があればURLのqを反映（任意）
+    const input = document.querySelector('#q');
+    if (input) input.value = q;
+
+    // --- cmd=... がある場合：COMMANDS を使って初期描画 ---
+    if (cmd && COMMANDS && COMMANDS[cmd]) {
+      // cmd 以外の残りのパラメータをクエリに戻す（例：?cmd=songsByPlays&mode=gt1）
+      const passthrough = new URLSearchParams(params);
+      passthrough.delete('cmd');  // cmdは searchAll に種類として渡すので除外
+      // searchAll は 'cmd:種類?key=val' 形式に対応しているため、既存ロジックを活用
+      const cmdQuery = 'cmd:' + cmd + (passthrough.toString() ? ('?' + passthrough.toString()) : '');
+      const out = searchAll(cmdQuery);
+      render(out, q); // ハイライトは q を使う（cmd検索時は null でも可）
+      return;
+    }
+
+    // --- q=... がある場合：通常検索で初期描画 ---
+    if (q && q.trim()) {
+      const out = searchAll(q);
+      render(out, q);
+      return;
+    }
+
+    // どちらも無ければ、初期は何も描画しない（必要ならここでガイダンスを出す）
+    // 例）document.getElementById('result').innerHTML = '<p>検索キーワードを入力してください</p>';
+  }
+
+  document.addEventListener('DOMContentLoaded', initSearchFromURL);
+</script>
+
+
+
+<script>
+// ====== 自動適用ロジック（googleform.js の末尾に追加） ======
+(function applySiteConfig(){
+  // DOM準備後に適用（<head>や<h1>がまだ無いタイミングもあるため）
+  function run() {
+    try {
+      // 1) <title> 置き換え
+      if (typeof SITE_TITLE !== 'undefined' && SITE_TITLE) {
+        document.title = SITE_TITLE;
+      }
+
+      // 2) <h1> 置き換え（最初に見つかった h1 を対象）
+      if (typeof SITE_TITLE !== 'undefined' && SITE_TITLE) {
+        const h1 = document.querySelector('h1');
+        if (h1) h1.textContent = SITE_TITLE;
+      }
+
+      // 3) 戻るリンク（HOME_URL があれば右上に追加）
+      if (typeof HOME_URL !== 'undefined' && HOME_URL) {
+        const label = (typeof HOME_LABEL !== 'undefined' && HOME_LABEL) ? HOME_LABEL : '戻る';
+        const a = document.createElement('a');
+        a.href = HOME_URL;
+        a.textContent = label;
+        a.className = 'home-link';
+        // 既存の README（right:20px）と並べるため左側に出す
+        Object.assign(a.style, {
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          fontWeight: 'bold',
+          color: '#0b57d0',
+          textDecoration: 'none',
+        });
+        a.addEventListener('mouseover', () => a.style.textDecoration = 'underline');
+        a.addEventListener('mouseout',  () => a.style.textDecoration = 'none');
+        document.body.appendChild(a);
+      }
+    } catch (e) {
+      // 失敗してもサイト自体は動くように黙ってスルー
+      // console.warn(e);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "id": 302,
+  "name": "チャレンジャーズ",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 105,
+      "date": "2022-10-07",
+      "title": "＃MGA",
+      "form": "IDOL",
+      "venue_id": 45,
+      "venue": "西永福JAM",
+      "seq": 6
+    }
+  ]
+}

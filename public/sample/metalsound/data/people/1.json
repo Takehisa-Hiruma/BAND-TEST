@@ -1,0 +1,186 @@
+{
+  "id": 1,
+  "name": "UYU",
+  "events": [
+    {
+      "event_id": 35,
+      "date": "2025-02-24",
+      "title": "NO DOUBT!! vol.23",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "IDOL",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 20,
+      "date": "2025-07-13",
+      "title": "Rebirth of the World",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 18,
+      "date": "2025-08-23",
+      "title": "LINER LINER",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 19,
+      "date": "2025-08-31",
+      "title": "咆哮祭",
+      "venue": "渋谷Star lounge",
+      "venue_id": 13,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 15,
+      "date": "2025-09-23",
+      "title": "Light of connection",
+      "venue": "渋谷GARRET udagawa",
+      "venue_id": 11,
+      "form": "IDOL",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 16,
+      "date": "2025-09-23",
+      "title": "DAIDOL Vol.155",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "IDOL",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 14,
+      "date": "2025-10-07",
+      "title": "ENTRANCE",
+      "venue": "吉祥寺CLUB SEATA",
+      "venue_id": 3,
+      "form": "IDOL",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 17,
+      "date": "2025-10-08",
+      "title": "IDOL RIOT",
+      "venue": "浅草VAMPKIN",
+      "venue_id": 12,
+      "form": "IDOL",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 11,
+      "date": "2025-10-26",
+      "title": "Gracemelodia",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 10,
+      "date": "2025-11-16",
+      "title": "Moment of Converging Fates(DIZZYREVERSE)",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 13,
+      "date": "2025-11-21",
+      "title": "The LUNA-lit Deer",
+      "venue": "新宿Zirco Tokyo",
+      "venue_id": 10,
+      "form": "IDOL",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 9,
+      "date": "2025-12-07",
+      "title": "METAL RESURRECTION 7",
+      "venue": "大塚Hearts＋",
+      "venue_id": 9,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 12,
+      "date": "2025-12-28",
+      "title": "「超エグイ日つくりました。」",
+      "venue": "新宿Zirco Tokyo",
+      "venue_id": 10,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 8,
+      "date": "2026-01-04",
+      "title": "METAMORPHOSE FESTIVAL 2026",
+      "venue": "下北沢CLUB251",
+      "venue_id": 8,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 7,
+      "date": "2026-01-12",
+      "title": "Vamp Up SEASON",
+      "venue": "青山RizM",
+      "venue_id": 7,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 6,
+      "date": "2026-02-08",
+      "title": "LINER LINER",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 34,
+      "date": "2026-02-22",
+      "title": "Hot\"444\"Voice Vol.2",
+      "venue": "渋谷FOWS",
+      "venue_id": 21,
+      "form": "IDOL",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 153,
+      "date": "2026-02-24",
+      "title": "NO DOUBT!! vol.23",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "IDOL",
+      "role": "Dance&Vocal"
+    },
+    {
+      "event_id": 152,
+      "date": "2026-03-07",
+      "title": "Tweyelight FEST",
+      "venue": "渋谷GARRET udagawa",
+      "venue_id": 11,
+      "form": "BAND",
+      "role": "Dance&Vocal"
+    }
+  ],
+  "birthday": "3月20日",
+  "joined_on": "2019年01月20日",
+  "left_on": "",
+  "x": "https://x.com/x_uyumetal_x",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": ""
+}

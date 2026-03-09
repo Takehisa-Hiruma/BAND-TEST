@@ -1,0 +1,76 @@
+{
+  "id": 183,
+  "name": "神風センセーション",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 116,
+      "date": "2022-06-21",
+      "title": "Otsuka IDOL Unite vol.8",
+      "form": "IDOL",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "seq": 2
+    },
+    {
+      "event_id": 101,
+      "date": "2022-12-08",
+      "title": "夜神乃空生誕祭",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 4
+    },
+    {
+      "event_id": 79,
+      "date": "2023-05-14",
+      "title": "DAIDOL Vol.46",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 5
+    },
+    {
+      "event_id": 77,
+      "date": "2023-05-14",
+      "title": "ND EXTRA!!",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 5
+    },
+    {
+      "event_id": 65,
+      "date": "2023-10-29",
+      "title": "NAGISA Twenty!",
+      "form": "IDOL",
+      "venue_id": 29,
+      "venue": "大塚Hearts NEXT",
+      "seq": 1
+    },
+    {
+      "event_id": 65,
+      "date": "2023-10-29",
+      "title": "NAGISA Twenty!",
+      "form": "IDOL",
+      "venue_id": 29,
+      "venue": "大塚Hearts NEXT",
+      "seq": 6
+    },
+    {
+      "event_id": 58,
+      "date": "2024-01-28",
+      "title": "KAMIKAZE GENERATION",
+      "form": "IDOL",
+      "venue_id": 27,
+      "venue": "下北沢シャングリラ",
+      "seq": 9
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "id": 26,
+  "name": "Risky Melody",
+  "url": "https://risky-melody.com/",
+  "x": "https://x.com/_Risky_Melody_",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "https://www.youtube.com/channel/UCugV2ltRu7ZEDOU2ZyaL_dw",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 121,
+      "date": "2022-02-12",
+      "title": "Crazy Fest ヴァレンタインSP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 9
+    },
+    {
+      "event_id": 108,
+      "date": "2022-09-11",
+      "title": "CrazyFest 秋の大運動会SP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 10
+    },
+    {
+      "event_id": 83,
+      "date": "2023-04-23",
+      "title": "Beginning",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 4
+    },
+    {
+      "event_id": 80,
+      "date": "2023-06-06",
+      "title": "5COLORS MELODY 2023",
+      "form": "IDOL",
+      "venue_id": 34,
+      "venue": "渋谷eggman",
+      "seq": 5
+    },
+    {
+      "event_id": 49,
+      "date": "2024-05-31",
+      "title": "5COLORS MELODY",
+      "form": "IDOL",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "seq": 6
+    },
+    {
+      "event_id": 43,
+      "date": "2024-08-11",
+      "title": "炎のRockAventers3 Day1",
+      "form": "BAND",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "seq": 6
+    },
+    {
+      "event_id": 32,
+      "date": "2024-12-01",
+      "title": "Shared Universe Vol.3",
+      "form": "BAND",
+      "venue_id": 18,
+      "venue": "川崎セルビアンナイト",
+      "seq": 3
+    },
+    {
+      "event_id": 24,
+      "date": "2025-05-27",
+      "title": "last spell vol.7",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 8
+    },
+    {
+      "event_id": 8,
+      "date": "2026-01-04",
+      "title": "METAMORPHOSE FESTIVAL 2026",
+      "form": "BAND",
+      "venue_id": 8,
+      "venue": "下北沢CLUB251",
+      "seq": 1
+    }
+  ]
+}

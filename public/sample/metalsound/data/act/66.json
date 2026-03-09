@@ -1,0 +1,31 @@
+{
+  "id": 66,
+  "name": "82回目の終身刑",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 31,
+      "date": "2025-02-14",
+      "title": "HELLO NEW WORLD",
+      "form": "IDOL",
+      "venue_id": 14,
+      "venue": "渋谷CHELSEA HOTEL",
+      "seq": 4
+    },
+    {
+      "event_id": 23,
+      "date": "2025-06-04",
+      "title": "カミカゼライオット",
+      "form": "IDOL",
+      "venue_id": 8,
+      "venue": "下北沢CLUB251",
+      "seq": 5
+    }
+  ]
+}

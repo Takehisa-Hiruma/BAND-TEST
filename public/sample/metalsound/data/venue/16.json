@@ -1,0 +1,19 @@
+{
+  "id": 16,
+  "name": "渋谷DIVE",
+  "url": "",
+  "events": [
+    {
+      "id": 45,
+      "date": "2024-07-27",
+      "title": "DAIDOL Vol.100",
+      "form": "IDOL"
+    },
+    {
+      "id": 36,
+      "date": "2024-11-17",
+      "title": "ネクストカルチャーズ",
+      "form": "IDOL"
+    }
+  ]
+}

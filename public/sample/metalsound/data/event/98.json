@@ -1,0 +1,75 @@
+{
+  "id": 98,
+  "date": "2022-12-13",
+  "title": "DAIDOL vol.28",
+  "sub_title": null,
+  "venue": "新宿ANTIKNOCK",
+  "venue_id": 6,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "yummyummy!!!",
+      "act_id": 271
+    },
+    {
+      "seq": 2,
+      "name": "ルミキスex",
+      "act_id": 236
+    },
+    {
+      "seq": 3,
+      "name": "百鬼乙女",
+      "act_id": 196
+    },
+    {
+      "seq": 4,
+      "name": "IQ99",
+      "act_id": 272
+    },
+    {
+      "seq": 5,
+      "name": "TOKYOてふてふ",
+      "act_id": 105
+    },
+    {
+      "seq": 6,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 7,
+      "name": "MAZE",
+      "act_id": 55
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 10,
+      "name": "AKAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    }
+  ],
+  "setlist": []
+}

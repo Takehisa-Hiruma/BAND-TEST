@@ -1,0 +1,149 @@
+{
+  "id": 49,
+  "title": "ウ・キ・ウ・キ★ミッドナイト",
+  "events": [
+    {
+      "event_id": 140,
+      "date": "2020-09-27",
+      "title": "ONEMAN",
+      "venue_id": 54,
+      "venue": "渋谷CYCLONE",
+      "form": "BAND",
+      "seq": 8,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 124,
+      "date": "2021-11-14",
+      "title": "HEAVY METAL FEVER",
+      "venue_id": 19,
+      "venue": "新宿WildSide Tokyo",
+      "form": "BAND",
+      "seq": 8,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 122,
+      "date": "2021-11-27",
+      "title": "METAL RESURRECTION",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 8,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 117,
+      "date": "2022-05-15",
+      "title": "DAIDOL VOL.14",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "IDOL",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 112,
+      "date": "2022-07-09",
+      "title": "弾丸ライナーFEST Vol.2",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 107,
+      "date": "2022-09-15",
+      "title": "KICHIJOJI RIOT",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "form": "IDOL",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 99,
+      "date": "2022-11-13",
+      "title": "OTSUKA DAIGO Vol.5",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 97,
+      "date": "2022-12-17",
+      "title": "DIZZYMETAL ONE MAN LIVE",
+      "venue_id": 42,
+      "venue": "横浜LiT",
+      "form": "BAND",
+      "seq": 12,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 92,
+      "date": "2023-02-12",
+      "title": "LEGEND \"0207\"",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 73,
+      "date": "2023-09-03",
+      "title": "LEGEND \"2001\"",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 44,
+      "date": "2024-08-12",
+      "title": "炎のRockAventers3 Day2",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "form": "BAND",
+      "seq": 2,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 40,
+      "date": "2024-08-26",
+      "title": "DAIDOL PARTY",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "form": "IDOL",
+      "seq": 3,
+      "section": null,
+      "version": ""
+    },
+    {
+      "event_id": 42,
+      "date": "2024-11-10",
+      "title": "LINER LINER",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

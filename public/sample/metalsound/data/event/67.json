@@ -1,0 +1,83 @@
+{
+  "id": 67,
+  "date": "2023-09-11",
+  "title": "ヴィクトリアス",
+  "sub_title": "偉大なる恐竜たちのツアー",
+  "venue": "西川口Hearts",
+  "venue_id": 2,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 2,
+      "name": "VICTORIUS",
+      "act_id": 204
+    },
+    {
+      "seq": 3,
+      "name": "FATE GEAR",
+      "act_id": 205
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Guitar（上手）",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 6,
+      "name": "NAKAJI",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 7,
+      "name": "Douglas",
+      "role": "Bass",
+      "position": "",
+      "ord": 6
+    },
+    {
+      "person_id": 9,
+      "name": "RIHITO",
+      "role": "Drum",
+      "position": "",
+      "ord": 7
+    }
+  ],
+  "setlist": []
+}

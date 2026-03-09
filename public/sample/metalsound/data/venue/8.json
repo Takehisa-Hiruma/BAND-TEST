@@ -1,0 +1,19 @@
+{
+  "id": 8,
+  "name": "下北沢CLUB251",
+  "url": "https://club251.com/",
+  "events": [
+    {
+      "id": 23,
+      "date": "2025-06-04",
+      "title": "カミカゼライオット",
+      "form": "IDOL"
+    },
+    {
+      "id": 8,
+      "date": "2026-01-04",
+      "title": "METAMORPHOSE FESTIVAL 2026",
+      "form": "BAND"
+    }
+  ]
+}
