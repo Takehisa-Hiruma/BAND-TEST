@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Buildozer / Kivy
+build/
+bin/
+dist/
+Markdown/
+*.exe
+*.apk
+*.keystore
+*.spec
+
+# VS Code
+.vscode/
+
+# Android
+*.keystore
+*.jks
+
+# OS・環境依存
+.DS_Store
+Thumbs.db
+
+# その他
+.env
+*.tmp
+# *.md
+*.csv
+*.xlsx
+*.pdf
+*.txt
+*url
+*.ini
+*.ttf
+old/
+jpg/
+screenshot/
+*_new.py
+_template*.py
+*.sh
+*bak

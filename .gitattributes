@@ -1,0 +1,12 @@
+# --- 画像はバイナリ扱いにする（自動マージしない） ---
+*.webp binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+
+# --- SQLite の DB ファイルはバイナリ扱い ---
+*.db   binary
+
+# --- （任意）特定ファイルは常にリモート優先にする例 ---
+# site/image/*.webp merge=theirs
+# dizzy.db            merge=theirs
