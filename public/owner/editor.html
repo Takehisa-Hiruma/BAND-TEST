@@ -45,7 +45,7 @@
 
 
 
-<body>
+<div>
   <header>
     <div style="display:flex;gap:8px;align-items:center">
       <button id="btn-back">← 一覧へ</button>
@@ -404,21 +404,11 @@
 
     // ===== 初期化（events 読込 → masters → 描画） =====
     (async function init(){
-      try{
-        const r = await fetch(`${API_BASE}/owner/api/events?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`,{cache:"no-store"});
-        if(!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-        events = await r.json();
-        status.textContent = "（APIから取得）";
-      }catch(e){
-        const r2 = await fetch(`../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/events.json?ts=${Date.now()}`,{cache:"no-store"});
-        if(!r2.ok){ status.textContent = "イベント一覧の取得に失敗しました"; return; }
-        events = await r2.json();
-        status.textContent = "（JSONから取得：保存/公開は未接続）";
-        // API未接続時のガード
-        $("#btn-save").onclick = ()=>alert("API未起動のため保存は無効（夜の部で）");
-        $("#btn-publish").onclick = ()=>alert("API未起動のため公開反映は無効（夜の部で）");
-        $("#btn-publish2").onclick = $("#btn-publish").onclick;
-      }
+      const r = await fetch(`${API_BASE}/owner/api/events?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`,{cache:"no-store"});
+      if(!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+      events = await r.json();
+      status.textContent = "（APIから取得）";
+
       events = events.map(e=>({...e, date: normDate(e.date||"")}));
       await loadMasters();
       render(events);
@@ -561,31 +551,28 @@
 
     // lineup
     async function loadLineup(eventId){
-      lineupRows = [];
-      const base = `../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/`;
-      let data=null;
-      for(const name of ["lineup.json","lineup_all.json"]){
-        try{ const r=await fetch(base+name+`?ts=${Date.now()}`,{cache:"no-store"}); if(r.ok){ data=await r.json(); break; } }catch{}
-      }
-      const list = Array.isArray(data) ? data : [];
-      // 正規化：{event_id, person_id, role_id, seq}
-      lineupRows = list
-        .map(r=>({event_id:+r.event_id, person_id:String(r.person_id), role_id:String(r.role_id), seq:+(r.seq||r.order||0)}))
-        .filter(r=>r.event_id===eventId)
-        .sort((a,b)=>a.seq-b.seq);
+      const r = await fetch(`${API_BASE}/owner/api/lineup/${eventId}?u=${u}&p=${p}`);
+      lineupRows = await r.json();
       renderLineup();
     }
     function renderLineup(){
       lineupBody.innerHTML = lineupRows.map((r,i)=>{
-        const mem = personById.get(r.person_id)||r.person_id;
-        const role= roleById.get(r.role_id)||r.role_id;
-        return `<tr data-idx="${i}"><td>${escapeHtml(mem)}</td><td>${escapeHtml(role)}</td></tr>`;
+        return `<tr data-idx="${i}">
+          <td>${escapeHtml(r.person)}</td>
+          <td>${escapeHtml(r.role)}</td>
+        </tr>`;
       }).join("");
+
       lineupBody.querySelectorAll("tr[data-idx]").forEach(tr=>{
-        tr.onclick=()=>{ lineupBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel")); tr.classList.add("sel");
-          const i=+tr.dataset.idx; const row=lineupRows[i];
-          $("#ln-member").value = row?.person_id??"";
-          $("#ln-role").value   = row?.role_id??"";
+        tr.onclick=()=>{
+          lineupBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel"));
+          tr.classList.add("sel");
+
+          const i=+tr.dataset.idx;
+          const row=lineupRows[i];
+
+          $("#ln-member").value = row?.person ?? "";
+          $("#ln-role").value   = row?.role ?? "";
         };
       });
     }
@@ -619,27 +606,23 @@
 
     // bandsevent
     async function loadBand(eventId){
-      bandRows=[];
-      const base=`../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/`;
-      let data=null;
-      for(const name of ["bandsevent.json","bands_event.json","acts_event.json"]){
-        try{ const r=await fetch(base+name+`?ts=${Date.now()}`,{cache:"no-store"}); if(r.ok){ data=await r.json(); break; } }catch{}
-      }
-      const list=Array.isArray(data)?data:[];
-      // 正規化：{event_id, seq, act_id? act_name?}
-      bandRows = list
-        .map(r=>({event_id:+r.event_id, seq:+(r.seq||r.order||0), act_id:(r.act_id!=null? String(r.act_id):null), act_name:r.act_name||null}))
-        .filter(r=>r.event_id===eventId)
-        .sort((a,b)=>a.seq-b.seq);
+      const r = await fetch(`${API_BASE}/owner/api/bandsevent/${eventId}?u=${u}&p=${p}`);
+      bandRows = await r.json();
       renderBand();
     }
     function renderBand(){
       bandBody.innerHTML = bandRows.map((r,i)=>{
-        const name = r.act_name || (r.act_id? (actById.get(r.act_id)||r.act_id):"");
-        return `<tr data-idx="${i}"><td>${r.seq}</td><td>${escapeHtml(name)}</td></tr>`;
+        return `<tr data-idx="${i}">
+          <td>${r.seq}</td>
+          <td>${escapeHtml(r.act_name)}</td>
+        </tr>`;
       }).join("");
+
       bandBody.querySelectorAll("tr[data-idx]").forEach(tr=>{
-        tr.onclick=()=>{ bandBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel")); tr.classList.add("sel"); };
+        tr.onclick=()=>{
+          bandBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel"));
+          tr.classList.add("sel");
+        };
       });
     }
     function bandAdd(){
@@ -665,31 +648,30 @@
 
     // setlist
     async function loadSetlist(eventId){
-      setlistRows=[];
-      const base=`../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/`;
-      let data=null;
-      for(const name of ["event_songs.json","event-song.json","eventSongs.json"]){
-        try{ const r=await fetch(base+name+`?ts=${Date.now()}`,{cache:"no-store"}); if(r.ok){ data=await r.json(); break; } }catch{}
-      }
-      const list=Array.isArray(data)?data:[];
-      // 正規化：{event_id, song_id, order|seq, note}
-      setlistRows = list
-        .map(r=>({event_id:+r.event_id, song_id:String(r.song_id), seq:+(r.order||r.seq||r.no||0), note:r.note||r.memo||""}))
-        .filter(r=>r.event_id===eventId)
-        .sort((a,b)=>a.seq-b.seq);
+      const r = await fetch(`${API_BASE}/owner/api/setlist/${eventId}?u=${u}&p=${p}`);
+      setlistRows = await r.json();
       renderSetlist();
     }
     function renderSetlist(){
       setlistBody.innerHTML = setlistRows.map((r,i)=>{
-        const title = songById.get(r.song_id)||r.song_id;
-        return `<tr data-idx="${i}"><td>${r.seq}</td><td>${escapeHtml(title)}</td><td>${escapeHtml(r.note||"")}</td></tr>`;
+        return `<tr data-idx="${i}">
+          <td>${r.seq}</td>
+          <td>${escapeHtml(r.song_title)}</td>
+          <td>${escapeHtml(r.note||"")}</td>
+        </tr>`;
       }).join("");
+
       setlistBody.querySelectorAll("tr[data-idx]").forEach(tr=>{
-        tr.onclick=()=>{ setlistBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel")); tr.classList.add("sel");
-          const i=+tr.dataset.idx; const row=setlistRows[i];
-          $("#sl-song").value = row?.song_id??"";
-          $("#sl-section").value = row?.section??"";
-          $("#sl-version").value = row?.version??"";
+        tr.onclick=()=>{
+          setlistBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel"));
+          tr.classList.add("sel");
+
+          const i=+tr.dataset.idx;
+          const row=setlistRows[i];
+
+          $("#sl-song").value    = row?.song_title ?? "";
+          $("#sl-section").value = row?.section ?? "";
+          $("#sl-version").value = row?.version ?? "";
         };
       });
     }
@@ -723,7 +705,7 @@
       renderSetlist(); status.textContent="（setlist: 更新・未保存）";
     }
   </script>
-</body>
+</div>
 
 
 
@@ -768,7 +750,6 @@
       const style = document.createElement("style");
       style.id = "event-editor-style";
       style.textContent = `
-  <style>
     :root{
       --gap:8px;--bd:#ddd;--bd2:#eee;--fg:#222;--muted:#555;--hl:#0ea5e9;
       --left-col: 520px;    /* 左カラム初期幅 */
@@ -855,7 +836,6 @@
     #listBox{display:flex;flex-direction:column;min-height:0}
     #listBox .list-scroller{flex:1;min-height:0;overflow:auto;padding:10px}
 
-  </style>
         `;
       document.head.appendChild(style);
     }
@@ -887,7 +867,7 @@
     // 表示切り替え（クエリパラメータで超シンプルに分岐）
     const app = document.getElementById("app");
     if (!view) {
-      renderEventEditor(app, { uu, pp });
+      renderEventEditor(app, { u: uu, p: pp });
     } else {
       renderMaster(app, view);
     }

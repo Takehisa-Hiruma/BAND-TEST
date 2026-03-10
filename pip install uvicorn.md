@@ -43,10 +43,10 @@
 
 ```bash
 mkdir wheelhouse
-pip download --only-binary=:all: -d wheelhouse \
-  fastapi pydantic uvicorn starlette anyio sniffio h11 typing-extensions \
-  pydantic-core annotated-types \
-  watchfiles colorama httptools websockets uvloop
+pip download --only-binary=:all: -d wheelhouse fastapi pydantic uvicorn starlette anyio sniffio h11 typing-extensions pydantic-core annotated-types watchfiles colorama httptools websockets
+
+
+uvloop
 ```
 
 > `pip download` が **依存関係ごと**に `.whl` を全部落としてくれます。  
@@ -55,8 +55,7 @@ pip download --only-binary=:all: -d wheelhouse \
 **昼PC（オフライン）**では：
 
 ```bash
-python -m pip install --no-index --find-links=wheelhouse \
-  fastapi pydantic uvicorn
+python -m pip install --no-index --find-links=wheelhouse fastapi pydantic uvicorn
 ```
 
 > `--no-index` で外部ネットを見に行かず、`wheelhouse` だけを参照します。  
