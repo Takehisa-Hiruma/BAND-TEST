@@ -1,0 +1,22 @@
+{
+  "id": 161,
+  "name": "BABYTANTS",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 45,
+      "date": "2024-07-27",
+      "title": "DAIDOL Vol.100",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 16
+    }
+  ]
+}

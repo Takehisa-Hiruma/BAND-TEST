@@ -1,0 +1,19 @@
+{
+  "id": 13,
+  "name": "渋谷Star lounge",
+  "url": "",
+  "events": [
+    {
+      "id": 69,
+      "date": "2023-07-20",
+      "title": "TOKYO GIRLS Connection",
+      "form": "IDOL"
+    },
+    {
+      "id": 19,
+      "date": "2025-08-31",
+      "title": "咆哮祭",
+      "form": "BAND"
+    }
+  ]
+}

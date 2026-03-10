@@ -1,0 +1,77 @@
+{
+  "id": 37,
+  "date": "2024-11-16",
+  "title": "あみい生誕祭",
+  "sub_title": "陰キャの大パーティ",
+  "venue": "秋葉原COSMICLAB",
+  "venue_id": 22,
+  "era": "第３章（METAL）",
+  "era_id": 2,
+  "tour": "",
+  "tour_id": null,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "生誕祭特別ユニット",
+      "act_id": 134
+    },
+    {
+      "seq": 2,
+      "name": "LABOnes.",
+      "act_id": 135
+    },
+    {
+      "seq": 3,
+      "name": "Lって何のLですか？",
+      "act_id": 136
+    },
+    {
+      "seq": 4,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 5,
+      "name": "アイドルは下克上",
+      "act_id": 137
+    },
+    {
+      "seq": 6,
+      "name": "あっぷろーでぃあ",
+      "act_id": 138
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    }
+  ],
+  "setlist": []
+}

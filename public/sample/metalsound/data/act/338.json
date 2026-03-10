@@ -1,0 +1,22 @@
+{
+  "id": 338,
+  "name": "Sevasuchan",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 145,
+      "date": "2019-03-24",
+      "title": "新宿HEAD POWER",
+      "form": "BAND",
+      "venue_id": 58,
+      "venue": "新宿HEAD POWER",
+      "seq": 7
+    }
+  ]
+}

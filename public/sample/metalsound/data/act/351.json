@@ -1,0 +1,22 @@
+{
+  "id": 351,
+  "name": "DREAMY",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 152,
+      "date": "2026-03-07",
+      "title": "Tweyelight FEST",
+      "form": "BAND",
+      "venue_id": 11,
+      "venue": "渋谷GARRET udagawa",
+      "seq": 2
+    }
+  ]
+}

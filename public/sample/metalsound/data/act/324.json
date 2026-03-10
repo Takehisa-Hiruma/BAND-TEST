@@ -1,0 +1,22 @@
+{
+  "id": 324,
+  "name": "LianRouge",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 121,
+      "date": "2022-02-12",
+      "title": "Crazy Fest ヴァレンタインSP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 1
+    }
+  ]
+}

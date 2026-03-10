@@ -1,0 +1,64 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Owner Console</title>
+<style>
+  body{font:14px system-ui;margin:24px} header{display:flex;justify-content:space-between;align-items:center}
+  ul{padding:0} li{list-style:none;margin:8px 0}
+  a{color:#0ea5e9;text-decoration:none} a:hover{text-decoration:underline}
+</style>
+<header>
+  <h1>Owner Console</h1>
+  <nav><a href="../">公開サイト一覧へ</a></nav>
+</header>
+<main>
+  <h2>あなたのプロジェクト</h2>
+  <ul id="list"></ul>
+</main>
+<!-- <script type="module">
+  // ▼ まずは “仮データ”（あとで /owner/api/projects?u=<u> に差し替え）
+  const username = new URLSearchParams(location.search).get("u") || "sample";
+  const projects = [
+    {project:"metalsound", display:"Metal Sound"},
+    // ここに足していく or 後でAPI化
+  ];
+  const list = document.getElementById('list');
+  list.innerHTML = projects.map(p =>
+    `<li>🎵 <strong>${p.display}</strong> — 
+       <a href="./editor.html?u=${encodeURIComponent(username)}&p=${encodeURIComponent(p.project)}">編集</a> /
+       <a href="../${encodeURIComponent(username)}/${encodeURIComponent(p.project)}/" target="_blank">公開URL</a>
+     </li>`
+  ).join('');
+</script> -->
+
+<script type="module">
+  const username = new URLSearchParams(location.search).get("u") || "sample";
+
+  // 昼/夜共通コード：オリジンで自動切替（本番は ''、ローカルは 127.0.0.1:8787）
+  const API_BASE =
+    (location.hostname === "127.0.0.1" || location.hostname === "localhost")
+      ? "http://127.0.0.1:8787"
+      : "";
+
+  const listEl = document.getElementById("list");
+
+  (async () => {
+    try {
+      const url = `${API_BASE}/owner/api/projects?u=${encodeURIComponent(username)}`;
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+      const projects = await r.json();
+
+      listEl.innerHTML = projects.length
+        ? projects.map(p => `
+            <li>
+              🎵 <strong>${p.display || p.project}</strong>
+               — <a href="./editor.html?u=${encodeURIComponent(username)}&p=${encodeURIComponent(p.project)}">編集</a>
+               / <a href="../${encodeURIComponent(username)}/${encodeURIComponent(p.project)}/">公開URL</a>
+            </li>`).join("")
+        : `<li>プロジェクトが見つかりません</li>`;
+    } catch (e) {
+      console.error(e);
+      listEl.innerHTML = `<li>プロジェクト一覧の取得に失敗しました</li>`;
+    }
+  })();
+</script>

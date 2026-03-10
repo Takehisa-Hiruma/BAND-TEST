@@ -1,0 +1,501 @@
+{
+  "id": 9,
+  "name": "RIHITO",
+  "events": [
+    {
+      "event_id": 150,
+      "date": "2016-07-10",
+      "title": "巣鴨獅子王",
+      "venue": "巣鴨獅子王",
+      "venue_id": 59,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 149,
+      "date": "2016-08-27",
+      "title": "渋谷Guilty",
+      "venue": "渋谷Guilty",
+      "venue_id": 17,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 139,
+      "date": "2016-11-23",
+      "title": "LIVE AT 目黒鹿鳴館",
+      "venue": "目黒鹿鳴館",
+      "venue_id": 24,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 138,
+      "date": "2017-01-08",
+      "title": "LEGEND \"2017\"",
+      "venue": "新宿WildSide Tokyo",
+      "venue_id": 19,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 137,
+      "date": "2017-02-26",
+      "title": "天下一メタル武道お茶会",
+      "venue": "三軒茶屋Grape Fruit Moon",
+      "venue_id": 53,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 136,
+      "date": "2017-04-22",
+      "title": "きつね楽員 × DIZZYMETAL",
+      "venue": "下北沢WAVER",
+      "venue_id": 52,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 151,
+      "date": "2017-08-26",
+      "title": "立川BABEL",
+      "venue": "立川BABEL",
+      "venue_id": 60,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 146,
+      "date": "2017-08-27",
+      "title": "初台theDOORS",
+      "venue": "初台theDOORS",
+      "venue_id": 51,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 134,
+      "date": "2017-10-21",
+      "title": "Only The FOXGOD Unknown",
+      "venue": "川崎セルビアンナイト",
+      "venue_id": 18,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 133,
+      "date": "2018-01-28",
+      "title": "DizzFEST vol.1",
+      "venue": "新宿WildSide Tokyo",
+      "venue_id": 19,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 132,
+      "date": "2018-04-22",
+      "title": "DizzFEST vol.2",
+      "venue": "川崎セルビアンナイト",
+      "venue_id": 18,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 131,
+      "date": "2018-07-01",
+      "title": "DizzFEST vol.3",
+      "venue": "吉祥寺ROCK JOINT GB",
+      "venue_id": 4,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 130,
+      "date": "2018-12-09",
+      "title": "\"THE ONE\" -man show-",
+      "venue": "吉祥寺ROCK JOINT GB",
+      "venue_id": 4,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 129,
+      "date": "2019-01-20",
+      "title": "音速絶倫バイアグラフェス",
+      "venue": "初台theDOORS",
+      "venue_id": 51,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 127,
+      "date": "2019-03-09",
+      "title": "LIVE TOUR 2019 DAY1",
+      "venue": "渋谷GARRET udagawa",
+      "venue_id": 11,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 145,
+      "date": "2019-03-24",
+      "title": "新宿HEAD POWER",
+      "venue": "新宿HEAD POWER",
+      "venue_id": 58,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 128,
+      "date": "2019-04-13",
+      "title": "KAWASAKI ROCK JAM 2019",
+      "venue": "川崎CLUB CITTA'",
+      "venue_id": 47,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 126,
+      "date": "2019-06-22",
+      "title": "LEGEND-Y",
+      "venue": "目黒鹿鳴館",
+      "venue_id": 24,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 144,
+      "date": "2019-07-27",
+      "title": "LOVESNYPER vol.44",
+      "venue": "渋谷CLUB ASIA",
+      "venue_id": 57,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 143,
+      "date": "2019-08-24",
+      "title": "池袋CYBER",
+      "venue": "池袋CYBER",
+      "venue_id": 55,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 142,
+      "date": "2019-09-29",
+      "title": "秋葉原CLUB GOODMAN",
+      "venue": "秋葉原CLUB GOODMAN",
+      "venue_id": 56,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 125,
+      "date": "2019-12-08",
+      "title": "ONE MAN SHOW",
+      "venue": "吉祥寺ROCK JOINT GB",
+      "venue_id": 4,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 141,
+      "date": "2020-01-12",
+      "title": "EQUINOX",
+      "venue": "池袋CYBER",
+      "venue_id": 55,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 140,
+      "date": "2020-09-27",
+      "title": "ONEMAN",
+      "venue": "渋谷CYCLONE",
+      "venue_id": 54,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 124,
+      "date": "2021-11-14",
+      "title": "HEAVY METAL FEVER",
+      "venue": "新宿WildSide Tokyo",
+      "venue_id": 19,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 122,
+      "date": "2021-11-27",
+      "title": "METAL RESURRECTION",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 121,
+      "date": "2022-02-12",
+      "title": "Crazy Fest ヴァレンタインSP",
+      "venue": "赤羽ReNY alpha",
+      "venue_id": 36,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 118,
+      "date": "2022-05-03",
+      "title": "Metal Hearts 2022",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 114,
+      "date": "2022-05-29",
+      "title": "KAWASAKI ROCK JAM",
+      "venue": "川崎CLUB CITTA'",
+      "venue_id": 47,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 112,
+      "date": "2022-07-09",
+      "title": "弾丸ライナーFEST Vol.2",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 111,
+      "date": "2022-07-16",
+      "title": "UNSUNG FANTASIA",
+      "venue": "心斎橋BIGTWIN DINER SHOVEL",
+      "venue_id": 37,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 110,
+      "date": "2022-08-06",
+      "title": "METAL RESURRECTION 2",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 108,
+      "date": "2022-09-11",
+      "title": "CrazyFest 秋の大運動会SP",
+      "venue": "赤羽ReNY alpha",
+      "venue_id": 36,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 103,
+      "date": "2022-11-05",
+      "title": "FATE GEAR レコ発ツアー東京編",
+      "venue": "目黒鹿鳴館",
+      "venue_id": 24,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 97,
+      "date": "2022-12-17",
+      "title": "DIZZYMETAL ONE MAN LIVE",
+      "venue": "横浜LiT",
+      "venue_id": 42,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 94,
+      "date": "2023-01-21",
+      "title": "武蔵野音楽祭2023",
+      "venue": "吉祥寺CLUB SEATA",
+      "venue_id": 3,
+      "form": "IDOL",
+      "role": "Drum"
+    },
+    {
+      "event_id": 89,
+      "date": "2023-03-12",
+      "title": "HATTALLICA結成20周年ツアー",
+      "venue": "六本木CLUB Edge",
+      "venue_id": 39,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 87,
+      "date": "2023-03-26",
+      "title": "LEGEND \"0320\"",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 84,
+      "date": "2023-04-29",
+      "title": "SHARED UNIVERSE VOL.1",
+      "venue": "心斎橋BIGTWIN DINER SHOVEL",
+      "venue_id": 37,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 85,
+      "date": "2023-04-30",
+      "title": "SHEARD UNIVERSE VOL.2",
+      "venue": "今池GROW",
+      "venue_id": 38,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 75,
+      "date": "2023-06-11",
+      "title": "LINER LINER",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 67,
+      "date": "2023-09-11",
+      "title": "ヴィクトリアス",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 63,
+      "date": "2023-10-22",
+      "title": "LINER LINER",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 64,
+      "date": "2023-11-25",
+      "title": "LEGEND \"1122\"",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 57,
+      "date": "2024-01-20",
+      "title": "無敵素敵フェス Vol.2",
+      "venue": "目黒THE LIVE STATION",
+      "venue_id": 26,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 55,
+      "date": "2024-03-16",
+      "title": "LEGEND \"0315\"",
+      "venue": "吉祥寺ROCK JOINT GB",
+      "venue_id": 4,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 59,
+      "date": "2024-03-23",
+      "title": "LEGENT - UYUMETAL聖誕祭",
+      "venue": "目黒鹿鳴館",
+      "venue_id": 24,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 51,
+      "date": "2024-04-29",
+      "title": "GIANT KILLING",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 53,
+      "date": "2024-05-11",
+      "title": "Free Festival 2024",
+      "venue": "新宿ANTIKNOCK",
+      "venue_id": 6,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 48,
+      "date": "2024-06-30",
+      "title": "VIXEN_FEST 2024",
+      "venue": "西川口Hearts",
+      "venue_id": 2,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 54,
+      "date": "2024-07-15",
+      "title": "THE METALANDS",
+      "venue": "目黒鹿鳴館",
+      "venue_id": 24,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 43,
+      "date": "2024-08-11",
+      "title": "炎のRockAventers3 Day1",
+      "venue": "青山RizM",
+      "venue_id": 7,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 39,
+      "date": "2024-10-13",
+      "title": "Grace melodia",
+      "venue": "渋谷Guilty",
+      "venue_id": 17,
+      "form": "BAND",
+      "role": "Drum"
+    },
+    {
+      "event_id": 32,
+      "date": "2024-12-01",
+      "title": "Shared Universe Vol.3",
+      "venue": "川崎セルビアンナイト",
+      "venue_id": 18,
+      "form": "BAND",
+      "role": "Drum"
+    }
+  ],
+  "birthday": "6月2日",
+  "joined_on": "",
+  "left_on": "",
+  "x": "https://x.com/RIHITO_VAL_KOR",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": ""
+}

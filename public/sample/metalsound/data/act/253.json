@@ -1,0 +1,22 @@
+{
+  "id": 253,
+  "name": "Cassie Te Light",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 90,
+      "date": "2023-02-21",
+      "title": "IDOL DEEGO",
+      "form": "IDOL",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "seq": 2
+    }
+  ]
+}

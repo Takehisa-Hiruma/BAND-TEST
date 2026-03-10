@@ -1,0 +1,75 @@
+{
+  "id": 77,
+  "date": "2023-05-14",
+  "title": "ND EXTRA!!",
+  "sub_title": null,
+  "venue": "新宿ANTIKNOCK",
+  "venue_id": 6,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "DAHLIA NOISE 360°",
+      "act_id": 237
+    },
+    {
+      "seq": 2,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 3,
+      "name": "テトラロンド",
+      "act_id": 238
+    },
+    {
+      "seq": 4,
+      "name": "なんちゃらアイドル",
+      "act_id": 235
+    },
+    {
+      "seq": 5,
+      "name": "神風センセーション",
+      "act_id": 183
+    },
+    {
+      "seq": 6,
+      "name": "絶世のインペリアルコレクション",
+      "act_id": 239
+    },
+    {
+      "seq": 7,
+      "name": "星歴13夜",
+      "act_id": 149
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    }
+  ],
+  "setlist": []
+}

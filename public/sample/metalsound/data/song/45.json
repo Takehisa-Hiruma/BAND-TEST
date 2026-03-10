@@ -1,0 +1,50 @@
+{
+  "id": 45,
+  "title": "FUTURE METAL",
+  "events": [
+    {
+      "event_id": 121,
+      "date": "2022-02-12",
+      "title": "Crazy Fest ヴァレンタインSP",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "form": "BAND",
+      "seq": 1,
+      "section": "SE",
+      "version": ""
+    },
+    {
+      "event_id": 118,
+      "date": "2022-05-03",
+      "title": "Metal Hearts 2022",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 1,
+      "section": "SE",
+      "version": ""
+    },
+    {
+      "event_id": 109,
+      "date": "2022-09-04",
+      "title": "Legends In Hearts",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 1,
+      "section": "SE",
+      "version": ""
+    },
+    {
+      "event_id": 28,
+      "date": "2025-02-22",
+      "title": "Shared Universe Vol.4",
+      "venue_id": 20,
+      "venue": "心斎橋PANHEAD GROOVE",
+      "form": "BAND",
+      "seq": 1,
+      "section": "SE",
+      "version": ""
+    }
+  ]
+}

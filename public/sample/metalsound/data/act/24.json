@@ -1,0 +1,40 @@
+{
+  "id": 24,
+  "name": "SAISEIGA",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 121,
+      "date": "2022-02-12",
+      "title": "Crazy Fest ヴァレンタインSP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 6
+    },
+    {
+      "event_id": 108,
+      "date": "2022-09-11",
+      "title": "CrazyFest 秋の大運動会SP",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 2
+    },
+    {
+      "event_id": 11,
+      "date": "2025-10-26",
+      "title": "Gracemelodia",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 3
+    }
+  ]
+}

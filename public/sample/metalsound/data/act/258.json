@@ -1,0 +1,22 @@
+{
+  "id": 258,
+  "name": "花冷え。",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 94,
+      "date": "2023-01-21",
+      "title": "武蔵野音楽祭2023",
+      "form": "IDOL",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "seq": 6
+    }
+  ]
+}

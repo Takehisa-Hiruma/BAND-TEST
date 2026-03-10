@@ -1,0 +1,123 @@
+{
+  "id": 24,
+  "name": "YONMETAL",
+  "events": [
+    {
+      "event_id": 150,
+      "date": "2016-07-10",
+      "title": "巣鴨獅子王",
+      "venue": "巣鴨獅子王",
+      "venue_id": 59,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 149,
+      "date": "2016-08-27",
+      "title": "渋谷Guilty",
+      "venue": "渋谷Guilty",
+      "venue_id": 17,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 139,
+      "date": "2016-11-23",
+      "title": "LIVE AT 目黒鹿鳴館",
+      "venue": "目黒鹿鳴館",
+      "venue_id": 24,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 138,
+      "date": "2017-01-08",
+      "title": "LEGEND \"2017\"",
+      "venue": "新宿WildSide Tokyo",
+      "venue_id": 19,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 137,
+      "date": "2017-02-26",
+      "title": "天下一メタル武道お茶会",
+      "venue": "三軒茶屋Grape Fruit Moon",
+      "venue_id": 53,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 136,
+      "date": "2017-04-22",
+      "title": "きつね楽員 × DIZZYMETAL",
+      "venue": "下北沢WAVER",
+      "venue_id": 52,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 151,
+      "date": "2017-08-26",
+      "title": "立川BABEL",
+      "venue": "立川BABEL",
+      "venue_id": 60,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 146,
+      "date": "2017-08-27",
+      "title": "初台theDOORS",
+      "venue": "初台theDOORS",
+      "venue_id": 51,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 134,
+      "date": "2017-10-21",
+      "title": "Only The FOXGOD Unknown",
+      "venue": "川崎セルビアンナイト",
+      "venue_id": 18,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 133,
+      "date": "2018-01-28",
+      "title": "DizzFEST vol.1",
+      "venue": "新宿WildSide Tokyo",
+      "venue_id": 19,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 132,
+      "date": "2018-04-22",
+      "title": "DizzFEST vol.2",
+      "venue": "川崎セルビアンナイト",
+      "venue_id": 18,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    },
+    {
+      "event_id": 130,
+      "date": "2018-12-09",
+      "title": "\"THE ONE\" -man show-",
+      "venue": "吉祥寺ROCK JOINT GB",
+      "venue_id": 4,
+      "form": "BAND",
+      "role": "Dance&Scream"
+    }
+  ],
+  "birthday": "",
+  "joined_on": "",
+  "left_on": "2018年12月09日",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": ""
+}

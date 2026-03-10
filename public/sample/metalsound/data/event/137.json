@@ -1,0 +1,158 @@
+{
+  "id": 137,
+  "date": "2017-02-26",
+  "title": "天下一メタル武道お茶会",
+  "sub_title": null,
+  "venue": "三軒茶屋Grape Fruit Moon",
+  "venue_id": 53,
+  "era": "第１章（METAL）",
+  "era_id": 4,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [],
+  "lineup": [
+    {
+      "person_id": 23,
+      "name": "HOSHIMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 22,
+      "name": "HARUMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 24,
+      "name": "YONMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Guitar（上手）",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 25,
+      "name": "NOBUMETAL",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 7,
+      "name": "Douglas",
+      "role": "Bass",
+      "position": "",
+      "ord": 6
+    },
+    {
+      "person_id": 9,
+      "name": "RIHITO",
+      "role": "Drum",
+      "position": "",
+      "ord": 7
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 71,
+      "song_title": "BABYMETAL DEATH",
+      "section": "main",
+      "version": "DIZZYMETAL ver.",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 16,
+      "song_title": "ギミチョコ!!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 26,
+      "song_title": "KARATE",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 32,
+      "song_title": "あわだまフィーバー",
+      "section": "main",
+      "version": "w/ KAMIBAND solo",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 4,
+      "song_title": "紅月 -アカツキ-",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 48,
+      "song_title": "4の歌",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 13,
+      "song_title": "Over The Future",
+      "section": "main",
+      "version": "Rising Force Ver.",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 14,
+      "song_title": "Road of Resistance",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 9,
+      "song_id": 6,
+      "song_title": "メギツネ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 10,
+      "song_id": 1,
+      "song_title": "イジメ、ダメ、ゼッタイ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

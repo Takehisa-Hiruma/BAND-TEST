@@ -1,0 +1,303 @@
+{
+  "id": 34,
+  "date": "2026-02-22",
+  "title": "Hot\"444\"Voice Vol.2",
+  "sub_title": "FOWS 1st Anniversary Month!!",
+  "venue": "渋谷FOWS",
+  "venue_id": 21,
+  "era": "第一期（REVERSE）",
+  "era_id": 1,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "Mellows",
+      "act_id": 74
+    },
+    {
+      "seq": 2,
+      "name": "DIZZYREVERSE",
+      "act_id": 1
+    },
+    {
+      "seq": 3,
+      "name": "AKARA",
+      "act_id": 104
+    },
+    {
+      "seq": 4,
+      "name": "Aqilla",
+      "act_id": 103
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 1,
+      "name": "UYU",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 2,
+      "name": "MAI",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 3,
+      "name": "MISAE",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 21,
+      "song_title": "Dawn of a New World",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 2,
+      "song_id": 22,
+      "song_title": "VICTORIΛ (feat. 秘京 凛 from LOILO)",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 3,
+      "song_id": 29,
+      "song_title": "ライラックシンドローム -Lilac Syndrome- (feat. yu umehara)",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 4,
+      "song_id": 6,
+      "song_title": "メギツネ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 5,
+      "song_id": 24,
+      "song_title": "TOGARE remix",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 25,
+      "song_title": "TOGARE",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 7,
+      "song_id": 16,
+      "song_title": "ギミチョコ!!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 8,
+      "song_id": 31,
+      "song_title": "Arrowlight",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 9,
+      "song_id": 27,
+      "song_title": "コールマイヒーロー",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 10,
+      "song_id": 34,
+      "song_title": "Ending",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 93,
+  "name": "頭に赤ちゃんがいます",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 33,
+      "date": "2024-12-17",
+      "title": "Made in Heaven vol.23",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 1
+    }
+  ]
+}

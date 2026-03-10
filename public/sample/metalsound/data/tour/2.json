@@ -1,0 +1,24 @@
+{
+  "id": 2,
+  "name": "東名阪 SPRING TOUR 2023",
+  "events": [
+    {
+      "id": 83,
+      "date": "2023-04-23",
+      "title": "Beginning",
+      "form": "BAND"
+    },
+    {
+      "id": 84,
+      "date": "2023-04-29",
+      "title": "SHARED UNIVERSE VOL.1",
+      "form": "BAND"
+    },
+    {
+      "id": 85,
+      "date": "2023-04-30",
+      "title": "SHEARD UNIVERSE VOL.2",
+      "form": "BAND"
+    }
+  ]
+}

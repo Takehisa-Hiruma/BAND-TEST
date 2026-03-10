@@ -1,0 +1,22 @@
+{
+  "id": 231,
+  "name": "OMG",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 80,
+      "date": "2023-06-06",
+      "title": "5COLORS MELODY 2023",
+      "form": "IDOL",
+      "venue_id": 34,
+      "venue": "渋谷eggman",
+      "seq": 1
+    }
+  ]
+}

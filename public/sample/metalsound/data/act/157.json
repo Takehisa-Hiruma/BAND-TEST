@@ -1,0 +1,58 @@
+{
+  "id": 157,
+  "name": "Treble",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 95,
+      "date": "2023-01-13",
+      "title": "DA VAMP Vol.3",
+      "form": "IDOL",
+      "venue_id": 12,
+      "venue": "浅草VAMPKIN",
+      "seq": 2
+    },
+    {
+      "event_id": 78,
+      "date": "2023-05-31",
+      "title": "This Dying Soul Vol.4",
+      "form": "IDOL",
+      "venue_id": 33,
+      "venue": "新宿HEIST",
+      "seq": 5
+    },
+    {
+      "event_id": 74,
+      "date": "2023-06-24",
+      "title": "SPICE GIRLS -EXTRA-",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    },
+    {
+      "event_id": 70,
+      "date": "2023-07-26",
+      "title": "Darco",
+      "form": "IDOL",
+      "venue_id": 10,
+      "venue": "新宿Zirco Tokyo",
+      "seq": 2
+    },
+    {
+      "event_id": 45,
+      "date": "2024-07-27",
+      "title": "DAIDOL Vol.100",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 6
+    }
+  ]
+}

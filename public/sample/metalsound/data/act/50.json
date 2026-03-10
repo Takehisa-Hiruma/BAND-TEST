@@ -1,0 +1,58 @@
+{
+  "id": 50,
+  "name": "Village in Maier",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 106,
+      "date": "2022-10-17",
+      "title": "SPICE GIRLS VOL11",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    },
+    {
+      "event_id": 74,
+      "date": "2023-06-24",
+      "title": "SPICE GIRLS -EXTRA-",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 3
+    },
+    {
+      "event_id": 30,
+      "date": "2025-01-22",
+      "title": "last spell vol.5",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 3
+    },
+    {
+      "event_id": 24,
+      "date": "2025-05-27",
+      "title": "last spell vol.7",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 3
+    },
+    {
+      "event_id": 16,
+      "date": "2025-09-23",
+      "title": "DAIDOL Vol.155",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 5
+    }
+  ]
+}

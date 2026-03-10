@@ -1,0 +1,22 @@
+{
+  "id": 274,
+  "name": "LOG BOOK",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 100,
+      "date": "2022-12-08",
+      "title": "idol Wauchin",
+      "form": "IDOL",
+      "venue_id": 43,
+      "venue": "五反田G2",
+      "seq": 5
+    }
+  ]
+}

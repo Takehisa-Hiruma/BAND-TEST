@@ -1,0 +1,171 @@
+{
+  "id": 22,
+  "title": "VICTORIΛ (feat. 秘京 凛 from LOILO)",
+  "events": [
+    {
+      "event_id": 2,
+      "date": "2025-06-15",
+      "title": "Shared Universe Vol.5",
+      "venue_id": 4,
+      "venue": "吉祥寺ROCK JOINT GB",
+      "form": "BAND",
+      "seq": 12,
+      "section": "Video",
+      "version": ""
+    },
+    {
+      "event_id": 20,
+      "date": "2025-07-13",
+      "title": "Rebirth of the World",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 21,
+      "date": "2025-08-10",
+      "title": "炎のRock Avengers5",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "form": "BAND",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 18,
+      "date": "2025-08-23",
+      "title": "LINER LINER",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 19,
+      "date": "2025-08-31",
+      "title": "咆哮祭",
+      "venue_id": 13,
+      "venue": "渋谷Star lounge",
+      "form": "BAND",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 16,
+      "date": "2025-09-23",
+      "title": "DAIDOL Vol.155",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "IDOL",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 11,
+      "date": "2025-10-26",
+      "title": "Gracemelodia",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 10,
+      "date": "2025-11-16",
+      "title": "Moment of Converging Fates(DIZZYREVERSE)",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 9,
+      "date": "2025-12-07",
+      "title": "METAL RESURRECTION 7",
+      "venue_id": 9,
+      "venue": "大塚Hearts＋",
+      "form": "BAND",
+      "seq": 13,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 12,
+      "date": "2025-12-28",
+      "title": "「超エグイ日つくりました。」",
+      "venue_id": 10,
+      "venue": "新宿Zirco Tokyo",
+      "form": "BAND",
+      "seq": 8,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 8,
+      "date": "2026-01-04",
+      "title": "METAMORPHOSE FESTIVAL 2026",
+      "venue_id": 8,
+      "venue": "下北沢CLUB251",
+      "form": "BAND",
+      "seq": 7,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 7,
+      "date": "2026-01-12",
+      "title": "Vamp Up SEASON",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "form": "BAND",
+      "seq": 2,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 6,
+      "date": "2026-02-08",
+      "title": "LINER LINER",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 2,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 34,
+      "date": "2026-02-22",
+      "title": "Hot\"444\"Voice Vol.2",
+      "venue_id": 21,
+      "venue": "渋谷FOWS",
+      "form": "IDOL",
+      "seq": 2,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 152,
+      "date": "2026-03-07",
+      "title": "Tweyelight FEST",
+      "venue_id": 11,
+      "venue": "渋谷GARRET udagawa",
+      "form": "BAND",
+      "seq": 4,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

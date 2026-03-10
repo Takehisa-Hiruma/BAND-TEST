@@ -1,0 +1,22 @@
+{
+  "id": 283,
+  "name": "MANACLE",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 103,
+      "date": "2022-11-05",
+      "title": "FATE GEAR レコ発ツアー東京編",
+      "form": "BAND",
+      "venue_id": 24,
+      "venue": "目黒鹿鳴館",
+      "seq": 2
+    }
+  ]
+}

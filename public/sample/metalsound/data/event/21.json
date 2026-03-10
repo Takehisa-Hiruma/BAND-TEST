@@ -1,0 +1,108 @@
+{
+  "id": 21,
+  "date": "2025-08-10",
+  "title": "炎のRock Avengers5",
+  "sub_title": "2025 Destroy Blaze",
+  "venue": "青山RizM",
+  "venue_id": 7,
+  "era": "第一期（REVERSE）",
+  "era_id": 1,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [],
+  "lineup": [],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 30,
+      "song_title": "Opening",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 21,
+      "song_title": "Dawn of a New World",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 22,
+      "song_title": "VICTORIΛ (feat. 秘京 凛 from LOILO)",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 28,
+      "song_title": "走れ未来へ!!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 42,
+      "song_title": "曲名未定",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 19,
+      "song_title": "Crazy J",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 3,
+      "song_title": "いいね！",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 9,
+      "song_title": "Arkadia",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 9,
+      "song_id": 31,
+      "song_title": "Arrowlight",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 10,
+      "song_id": 27,
+      "song_title": "コールマイヒーロー",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

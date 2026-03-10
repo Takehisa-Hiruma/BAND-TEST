@@ -1,0 +1,711 @@
+{
+  "id": 10,
+  "date": "2025-11-16",
+  "title": "Moment of Converging Fates(DIZZYREVERSE)",
+  "sub_title": "10th Anniversary Special Show",
+  "venue": "西川口Hearts",
+  "venue_id": 2,
+  "era": "第一期（REVERSE）",
+  "era_id": 1,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 2,
+      "name": "DIZZYREVERSE",
+      "act_id": 1
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 1,
+      "name": "UYU",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 2,
+      "name": "MAI",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 3,
+      "name": "MISAE",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 4,
+      "name": "NEAR",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Guitar（上手）",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 6,
+      "name": "NAKAJI",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 6
+    },
+    {
+      "person_id": 7,
+      "name": "Douglas",
+      "role": "Bass",
+      "position": "",
+      "ord": 7
+    },
+    {
+      "person_id": 8,
+      "name": "Yuichi 'samraichan'",
+      "role": "Drum",
+      "position": "",
+      "ord": 8
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 30,
+      "song_title": "Opening",
+      "section": "Video",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 21,
+      "song_title": "Dawn of a New World",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 3,
+      "song_id": 22,
+      "song_title": "VICTORIΛ (feat. 秘京 凛 from LOILO)",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 4,
+      "song_id": 28,
+      "song_title": "走れ未来へ!!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 5,
+      "song_id": 24,
+      "song_title": "TOGARE remix",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 25,
+      "song_title": "TOGARE",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 7,
+      "song_id": 29,
+      "song_title": "ライラックシンドローム -Lilac Syndrome- (feat. yu umehara)",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 8,
+      "song_id": 19,
+      "song_title": "Crazy J",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 9,
+      "song_id": 31,
+      "song_title": "Arrowlight",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 10,
+      "song_id": 35,
+      "song_title": "Re:Start Future remix",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 11,
+      "song_id": 23,
+      "song_title": "Re:Start Future",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 12,
+      "song_id": 27,
+      "song_title": "コールマイヒーロー",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 13,
+      "song_id": 36,
+      "song_title": "Video.1",
+      "section": "encore",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 14,
+      "song_id": 14,
+      "song_title": "Road of Resistance",
+      "section": "encore",
+      "version": null,
+      "note": "",
+      "performer": [
+        {
+          "person_id": 1,
+          "name": "UYU",
+          "role": "Dance&Vocal",
+          "position": ""
+        },
+        {
+          "person_id": 2,
+          "name": "MAI",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 3,
+          "name": "MISAE",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 4,
+          "name": "NEAR",
+          "role": "Dance&Scream（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 5,
+          "name": "Masaxxxxx",
+          "role": "Guitar（上手）",
+          "position": ""
+        },
+        {
+          "person_id": 6,
+          "name": "NAKAJI",
+          "role": "Guitar（下手）",
+          "position": ""
+        },
+        {
+          "person_id": 7,
+          "name": "Douglas",
+          "role": "Bass",
+          "position": ""
+        },
+        {
+          "person_id": 8,
+          "name": "Yuichi 'samraichan'",
+          "role": "Drum",
+          "position": ""
+        }
+      ]
+    },
+    {
+      "seq": 15,
+      "song_id": 34,
+      "song_title": "Ending",
+      "section": "encore",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 23,
+  "name": "蛍光クジラ",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 11,
+      "date": "2025-10-26",
+      "title": "Gracemelodia",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 1
+    }
+  ]
+}

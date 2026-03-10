@@ -1,0 +1,49 @@
+{
+  "id": 11,
+  "name": "LUMiRiSE",
+  "url": "https://lumirise.biz/biography",
+  "x": "https://x.com/_LUMiRiSE",
+  "instagram": "https://www.instagram.com/_lumirise_official/",
+  "threads": "",
+  "facebook": "",
+  "youtube": "https://www.youtube.com/@lumirise",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 83,
+      "date": "2023-04-23",
+      "title": "Beginning",
+      "form": "BAND",
+      "venue_id": 36,
+      "venue": "赤羽ReNY alpha",
+      "seq": 2
+    },
+    {
+      "event_id": 44,
+      "date": "2024-08-12",
+      "title": "炎のRockAventers3 Day2",
+      "form": "BAND",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "seq": 5
+    },
+    {
+      "event_id": 32,
+      "date": "2024-12-01",
+      "title": "Shared Universe Vol.3",
+      "form": "BAND",
+      "venue_id": 18,
+      "venue": "川崎セルビアンナイト",
+      "seq": 1
+    },
+    {
+      "event_id": 3,
+      "date": "2025-08-09",
+      "title": "ズマズマズマ！",
+      "form": "BAND",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "seq": 10
+    }
+  ]
+}

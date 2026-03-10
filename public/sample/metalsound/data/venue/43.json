@@ -1,0 +1,19 @@
+{
+  "id": 43,
+  "name": "五反田G2",
+  "url": "",
+  "events": [
+    {
+      "id": 113,
+      "date": "2022-06-29",
+      "title": "LIVE リミット！",
+      "form": "IDOL"
+    },
+    {
+      "id": 100,
+      "date": "2022-12-08",
+      "title": "idol Wauchin",
+      "form": "IDOL"
+    }
+  ]
+}

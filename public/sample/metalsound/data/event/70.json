@@ -1,0 +1,65 @@
+{
+  "id": 70,
+  "date": "2023-07-26",
+  "title": "Darco",
+  "sub_title": null,
+  "venue": "新宿Zirco Tokyo",
+  "venue_id": 10,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "",
+  "tour_id": null,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "センチメンタル思春期",
+      "act_id": 211
+    },
+    {
+      "seq": 2,
+      "name": "Treble",
+      "act_id": 157
+    },
+    {
+      "seq": 3,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 4,
+      "name": "LOILO",
+      "act_id": 212
+    },
+    {
+      "seq": 5,
+      "name": "すごいバンド名にしたかった。",
+      "act_id": 5
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    }
+  ],
+  "setlist": []
+}

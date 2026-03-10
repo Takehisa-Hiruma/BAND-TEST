@@ -1,0 +1,22 @@
+{
+  "id": 346,
+  "name": "マリアと繋がりギャ",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 141,
+      "date": "2020-01-12",
+      "title": "EQUINOX",
+      "form": "BAND",
+      "venue_id": 55,
+      "venue": "池袋CYBER",
+      "seq": 2
+    }
+  ]
+}

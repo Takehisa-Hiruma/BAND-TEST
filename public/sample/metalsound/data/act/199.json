@@ -1,0 +1,22 @@
+{
+  "id": 199,
+  "name": "たけやま3.5",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 66,
+      "date": "2023-10-31",
+      "title": "POP OUT!! vol.9",
+      "form": "IDOL",
+      "venue_id": 30,
+      "venue": "六本木unravel tokyo",
+      "seq": 4
+    }
+  ]
+}

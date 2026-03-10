@@ -1,0 +1,22 @@
+{
+  "id": 61,
+  "name": "Monochrome Cinderella",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 18,
+      "date": "2025-08-23",
+      "title": "LINER LINER",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 1
+    }
+  ]
+}

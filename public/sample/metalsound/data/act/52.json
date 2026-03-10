@@ -1,0 +1,31 @@
+{
+  "id": 52,
+  "name": "世界逆転宣言！",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 22,
+      "date": "2025-07-18",
+      "title": "イナズマズナvol.6",
+      "form": "IDOL",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "seq": 7
+    },
+    {
+      "event_id": 16,
+      "date": "2025-09-23",
+      "title": "DAIDOL Vol.155",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 3
+    }
+  ]
+}

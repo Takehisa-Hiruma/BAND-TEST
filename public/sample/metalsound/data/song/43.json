@@ -1,0 +1,17 @@
+{
+  "id": 43,
+  "title": "SUPER HERO（仮）",
+  "events": [
+    {
+      "event_id": 20,
+      "date": "2025-07-13",
+      "title": "Rebirth of the World",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 10,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

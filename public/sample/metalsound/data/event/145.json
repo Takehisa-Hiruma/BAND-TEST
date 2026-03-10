@@ -1,0 +1,196 @@
+{
+  "id": 145,
+  "date": "2019-03-24",
+  "title": "新宿HEAD POWER",
+  "sub_title": null,
+  "venue": "新宿HEAD POWER",
+  "venue_id": 58,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "kossy",
+      "act_id": 333
+    },
+    {
+      "seq": 2,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 3,
+      "name": "からし蓮根",
+      "act_id": 334
+    },
+    {
+      "seq": 4,
+      "name": "sleep",
+      "act_id": 335
+    },
+    {
+      "seq": 5,
+      "name": "Saln de CIEL",
+      "act_id": 336
+    },
+    {
+      "seq": 6,
+      "name": "ignoppor",
+      "act_id": 337
+    },
+    {
+      "seq": 7,
+      "name": "Sevasuchan",
+      "act_id": 338
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 12,
+      "name": "EMIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 11,
+      "name": "OMIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Guitar（上手）",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 6,
+      "name": "NAKAJI",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 9,
+      "name": "RIHITO",
+      "role": "Drum",
+      "position": "",
+      "ord": 6
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 71,
+      "song_title": "BABYMETAL DEATH",
+      "section": "main",
+      "version": "DIZZYMETAL ver.",
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 6,
+      "song_title": "メギツネ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 51,
+      "song_title": "ド・キ・ド・キ☆モーニング",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 15,
+      "song_title": "ヤバッ！",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 4,
+      "song_title": "紅月 -アカツキ-",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 12,
+      "song_title": "おねだり大作戦",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 85,
+      "song_title": "The Hill Of Wisteria（KAMI Band solo）",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 16,
+      "song_title": "ギミチョコ!!",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 9,
+      "song_id": 8,
+      "song_title": "ヘドバンギャー！！",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 10,
+      "song_id": 1,
+      "song_title": "イジメ、ダメ、ゼッタイ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 11,
+      "song_id": 14,
+      "song_title": "Road of Resistance",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

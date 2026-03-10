@@ -1,0 +1,50 @@
+{
+  "id": 66,
+  "title": "METAL KINGDOM",
+  "events": [
+    {
+      "event_id": 75,
+      "date": "2023-06-11",
+      "title": "LINER LINER",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 1,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 74,
+      "date": "2023-06-24",
+      "title": "SPICE GIRLS -EXTRA-",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "form": "BAND",
+      "seq": 1,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 73,
+      "date": "2023-09-03",
+      "title": "LEGEND \"2001\"",
+      "venue_id": 5,
+      "venue": "大塚Deepa",
+      "form": "BAND",
+      "seq": 20,
+      "section": "encore",
+      "version": ""
+    },
+    {
+      "event_id": 55,
+      "date": "2024-03-16",
+      "title": "LEGEND \"0315\"",
+      "venue_id": 4,
+      "venue": "吉祥寺ROCK JOINT GB",
+      "form": "BAND",
+      "seq": 11,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

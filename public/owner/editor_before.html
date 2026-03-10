@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>Owner Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --gap:8px;--bd:#ddd;--bd2:#eee;--fg:#222;--muted:#555;--hl:#0ea5e9;
+      --left-col: 520px;    /* 左カラム初期幅 */
+      --split: 6px;         /* スプリッタ太さ */
+      --row1: 35%;          /* 右1段目 初期高さ */
+      --row2: 35%;          /* 右2段目 初期高さ */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{font:14px system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;margin:0;color:var(--fg);background:#fff;overflow:hidden}
+    header{display:flex;gap:var(--gap);align-items:center;border-bottom:1px solid var(--bd);padding:8px 12px}
+    header .status{color:var(--muted)}
+    /* 2カラム：左（フォーム+一覧） / 右（lineup / band / setlist） */
+    /* #wrap{display:grid;grid-template-columns: 600px 1fr; gap:0; height:calc(100vh - 44px); overflow:hidden} */
+    #wrap{
+      display:grid;
+      grid-template-columns: var(--left-col) var(--split) 1fr;  /* ← 中央に縦スプリッタ列を挿入 */
+      gap:0;
+      height:calc(100vh - 44px);
+      overflow:hidden;
+    }
+    /* 左ペイン */
+    #left{display:grid;grid-template-rows:auto 1fr;border-right:1px solid var(--bd2); min-height:0}
+    #listBox{display:flex;flex-direction:column;min-height:0}
+    #listBox .list-scroller{flex:1;min-height:0;overflow:auto;padding:10px}
+    .box{padding:10px}
+    .box h3{margin:0 0 8px 0;font-size:15px}
+    .grid2{display:grid;grid-template-columns: 1fr 1fr;gap:10px}
+    .row{display:flex;gap:10px;align-items:center;margin:6px 0}
+    label{display:flex;align-items:center;gap:6px}
+    input[type="text"],input[type="date"],input[type="number"],select{font:inherit;padding:4px 6px}
+    input[type="text"]{width:100%}
+    .toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:8px}
+    button{font:inherit;padding:6px 10px;border:1px solid var(--bd);background:#fff;border-radius:4px;cursor:pointer}
+    button.primary{background:#0ea5e9;color:#fff;border-color:#0ea5e9}
+    button:disabled{opacity:.5;cursor:not-allowed}
+    /* 一覧テーブル */
+    #search{display:flex;gap:8px;align-items:center;border-top:1px solid var(--bd2);padding:10px}
+    table{width:100%;border-collapse:collapse}
+    th,td{border-bottom:1px solid var(--bd2);padding:6px 8px;text-align:left}
+    tbody tr[data-id].sel{background:#f0f9ff}
+    tbody tr[data-id]:hover{background:#f7fbff}
+    /* 右ペイン：縦3段（lineup / band / setlist） */
+    /* #right{display:grid;grid-template-rows: 35% 35% 1fr; min-height:0} */
+    /* #right{
+      display:grid;
+      grid-template-rows: var(--row1) var(--split) var(--row2) var(--split) 1fr;
+      min-height:0;
+    } */
+    #right{
+      display:grid;
+      /* 35% をそのままではなく、縮められるよう minmax(0, 35%) にする */
+      grid-template-rows:
+        minmax(0, var(--row1))  /* ← 例: 35% */
+        var(--split)
+        minmax(0, var(--row2))  /* ← 例: 35% */
+        var(--split)
+        minmax(0, 1fr);         /* ← 最下段も縮小許可しておく */
+      min-height:0;  /* ← ここも維持 */
+      height:100%;   /* ← 右カラム自身の高さを確定させる */
+      overflow:hidden; /* ← はみ出しで親が押し広げられないように */
+    }
+    .panel{display:flex;flex-direction:column;min-height:0;border-bottom:1px solid var(--bd2)}
+    .panel:last-child{border-bottom:none}
+    .panel h3{margin:10px;font-size:15px}
+    .panel .inner{flex:1;min-height:0;padding:0 10px 10px 10px;display:flex;flex-direction:column;gap:8px}
+    .flex-row{display:flex;gap:8px;align-items:center}
+    .muted{color:var(--muted)}
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+    .list-box{flex:1;min-height:0;display:flex;gap:8px}
+    .list-box .scroller{flex:1;min-height:0;overflow:auto;border:1px solid var(--bd2)}
+    .list-box table{width:100%}
+
+    .splitter-v{ width:var(--split); cursor:col-resize; background:transparent; }
+    .splitter-v::after{ content:""; display:block; width:2px; height:100%; margin:0 auto; background:#e5e7eb; }
+    .splitter-v:hover::after{ background:#cbd5e1; }
+
+    .splitter-h{ height:var(--split); cursor:row-resize; background:transparent; }
+    .splitter-h::after{ content:""; display:block; height:2px; width:100%; margin:auto 0; background:#e5e7eb; }
+    .splitter-h:hover::after{ background:#cbd5e1; }
+
+    /* 左一覧だけスクロール（右が引っ張られないように） */
+    #left{display:grid;grid-template-rows:auto 1fr;border-right:1px solid var(--bd2);min-height:0}
+    #listBox{display:flex;flex-direction:column;min-height:0}
+    #listBox .list-scroller{flex:1;min-height:0;overflow:auto;padding:10px}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="btn-back">← 一覧へ</button>
+      <button id="btn-save" class="primary">保存</button>
+      <button id="btn-publish">公開反映</button>
+    </div>
+    <span id="status" class="status"></span>
+  </header>
+
+  <div id="wrap">
+    <!-- 左：フォーム + 一覧 -->
+    <div id="left">
+      <!-- フォーム -->
+      <div class="box" id="formBox">
+        <h3>イベント編集</h3>
+        <div class="grid2">
+          <div>
+            <div class="row"><label>日付 <input id="f-date" type="date"></label></div>
+            <div class="row"><label>タイトル <input id="f-title" type="text" placeholder="Title"></label></div>
+            <div class="row"><label>サブ <input id="f-sub" type="text" placeholder="Subtitle / Note"></label></div>
+          </div>
+          <div>
+            <div class="row">
+              <label>会場
+                <select id="f-venue-select" style="min-width:220px"></select>
+              </label>
+            </div>
+            <div class="row">
+              <label>Era
+                <select id="f-era-select" style="min-width:160px"></select>
+              </label>
+            </div>
+            <div class="row">
+              <label>Tour/Series
+                <select id="f-tour-select" style="min-width:160px"></select>
+              </label>
+            </div>
+            <div class="row">
+              <label>形態
+                <select id="f-form-select" style="min-width:120px">
+                  <option value=""></option>
+                  <option value="BAND">BAND</option>
+                  <option value="IDOL">IDOL</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="flex-row">
+            <button id="btn-reload-setlist">セトリをリロード</button>
+          </div>
+          <div class="flex-row">
+            <button id="btn-open-public">Web参照</button>
+            <button id="btn-publish2">Publish JSON</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 一覧 -->
+      <div id="listBox" style="display:flex;flex-direction:column;min-height:0">
+        <div id="search">
+          <div class="flex-row">
+            <span>検索:</span>
+            <input id="q" type="text" placeholder="タイトル / 会場" style="width:200px">
+            <button id="btn-filter">検索</button>
+          </div>
+          <div style="margin-left:auto" class="flex-row">
+            <button id="btn-new">新規</button>
+            <button id="btn-del">削除</button>
+          </div>
+        </div>
+        <!-- <div style="padding:10px;overflow:auto">
+          <table>
+            <thead><tr><th style="width:90px">日付</th><th>タイトル</th><th style="width:160px">会場</th><th style="width:80px">形態</th></tr></thead>
+            <tbody id="tbl"></tbody>
+          </table>
+        </div> -->
+        <div class="list-scroller">
+          <table>
+            <thead><tr><th style="width:90px">日付</th><th>タイトル</th><th style="width:160px">会場</th><th style="width:80px">形態</th></tr></thead>
+            <tbody id="tbl"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 左右のスプリッタ（縦） -->
+    <div id="split-h" class="splitter-v" aria-label="resize columns"></div>
+
+    <!-- 右：縦3段（lineup / bandsevent / setlist） -->
+    <div id="right">
+      <!-- lineup -->
+      <section class="panel" id="panel-lineup">
+        <h3>出演者（イベント全体：lineup）</h3>
+        <div class="inner">
+          <div class="list-box">
+            <div class="scroller">
+              <table>
+                <thead><tr><th style="width:160px">メンバー</th><th style="width:160px">役割</th></tr></thead>
+                <tbody id="lineup-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="flex-row">
+            <label>メンバー
+              <select id="ln-member" style="min-width:200px"></select>
+            </label>
+            <label>役割
+              <select id="ln-role" style="min-width:140px"></select>
+            </label>
+          </div>
+          <div class="flex-row">
+            <button id="ln-add">追加</button>
+            <button id="ln-del">削除</button>
+            <button id="ln-up">▲上へ</button>
+            <button id="ln-down">▼下へ</button>
+            <button id="ln-update">更新</button>
+          </div>
+        </div>
+      </section>
+      <!-- 右内スプリッタ（横）1 -->
+      <div id="split-v1" class="splitter-h" aria-label="resize row 1-2"></div>
+      <!-- bandsevent -->
+      <section class="panel" id="panel-band">
+        <h3>対バン（bandsevent）</h3>
+        <div class="inner">
+          <div class="list-box">
+            <div class="scroller">
+              <table>
+                <thead><tr><th style="width:40px">#</th><th>バンド名</th></tr></thead>
+                <tbody id="band-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="flex-row">
+            <label>バンド名
+              <select id="band-name" style="min-width:220px"></select>
+            </label>
+          </div>
+          <div class="flex-row">
+            <button id="band-add">追加</button>
+            <button id="band-del">削除</button>
+            <button id="band-up">▲上へ</button>
+            <button id="band-down">▼下へ</button>
+          </div>
+        </div>
+      </section>
+      <!-- 右内スプリッタ（横）2 -->
+      <div id="split-v2" class="splitter-h" aria-label="resize row 2-3"></div>
+      <!-- setlist -->
+      <section class="panel" id="panel-setlist">
+        <h3>セトリ編集（seqは常に1..N）</h3>
+        <div class="inner">
+          <div class="list-box">
+            <div class="scroller">
+              <table>
+                <thead><tr><th style="width:40px">#</th><th>曲名</th><th style="width:180px">補足</th></tr></thead>
+                <tbody id="setlist-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="flex-row">
+            <label>曲<select id="sl-song" style="min-width:240px"></select></label>
+            <label>Section
+              <select id="sl-section" style="min-width:120px">
+                <option value=""></option><option value="main">main</option><option value="encore">encore</option><option value="MC">MC</option><option value="SE">SE</option><option value="Video">Video</option>
+              </select>
+            </label>
+            <label>Version <input id="sl-version" type="text" style="width:120px"></label>
+          </div>
+          <div class="flex-row">
+            <button id="sl-add">追加</button>
+            <button id="sl-del">削除</button>
+            <button id="sl-up">▲上へ</button>
+            <button id="sl-down">▼下へ</button>
+            <button id="sl-update">更新</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script type="module">
+    // ===== コンテキスト =====
+    const u = new URLSearchParams(location.search).get("u");
+    const p = new URLSearchParams(location.search).get("p");
+    if (!u || !p) location.href = "./index.html";
+
+    const API_BASE =
+      (location.hostname === "127.0.0.1" || location.hostname === "localhost")
+        ? "http://127.0.0.1:8787"
+        : "";
+
+    const $ = s => document.querySelector(s);
+    const status = $("#status");
+    const leftTbody = $("#tbl");
+    let events = [], cur = null;
+
+
+    // ===== スプリッタ配線 =====
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+    function px(n){ return `${Math.round(n)}px`; }
+
+    function wireSplitters(){
+      // 左右：#split-h で --left-col を更新
+      const gripH = document.getElementById('split-h');
+      if (gripH){
+        gripH.addEventListener('mousedown', e=>{
+          e.preventDefault();
+          const wrap = document.getElementById('wrap');
+          const wrapRect = wrap.getBoundingClientRect();
+          const startX = e.clientX;
+          const startLeft = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--left-col')) || 520;
+          const onMove = (ev)=>{
+            const dx = ev.clientX - startX;
+            const next = clamp(startLeft + dx, 360, Math.min(window.innerWidth*0.75, wrapRect.width-300));
+            document.documentElement.style.setProperty('--left-col', px(next));
+            // 保存（u/p単位で復元）
+            localStorage.setItem(`editor.leftcol.${u}.${p}`, String(next));
+          };
+          const onUp = ()=>{ window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+          window.addEventListener('mousemove', onMove);
+          window.addEventListener('mouseup', onUp);
+        });
+        // 復元
+        const savedLeft = parseFloat(localStorage.getItem(`editor.leftcol.${u}.${p}`));
+        if (!Number.isNaN(savedLeft)) document.documentElement.style.setProperty('--left-col', px(savedLeft));
+      }
+
+      // 右内：#split-v1 / #split-v2 で --row1 / --row2 を px 指定で更新
+      const gripV1 = document.getElementById('split-v1');
+      const gripV2 = document.getElementById('split-v2');
+      const right  = document.getElementById('right');
+
+      function readRows(){
+        // CSS変数が%でも px 指定に直す（初回のみ）
+        const cs = getComputedStyle(document.documentElement);
+        const r1 = cs.getPropertyValue('--row1').trim();
+        const r2 = cs.getPropertyValue('--row2').trim();
+        const h  = right.getBoundingClientRect().height;
+        const toPx = (v)=> v.endsWith('%') ? h * parseFloat(v)/100 : parseFloat(v||'0');
+        return {h, r1: toPx(r1||'35%'), r2: toPx(r2||'35%')};
+      }
+      function setRows(r1px, r2px){
+        const h = right.getBoundingClientRect().height;
+        const min = 80;                                   // 各段の最小高
+        const maxR1 = h - (min + parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--split'))*2 + min);
+        const r1 = clamp(r1px, min, Math.max(min, maxR1));
+        const maxR2 = h - (r1 + parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--split'))*2 + min);
+        const r2 = clamp(r2px, min, Math.max(min, maxR2));
+        document.documentElement.style.setProperty('--row1', px(r1));
+        document.documentElement.style.setProperty('--row2', px(r2));
+        localStorage.setItem(`editor.rows.${u}.${p}`, JSON.stringify([r1, r2]));
+      }
+      function restoreRows(){
+        const saved = localStorage.getItem(`editor.rows.${u}.${p}`);
+        if (saved){
+          try{ const [r1,r2]=JSON.parse(saved); setRows(r1,r2); }catch{}
+        }
+      }
+      // V1（row1 のみをドラッグ、row2 は相対維持）
+      if (gripV1){
+        gripV1.addEventListener('mousedown', e=>{
+          e.preventDefault();
+          const {r1,r2} = readRows(); const startY = e.clientY;
+          const onMove = (ev)=> setRows(r1 + (ev.clientY - startY), r2);
+          const onUp   = ()=>{ window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+          window.addEventListener('mousemove', onMove); window.addEventListener('mouseup', onUp);
+        });
+      }
+      // V2（row2 をドラッグ）
+      if (gripV2){
+        gripV2.addEventListener('mousedown', e=>{
+          e.preventDefault();
+          const {r2} = readRows(); const startY = e.clientY;
+          const onMove = (ev)=> setRows(readRows().r1, r2 + (ev.clientY - startY));
+          const onUp   = ()=>{ window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+          window.addEventListener('mousemove', onMove); window.addEventListener('mouseup', onUp);
+        });
+      }
+      // 復元 & リサイズ追随
+      restoreRows();
+      window.addEventListener('resize', ()=>{
+        // 画面が大きく変わった場合でも最小高制約内に再クランプ
+        const saved = localStorage.getItem(`editor.rows.${u}.${p}`);
+        if (saved){ try{ const [r1,r2]=JSON.parse(saved); setRows(r1,r2); }catch{} }
+        const savedLeft = parseFloat(localStorage.getItem(`editor.leftcol.${u}.${p}`));
+        if (!Number.isNaN(savedLeft)){
+          const max = Math.min(window.innerWidth*0.75, document.getElementById('wrap').getBoundingClientRect().width-300);
+          document.documentElement.style.setProperty('--left-col', px(clamp(savedLeft, 360, max)));
+        }
+      });
+    }
+
+    // ===== ユーティリティ =====
+    function normDate(s) {
+      if (!s) return "";
+      const nums = String(s).match(/\d+/g);
+      if (!nums || nums.length < 3) return s;
+      let [yy, mm, dd] = nums;
+      if (yy.length === 2) yy = (yy >= "70" ? "19" : "20") + yy;
+      yy = yy.padStart(4,"0"); mm = mm.padStart(2,"0"); dd = dd.padStart(2,"0");
+      return `${yy}-${mm}-${dd}`;
+    }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+    // ===== マスタ（venues / eras / tours / people / roles / acts / songs） =====
+    let venues=[], eras=[], tours=[], people=[], roles=[], acts=[], songs=[];
+    let venueById=new Map(), eraById=new Map(), tourById=new Map(), personById=new Map(), roleById=new Map(), actById=new Map(), songById=new Map();
+
+    async function loadMasterJson(cands){
+      for (const url of cands){
+        try{ const r=await fetch(url,{cache:"no-store"}); if(r.ok) return await r.json(); }catch{}
+      }
+      return null;
+    }
+    function normalizeList(data){
+      if (!data) return [];
+      if (Array.isArray(data)) return data.map(v=>({id:String(v.id), name:v.name||v.label||String(v.id)}));
+      return Object.keys(data).map(k=>({id:String(k), name:String(data[k])}));
+    }
+    async function loadMasters(){
+      const base = `../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/`;
+      venues = normalizeList(await loadMasterJson([`${base}venue.json?ts=${Date.now()}`, `${base}venues.json?ts=${Date.now()}`]));
+      eras   = normalizeList(await loadMasterJson([`${base}eras.json?ts=${Date.now()}`]));
+      tours  = normalizeList(await loadMasterJson([`${base}tours.json?ts=${Date.now()}`]));
+      people = normalizeList(await loadMasterJson([`${base}people.json?ts=${Date.now()}`]));
+      roles  = normalizeList(await loadMasterJson([`${base}roles.json?ts=${Date.now()}`]));
+      acts   = normalizeList(await loadMasterJson([`${base}acts.json?ts=${Date.now()}`]));
+      songs  = normalizeList(await loadMasterJson([`${base}songs.json?ts=${Date.now()}`]));
+
+      venueById = new Map(venues.map(v=>[v.id,v.name]));
+      eraById   = new Map(eras.map(v=>[v.id,v.name]));
+      tourById  = new Map(tours.map(v=>[v.id,v.name]));
+      personById= new Map(people.map(v=>[v.id,v.name]));
+      roleById  = new Map(roles.map(v=>[v.id,v.name]));
+      actById   = new Map(acts.map(v=>[v.id,v.name]));
+      songById  = new Map(songs.map(v=>[v.id,v.name]));
+
+      buildSelect('f-venue-select', venues, '（会場を選択）');
+      buildSelect('f-era-select',   eras,   '（Eraを選択）');
+      buildSelect('f-tour-select',  tours,  '（Tour/Seriesを選択）');
+      buildSelect('ln-member',      people, '（メンバー）');
+      buildSelect('ln-role',        roles,  '（役割）');
+      buildSelect('band-name',      acts.length?acts:venues, '（バンド名）'); // actsが無ければ簡易代替
+      buildSelect('sl-song',        songs,  '（曲を選択）');
+    }
+    function buildSelect(id, list, placeholder){
+      const sel = document.getElementById(id);
+      if(!sel) return;
+      sel.innerHTML = list.length
+        ? `<option value="">${placeholder}</option>` + list.map(v=>`<option value="${v.id}">${escapeHtml(v.name)}</option>`).join('')
+        : `<option value="">（データ無し）</option>`;
+    }
+
+    // ===== 初期化（events 読込 → masters → 描画） =====
+    (async function init(){
+      try{
+        const r = await fetch(`${API_BASE}/owner/api/events?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`,{cache:"no-store"});
+        if(!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+        events = await r.json();
+        status.textContent = "（APIから取得）";
+      }catch(e){
+        const r2 = await fetch(`../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/events.json?ts=${Date.now()}`,{cache:"no-store"});
+        if(!r2.ok){ status.textContent = "イベント一覧の取得に失敗しました"; return; }
+        events = await r2.json();
+        status.textContent = "（JSONから取得：保存/公開は未接続）";
+        // API未接続時のガード
+        $("#btn-save").onclick = ()=>alert("API未起動のため保存は無効（夜の部で）");
+        $("#btn-publish").onclick = ()=>alert("API未起動のため公開反映は無効（夜の部で）");
+        $("#btn-publish2").onclick = $("#btn-publish").onclick;
+      }
+      events = events.map(e=>({...e, date: normDate(e.date||"")}));
+      await loadMasters();
+      render(events);
+      wireLeftUi();
+      wireSplitters();
+    })();
+
+
+// ===== 左：一覧・選択 =====
+    function resolveVenueName(x){
+      const vId = (x.venue_id != null ? String(x.venue_id) : (x.venue != null ? String(x.venue) : ""));
+      return vId ? (venueById.get(vId) || vId) : (x.venue || "");
+    }
+    function render(arr){
+      const q = $("#q").value.trim();
+      const filtered = q ? arr.filter(x => (x.title||"").includes(q) || (resolveVenueName(x)||"").includes(q)) : arr;
+      const sorted = [...filtered].sort((a,b)=>{
+        const da=new Date(a.date||"0000-00-00"), db=new Date(b.date||"0000-00-00");
+        return db - da; // 降順
+      });
+      leftTbody.innerHTML = sorted.map(x=>{
+        const name = resolveVenueName(x);
+        const form = x.form || "";
+        return `<tr data-id="${x.id}">
+          <td>${normDate(x.date||"")}</td>
+          <td>${escapeHtml(x.title||"")}</td>
+          <td>${escapeHtml(name||"")}</td>
+          <td>${escapeHtml(form)}</td>
+        </tr>`;
+      }).join("");
+      leftTbody.querySelectorAll("tr[data-id]").forEach(tr=>{
+        tr.onclick = ()=>{
+          leftTbody.querySelectorAll("tr.sel").forEach(z=>z.classList.remove("sel"));
+          tr.classList.add("sel");
+          pick(+tr.dataset.id);
+        };
+      });
+    }
+
+    function pick(id){
+      cur = events.find(x=>x.id===id);
+      if(!cur) return;
+      $("#f-date").value  = normDate(cur.date||"");
+      $("#f-title").value = cur.title||"";
+      $("#f-sub").value   = cur.sub_title||"";
+      document.getElementById('f-venue-select').value = (cur.venue_id!=null? String(cur.venue_id):"");
+      document.getElementById('f-era-select').value   = (cur.era_id!=null?   String(cur.era_id):"");
+      document.getElementById('f-tour-select').value  = (cur.tour_id!=null?  String(cur.tour_id):"");
+      document.getElementById('f-form-select').value  = (cur.form!=null?     String(cur.form):"");
+      status.textContent = `編集中: #${cur.id}`;
+
+      // 右ペイン：イベント依存の3ブロックをロード
+      loadLineup(cur.id);
+      loadBand(cur.id);
+      loadSetlist(cur.id);
+    }
+
+    function wireLeftUi(){
+      $("#btn-back").onclick = ()=>location.href=`./index.html?u=${encodeURIComponent(u)}`;
+      $("#btn-filter").onclick = ()=>render(events);
+      $("#q").oninput = ()=>render(events);
+      $("#btn-new").onclick = ()=>alert("新規は夜の部（APIで実装）");
+      $("#btn-del").onclick = ()=>alert("削除は夜の部（APIで実装）");
+      $("#btn-reload-setlist").onclick = ()=>{ if(cur) loadSetlist(cur.id); };
+      $("#btn-open-public").onclick = ()=>{ window.open(`../${encodeURIComponent(u)}/${encodeURIComponent(p)}/index.html`,"_blank"); };
+      $("#btn-publish2").onclick = ()=>$("#btn-publish").click();
+      $("#btn-save").onclick = save;
+      $("#btn-publish").onclick = publish;
+
+      // 右ペイン操作（lineup/band/setlist）— API未接続時は UI更新のみ
+      $("#ln-add").onclick = ()=>lineupAdd();
+      $("#ln-del").onclick = ()=>lineupDel();
+      $("#ln-up").onclick  = ()=>lineupMove(-1);
+      $("#ln-down").onclick= ()=>lineupMove(1);
+      $("#ln-update").onclick = ()=>lineupUpdate();
+
+      $("#band-add").onclick = ()=>bandAdd();
+      $("#band-del").onclick = ()=>bandDel();
+      $("#band-up").onclick  = ()=>bandMove(-1);
+      $("#band-down").onclick= ()=>bandMove(1);
+
+      $("#sl-add").onclick = ()=>setlistAdd();
+      $("#sl-del").onclick = ()=>setlistDel();
+      $("#sl-up").onclick  = ()=>setlistMove(-1);
+      $("#sl-down").onclick= ()=>setlistMove(1);
+      $("#sl-update").onclick = ()=>setlistUpdate();
+    }
+
+    // ===== 保存 / 公開反映（イベント本体） =====
+    async function save(){
+      if(!cur){ alert("イベントを選択してください"); return; }
+      const vSel = document.getElementById('f-venue-select').value;
+      const eSel = document.getElementById('f-era-select').value;
+      const tSel = document.getElementById('f-tour-select').value;
+      const fSel = document.getElementById('f-form-select').value;
+      const body = {
+        date:      normDate($("#f-date").value) || null,
+        title:     $("#f-title").value || "",
+        sub_title: $("#f-sub").value || "",
+        venue_id:  (vSel!=="" ? (isFinite(+vSel)? +vSel : vSel) : null),
+        era_id:    (eSel!=="" ? (isFinite(+eSel)? +eSel : eSel) : null),
+        tour_id:   (tSel!=="" ? (isFinite(+tSel)? +tSel : tSel) : null),
+        form:      (fSel!=="" ? fSel : null)
+      };
+      try{
+        const r = await fetch(
+          `${API_BASE}/owner/api/events/${cur.id}?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`,
+          { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) }
+        );
+        status.textContent = r.ok ? "保存しました" : "保存に失敗";
+        if(r.ok){ Object.assign(cur, body); render(events); }
+      }catch(e){
+        alert("API未起動のため保存は無効（夜の部で）");
+      }
+    }
+
+    async function publish(){
+      status.textContent = "公開反映中…";
+      try{
+        const r = await fetch(
+          `${API_BASE}/owner/api/build?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`,
+          { method:"POST" }
+        );
+        status.textContent = r.ok ? "公開反映 完了" : "公開反映 失敗";
+        if(r.ok){
+          const r2 = await fetch(`${API_BASE}/owner/api/events?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&ts=${Date.now()}`,{cache:"no-store"});
+          if(r2.ok){ events = await r2.json(); events = events.map(e=>({...e,date:normDate(e.date||"")})); render(events); }
+        }
+      }catch(e){
+        alert("API未起動のため公開反映は無効（夜の部で）");
+      }
+    }
+
+    // ===== 右：lineup / band / setlist =====
+    // データは「表示用のローカル配列」を持ち、API未接続時はUIだけ動かす
+    let lineupRows=[], bandRows=[], setlistRows=[];
+    const lineupBody = $("#lineup-body");
+    const bandBody   = $("#band-body");
+    const setlistBody= $("#setlist-body");
+
+    // lineup
+    async function loadLineup(eventId){
+      lineupRows = [];
+      const base = `../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/`;
+      let data=null;
+      for(const name of ["lineup.json","lineup_all.json"]){
+        try{ const r=await fetch(base+name+`?ts=${Date.now()}`,{cache:"no-store"}); if(r.ok){ data=await r.json(); break; } }catch{}
+      }
+      const list = Array.isArray(data) ? data : [];
+      // 正規化：{event_id, person_id, role_id, seq}
+      lineupRows = list
+        .map(r=>({event_id:+r.event_id, person_id:String(r.person_id), role_id:String(r.role_id), seq:+(r.seq||r.order||0)}))
+        .filter(r=>r.event_id===eventId)
+        .sort((a,b)=>a.seq-b.seq);
+      renderLineup();
+    }
+    function renderLineup(){
+      lineupBody.innerHTML = lineupRows.map((r,i)=>{
+        const mem = personById.get(r.person_id)||r.person_id;
+        const role= roleById.get(r.role_id)||r.role_id;
+        return `<tr data-idx="${i}"><td>${escapeHtml(mem)}</td><td>${escapeHtml(role)}</td></tr>`;
+      }).join("");
+      lineupBody.querySelectorAll("tr[data-idx]").forEach(tr=>{
+        tr.onclick=()=>{ lineupBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel")); tr.classList.add("sel");
+          const i=+tr.dataset.idx; const row=lineupRows[i];
+          $("#ln-member").value = row?.person_id??"";
+          $("#ln-role").value   = row?.role_id??"";
+        };
+      });
+    }
+    function lineupAdd(){
+      if(!cur){ alert("イベントを選択してください"); return; }
+      const pid=$("#ln-member").value, rid=$("#ln-role").value;
+      if(!pid || !rid){ alert("メンバーと役割を選択"); return; }
+      lineupRows.push({event_id:cur.id, person_id:pid, role_id:rid, seq: lineupRows.length+1});
+      renderLineup(); status.textContent="（lineup: 追加・未保存）";
+    }
+    function lineupDel(){
+      const sel=lineupBody.querySelector("tr.sel"); if(!sel){ alert("行を選択"); return; }
+      lineupRows.splice(+sel.dataset.idx,1); lineupRows.forEach((r,i)=>r.seq=i+1);
+      renderLineup(); status.textContent="（lineup: 削除・未保存）";
+    }
+    function lineupMove(dir){
+      const sel=lineupBody.querySelector("tr.sel"); if(!sel){ alert("行を選択"); return; }
+      const i=+sel.dataset.idx, j=i+dir; if(j<0||j>=lineupRows.length) return;
+      [lineupRows[i],lineupRows[j]]=[lineupRows[j],lineupRows[i]];
+      lineupRows.forEach((r,k)=>r.seq=k+1); renderLineup();
+      const trs=lineupBody.querySelectorAll("tr[data-idx]"); trs[j]?.classList.add("sel");
+      status.textContent="（lineup: 並べ替え・未保存）";
+    }
+    function lineupUpdate(){
+      const sel=lineupBody.querySelector("tr.sel"); if(!sel){ alert("行を選択"); return; }
+      const i=+sel.dataset.idx; const pid=$("#ln-member").value, rid=$("#ln-role").value;
+      if(!pid || !rid){ alert("メンバーと役割を選択"); return; }
+      lineupRows[i].person_id=pid; lineupRows[i].role_id=rid; renderLineup();
+      status.textContent="（lineup: 更新・未保存）";
+    }
+
+    // bandsevent
+    async function loadBand(eventId){
+      bandRows=[];
+      const base=`../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/`;
+      let data=null;
+      for(const name of ["bandsevent.json","bands_event.json","acts_event.json"]){
+        try{ const r=await fetch(base+name+`?ts=${Date.now()}`,{cache:"no-store"}); if(r.ok){ data=await r.json(); break; } }catch{}
+      }
+      const list=Array.isArray(data)?data:[];
+      // 正規化：{event_id, seq, act_id? act_name?}
+      bandRows = list
+        .map(r=>({event_id:+r.event_id, seq:+(r.seq||r.order||0), act_id:(r.act_id!=null? String(r.act_id):null), act_name:r.act_name||null}))
+        .filter(r=>r.event_id===eventId)
+        .sort((a,b)=>a.seq-b.seq);
+      renderBand();
+    }
+    function renderBand(){
+      bandBody.innerHTML = bandRows.map((r,i)=>{
+        const name = r.act_name || (r.act_id? (actById.get(r.act_id)||r.act_id):"");
+        return `<tr data-idx="${i}"><td>${r.seq}</td><td>${escapeHtml(name)}</td></tr>`;
+      }).join("");
+      bandBody.querySelectorAll("tr[data-idx]").forEach(tr=>{
+        tr.onclick=()=>{ bandBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel")); tr.classList.add("sel"); };
+      });
+    }
+    function bandAdd(){
+      if(!cur){ alert("イベントを選択してください"); return; }
+      const v=$("#band-name").value; if(!v){ alert("バンド名を選択"); return; }
+      const row={event_id:cur.id, seq: bandRows.length+1};
+      // actsがあるなら id、無ければ name で保持
+      if (actById.has(v)) { row.act_id=v; } else { row.act_name = ($("#band-name").selectedOptions[0]?.textContent || v); }
+      bandRows.push(row); renderBand(); status.textContent="（band: 追加・未保存）";
+    }
+    function bandDel(){
+      const sel=bandBody.querySelector("tr.sel"); if(!sel){ alert("行を選択"); return; }
+      bandRows.splice(+sel.dataset.idx,1); bandRows.forEach((r,i)=>r.seq=i+1);
+      renderBand(); status.textContent="（band: 削除・未保存）";
+    }
+    function bandMove(dir){
+      const sel=bandBody.querySelector("tr.sel"); if(!sel){ alert("行を選択"); return; }
+      const i=+sel.dataset.idx, j=i+dir; if(j<0||j>=bandRows.length) return;
+      [bandRows[i],bandRows[j]]=[bandRows[j],bandRows[i]]; bandRows.forEach((r,k)=>r.seq=k+1);
+      renderBand(); const trs=bandBody.querySelectorAll("tr[data-idx]"); trs[j]?.classList.add("sel");
+      status.textContent="（band: 並べ替え・未保存）";
+    }
+
+    // setlist
+    async function loadSetlist(eventId){
+      setlistRows=[];
+      const base=`../${encodeURIComponent(u)}/${encodeURIComponent(p)}/data/`;
+      let data=null;
+      for(const name of ["event_songs.json","event-song.json","eventSongs.json"]){
+        try{ const r=await fetch(base+name+`?ts=${Date.now()}`,{cache:"no-store"}); if(r.ok){ data=await r.json(); break; } }catch{}
+      }
+      const list=Array.isArray(data)?data:[];
+      // 正規化：{event_id, song_id, order|seq, note}
+      setlistRows = list
+        .map(r=>({event_id:+r.event_id, song_id:String(r.song_id), seq:+(r.order||r.seq||r.no||0), note:r.note||r.memo||""}))
+        .filter(r=>r.event_id===eventId)
+        .sort((a,b)=>a.seq-b.seq);
+      renderSetlist();
+    }
+    function renderSetlist(){
+      setlistBody.innerHTML = setlistRows.map((r,i)=>{
+        const title = songById.get(r.song_id)||r.song_id;
+        return `<tr data-idx="${i}"><td>${r.seq}</td><td>${escapeHtml(title)}</td><td>${escapeHtml(r.note||"")}</td></tr>`;
+      }).join("");
+      setlistBody.querySelectorAll("tr[data-idx]").forEach(tr=>{
+        tr.onclick=()=>{ setlistBody.querySelectorAll(".sel").forEach(z=>z.classList.remove("sel")); tr.classList.add("sel");
+          const i=+tr.dataset.idx; const row=setlistRows[i];
+          $("#sl-song").value = row?.song_id??"";
+          $("#sl-section").value = row?.section??"";
+          $("#sl-version").value = row?.version??"";
+        };
+      });
+    }
+    function setlistAdd(){
+      if(!cur){ alert("イベントを選択してください"); return; }
+      const sid=$("#sl-song").value; if(!sid){ alert("曲を選択"); return; }
+      const section=$("#sl-section").value||"";
+      const version=$("#sl-version").value||"";
+      setlistRows.push({event_id:cur.id, song_id:sid, seq:setlistRows.length+1, section, version});
+      renderSetlist(); status.textContent="（setlist: 追加・未保存）";
+    }
+    function setlistDel(){
+      const sel=setlistBody.querySelector("tr.sel"); if(!sel){ alert("行を選択"); return; }
+      setlistRows.splice(+sel.dataset.idx,1); setlistRows.forEach((r,i)=>r.seq=i+1);
+      renderSetlist(); status.textContent="（setlist: 削除・未保存）";
+    }
+    function setlistMove(dir){
+      const sel=setlistBody.querySelector("tr.sel"); if(!sel){ alert("行を選択"); return; }
+      const i=+sel.dataset.idx, j=i+dir; if(j<0||j>=setlistRows.length) return;
+      [setlistRows[i],setlistRows[j]]=[setlistRows[j],setlistRows[i]];
+      setlistRows.forEach((r,k)=>r.seq=k+1); renderSetlist();
+      const trs=setlistBody.querySelectorAll("tr[data-idx]"); trs[j]?.classList.add("sel");
+      status.textContent="（setlist: 並べ替え・未保存）";
+    }
+    function setlistUpdate(){
+      const sel=setlistBody.querySelector("tr.sel"); if(!sel){ alert("行を選択"); return; }
+      const i=+sel.dataset.idx;
+      setlistRows[i].song_id = $("#sl-song").value||setlistRows[i].song_id;
+      setlistRows[i].section = $("#sl-section").value||"";
+      setlistRows[i].version = $("#sl-version").value||"";
+      renderSetlist(); status.textContent="（setlist: 更新・未保存）";
+    }
+  </script>
+</body>
+</html>

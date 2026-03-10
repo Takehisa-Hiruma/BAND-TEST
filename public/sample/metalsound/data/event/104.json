@@ -1,0 +1,75 @@
+{
+  "id": 104,
+  "date": "2022-10-20",
+  "title": "P.A.O project Live vol.12",
+  "sub_title": null,
+  "venue": "秋葉原ZEST",
+  "venue_id": 44,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "ながつかゆい",
+      "act_id": 284
+    },
+    {
+      "seq": 2,
+      "name": "E-star",
+      "act_id": 285
+    },
+    {
+      "seq": 3,
+      "name": "谷利沙紀",
+      "act_id": 286
+    },
+    {
+      "seq": 4,
+      "name": "白石夏菜",
+      "act_id": 287
+    },
+    {
+      "seq": 5,
+      "name": "THE+BETH",
+      "act_id": 155
+    },
+    {
+      "seq": 6,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 7,
+      "name": "世ノ果テデ人形ハ唯晒フ。",
+      "act_id": 288
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    }
+  ],
+  "setlist": []
+}

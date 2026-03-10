@@ -1,0 +1,22 @@
+{
+  "id": 104,
+  "name": "AKARA",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 34,
+      "date": "2026-02-22",
+      "title": "Hot\"444\"Voice Vol.2",
+      "form": "IDOL",
+      "venue_id": 21,
+      "venue": "渋谷FOWS",
+      "seq": 3
+    }
+  ]
+}

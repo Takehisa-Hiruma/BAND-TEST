@@ -1,0 +1,22 @@
+{
+  "id": 341,
+  "name": "ふつか組.inc",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 147,
+      "date": "2017-06-11",
+      "title": "FOXY GIRLS PARTY",
+      "form": "BAND",
+      "venue_id": 18,
+      "venue": "川崎セルビアンナイト",
+      "seq": 1
+    }
+  ]
+}

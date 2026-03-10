@@ -1,0 +1,70 @@
+{
+  "id": 65,
+  "date": "2023-10-29",
+  "title": "NAGISA Twenty!",
+  "sub_title": null,
+  "venue": "大塚Hearts NEXT",
+  "venue_id": 29,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "神風センセーション",
+      "act_id": 183
+    },
+    {
+      "seq": 2,
+      "name": "Tick☆tik",
+      "act_id": 201
+    },
+    {
+      "seq": 3,
+      "name": "HUMAN螺旋",
+      "act_id": 185
+    },
+    {
+      "seq": 4,
+      "name": "CLIPCLIP",
+      "act_id": 202
+    },
+    {
+      "seq": 5,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 6,
+      "name": "神風センセーション",
+      "act_id": 183
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    }
+  ],
+  "setlist": []
+}

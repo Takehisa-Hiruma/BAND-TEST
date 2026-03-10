@@ -1,0 +1,22 @@
+{
+  "id": 18,
+  "name": "LADYBABY",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 7,
+      "date": "2026-01-12",
+      "title": "Vamp Up SEASON",
+      "form": "BAND",
+      "venue_id": 7,
+      "venue": "青山RizM",
+      "seq": 4
+    }
+  ]
+}

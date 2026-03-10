@@ -62,6 +62,11 @@ def qone(cur, sql, args=()):
 def main():
     USERNAME, PROJECT = parse_args()
     DB = ROOT / "db" / USERNAME / f"{PROJECT}.db"
+
+    if not DB.exists():
+        raise SystemExit(f"[ERROR] DB not found: {DB}")
+    print(f"[INFO] Using DB: {DB}")
+
     # 出力ルート: site/<username>/<projectname>/（＝ FQDN/<username>/<projectname>/）
     PRJ_ROOT  = ROOT / "public" / USERNAME / PROJECT
     PRJ_DATA  = PRJ_ROOT / "data"

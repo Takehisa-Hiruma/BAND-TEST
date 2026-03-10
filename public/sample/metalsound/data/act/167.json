@@ -1,0 +1,22 @@
+{
+  "id": 167,
+  "name": "BERRYMETAL",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 48,
+      "date": "2024-06-30",
+      "title": "VIXEN_FEST 2024",
+      "form": "BAND",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "seq": 4
+    }
+  ]
+}

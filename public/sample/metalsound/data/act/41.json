@@ -1,0 +1,22 @@
+{
+  "id": 41,
+  "name": "KiS",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 14,
+      "date": "2025-10-07",
+      "title": "ENTRANCE",
+      "form": "IDOL",
+      "venue_id": 3,
+      "venue": "吉祥寺CLUB SEATA",
+      "seq": 1
+    }
+  ]
+}

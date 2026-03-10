@@ -1,0 +1,28 @@
+{
+  "id": 88,
+  "title": "君とアニメが見たい～Answer for Animation With You～",
+  "events": [
+    {
+      "event_id": 143,
+      "date": "2019-08-24",
+      "title": "池袋CYBER",
+      "venue_id": 55,
+      "venue": "池袋CYBER",
+      "form": "BAND",
+      "seq": 3,
+      "section": "main",
+      "version": ""
+    },
+    {
+      "event_id": 142,
+      "date": "2019-09-29",
+      "title": "秋葉原CLUB GOODMAN",
+      "venue_id": 56,
+      "venue": "秋葉原CLUB GOODMAN",
+      "form": "BAND",
+      "seq": 5,
+      "section": "main",
+      "version": ""
+    }
+  ]
+}

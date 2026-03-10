@@ -1,0 +1,22 @@
+{
+  "id": 82,
+  "name": "ASH FRAST",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 29,
+      "date": "2025-01-04",
+      "title": "Metamorphose Festival",
+      "form": "BAND",
+      "venue_id": 15,
+      "venue": "下北沢MOSAiC",
+      "seq": 4
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": 145,
+  "name": "雨音とアプローズ",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 52,
+      "date": "2024-05-20",
+      "title": "DAIDOL Vol.91",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 4
+    },
+    {
+      "event_id": 45,
+      "date": "2024-07-27",
+      "title": "DAIDOL Vol.100",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 4
+    },
+    {
+      "event_id": 38,
+      "date": "2024-10-28",
+      "title": "DAIDOL Vol.113",
+      "form": "IDOL",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 6
+    }
+  ]
+}

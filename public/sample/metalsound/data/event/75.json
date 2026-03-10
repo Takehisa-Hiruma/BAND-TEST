@@ -1,0 +1,181 @@
+{
+  "id": 75,
+  "date": "2023-06-11",
+  "title": "LINER LINER",
+  "sub_title": null,
+  "venue": "新宿ANTIKNOCK",
+  "venue_id": 6,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "BAND",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 2,
+      "name": "Little Lilith",
+      "act_id": 22
+    },
+    {
+      "seq": 3,
+      "name": "Broken By The Scream",
+      "act_id": 19
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 15,
+      "name": "MAIMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    },
+    {
+      "person_id": 17,
+      "name": "NEARMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 4
+    },
+    {
+      "person_id": 5,
+      "name": "Masaxxxxx",
+      "role": "Guitar（上手）",
+      "position": "",
+      "ord": 5
+    },
+    {
+      "person_id": 6,
+      "name": "NAKAJI",
+      "role": "Guitar（下手）",
+      "position": "",
+      "ord": 6
+    },
+    {
+      "person_id": 7,
+      "name": "Douglas",
+      "role": "Bass",
+      "position": "",
+      "ord": 7
+    },
+    {
+      "person_id": 9,
+      "name": "RIHITO",
+      "role": "Drum",
+      "position": "",
+      "ord": 8
+    }
+  ],
+  "setlist": [
+    {
+      "seq": 1,
+      "song_id": 66,
+      "song_title": "METAL KINGDOM",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 2,
+      "song_id": 14,
+      "song_title": "Road of Resistance",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 3,
+      "song_id": 3,
+      "song_title": "いいね！",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 4,
+      "song_id": 77,
+      "song_title": "Shanti Shanti Shanti",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 5,
+      "song_id": 57,
+      "song_title": "(SE)",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 6,
+      "song_id": 5,
+      "song_title": "Monochrome",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 7,
+      "song_id": 6,
+      "song_title": "メギツネ",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 8,
+      "song_id": 57,
+      "song_title": "(SE)",
+      "section": "SE",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 9,
+      "song_id": 78,
+      "song_title": "Divine Attack -神撃-",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    },
+    {
+      "seq": 10,
+      "song_id": 9,
+      "song_title": "Arkadia",
+      "section": "main",
+      "version": null,
+      "note": "",
+      "performer": []
+    }
+  ]
+}

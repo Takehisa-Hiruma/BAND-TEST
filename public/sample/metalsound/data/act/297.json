@@ -1,0 +1,22 @@
+{
+  "id": 297,
+  "name": "兀突骨",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 124,
+      "date": "2021-11-14",
+      "title": "HEAVY METAL FEVER",
+      "form": "BAND",
+      "venue_id": 19,
+      "venue": "新宿WildSide Tokyo",
+      "seq": 3
+    }
+  ]
+}

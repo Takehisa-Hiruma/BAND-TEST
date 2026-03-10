@@ -1,0 +1,90 @@
+{
+  "id": 119,
+  "date": "2022-03-12",
+  "title": "だめ天使お給仕中！",
+  "sub_title": null,
+  "venue": "AKIBA COLORS",
+  "venue_id": 48,
+  "era": "第２章（METAL）",
+  "era_id": 3,
+  "tour": "No Tour",
+  "tour_id": 1,
+  "form": "IDOL",
+  "video_url": "",
+  "acts": [
+    {
+      "seq": 1,
+      "name": "だめ天使お給仕中！",
+      "act_id": 316
+    },
+    {
+      "seq": 2,
+      "name": "CHEQUEMATE",
+      "act_id": 317
+    },
+    {
+      "seq": 3,
+      "name": "さよなら歌姫",
+      "act_id": 318
+    },
+    {
+      "seq": 4,
+      "name": "ラジスト",
+      "act_id": 319
+    },
+    {
+      "seq": 5,
+      "name": "DIZZYMETAL",
+      "act_id": 14
+    },
+    {
+      "seq": 6,
+      "name": "uncyclo",
+      "act_id": 320
+    },
+    {
+      "seq": 7,
+      "name": "妄想メリケンサックチョコレート",
+      "act_id": 321
+    },
+    {
+      "seq": 8,
+      "name": "Marionette in the Mirror",
+      "act_id": 322
+    },
+    {
+      "seq": 9,
+      "name": "うさたんわーるど",
+      "act_id": 323
+    },
+    {
+      "seq": 10,
+      "name": "だめ天使お給仕中！",
+      "act_id": 316
+    }
+  ],
+  "lineup": [
+    {
+      "person_id": 14,
+      "name": "UYUMETAL",
+      "role": "Dance&Vocal",
+      "position": "",
+      "ord": 1
+    },
+    {
+      "person_id": 10,
+      "name": "AKAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 2
+    },
+    {
+      "person_id": 16,
+      "name": "MISAMETAL",
+      "role": "Dance&Scream",
+      "position": "",
+      "ord": 3
+    }
+  ],
+  "setlist": []
+}

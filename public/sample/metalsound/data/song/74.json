@@ -1,0 +1,17 @@
+{
+  "id": 74,
+  "title": "ちょこっとLOVE",
+  "events": [
+    {
+      "event_id": 64,
+      "date": "2023-11-25",
+      "title": "LEGEND \"1122\"",
+      "venue_id": 2,
+      "venue": "西川口Hearts",
+      "form": "BAND",
+      "seq": 9,
+      "section": "main",
+      "version": "BIG TIME CHANGES ver."
+    }
+  ]
+}

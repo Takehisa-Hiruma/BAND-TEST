@@ -1,0 +1,19 @@
+{
+  "id": 17,
+  "name": "渋谷Guilty",
+  "url": "",
+  "events": [
+    {
+      "id": 149,
+      "date": "2016-08-27",
+      "title": "渋谷Guilty",
+      "form": "BAND"
+    },
+    {
+      "id": 39,
+      "date": "2024-10-13",
+      "title": "Grace melodia",
+      "form": "BAND"
+    }
+  ]
+}

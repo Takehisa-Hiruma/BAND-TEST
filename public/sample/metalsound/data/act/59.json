@@ -1,0 +1,40 @@
+{
+  "id": 59,
+  "name": "甘い断頭台",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 42,
+      "date": "2024-11-10",
+      "title": "LINER LINER",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 2
+    },
+    {
+      "event_id": 29,
+      "date": "2025-01-04",
+      "title": "Metamorphose Festival",
+      "form": "BAND",
+      "venue_id": 15,
+      "venue": "下北沢MOSAiC",
+      "seq": 11
+    },
+    {
+      "event_id": 18,
+      "date": "2025-08-23",
+      "title": "LINER LINER",
+      "form": "BAND",
+      "venue_id": 6,
+      "venue": "新宿ANTIKNOCK",
+      "seq": 4
+    }
+  ]
+}

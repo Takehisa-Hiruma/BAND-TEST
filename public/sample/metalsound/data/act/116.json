@@ -1,0 +1,22 @@
+{
+  "id": 116,
+  "name": "幻色シアター",
+  "url": "",
+  "x": "",
+  "instagram": "",
+  "threads": "",
+  "facebook": "",
+  "youtube": "",
+  "tiktok": "",
+  "events": [
+    {
+      "event_id": 36,
+      "date": "2024-11-17",
+      "title": "ネクストカルチャーズ",
+      "form": "IDOL",
+      "venue_id": 16,
+      "venue": "渋谷DIVE",
+      "seq": 8
+    }
+  ]
+}
