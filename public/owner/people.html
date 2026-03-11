@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Songs Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/common.css">
+<style>
+/* ページ骨格（360px 左固定＋右側）*/
+html, body { height: 100%; }
+body { 
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 0;
+}
+
+/* 左エリア：上が自然固定、下だけスクロール */
+aside {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;        /* ★ これが必須 */
+}
+
+aside .list-scroll {
+  flex: 1;               /* ★ 残り全部を受け取る */
+  min-height: 0;         /* ★ "スクロール子" の必須 */
+  overflow: auto;        /* ★ 下だけスクロール */
+}
+
+/* 表デザイン（押し出し防止） */
+aside table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+aside th, aside td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>
+</head>
+
+<body>
+
+  <aside>
+    <h3>People</h3>
+
+    <div class="row">
+      <input id="q" type="search" placeholder="メンバー名を検索" style="width:200px">
+      <button id="btn-search">検索</button>
+      <button id="btn-reload">再読込</button>
+    </div>
+
+    <hr>
+
+    <div class="list-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:64px">ID</th><th>Name</th></tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+  </aside>
+
+  <main>
+    <header class="toolbar">
+      <button id="btn-new">新規</button>
+      <button id="btn-save">保存</button>
+      <button id="btn-delete">削除</button>
+    </header>
+
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Name <input id="f-name" type="text" style="width:320px"></label></div>
+      <div class="row"><label>Birthday <input id="f-birthday" type="date" style="width:180px"></label></div>
+      <div class="row"><label>Joined <input id="f-joined_on" type="date" style="width:180px"></label></div>
+      <div class="row"><label>Left <input id="f-left_on" type="date" style="width:180px"></label></div>
+
+      <hr>
+
+      <!-- SNS -->
+      <div class="row"><label>X <input id="f-x" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Instagram <input id="f-instagram" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Threads <input id="f-threads" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Facebook <input id="f-facebook" type="text" style="width:360px"></label></div>
+      <div class="row"><label>YouTube <input id="f-youtube" type="text" style="width:360px"></label></div>
+      <div class="row"><label>TikTok <input id="f-tiktok" type="text" style="width:360px"></label></div>
+
+      <hr>
+
+      <!-- Preview (DBには保存しない) -->
+      <div class="row"><label>Preview <span id="preview"></span></label></div>
+      <div id="audit" class="hint" hidden></div>
+    </section>
+  </main>
+
+
+
+<script type="module">
+  // ===== コンテキスト =====
+  const u = new URLSearchParams(location.search).get("u");
+  const p = new URLSearchParams(location.search).get("p");
+  if (!u || !p) location.href = "./index.html";
+
+  const API_BASE = (location.hostname === "127.0.0.1" || location.hostname === "localhost")
+    ? "http://127.0.0.1:8787"
+    : "";
+
+  // ===== 小物 =====
+  const $  = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  const listTbody = $("#list");
+  let cur = null, page = 1, size = 50;
+
+  const getJSON = async (path) => {
+    const r = await fetch(`${API_BASE}${path}`);
+    if (!r.ok) throw await r.json().catch(() => ({ reason: r.statusText }));
+    return r.json();
+  };
+
+  const postJSON = async (path, body) => {
+    const r = await fetch(`${API_BASE}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body || {})
+    });
+    if (!r.ok) {
+      const data = await r.json().catch(() => ({ reason: r.statusText }));
+      const e = new Error(data.reason || "error");
+      e.status = r.status; e.data = data; throw e;
+    }
+    return r.json();
+  };
+
+  const setStatus = (msg, cls = "") => {}; // ダミー
+
+  const escapeHtml = (s) =>
+    (s ?? "").replace(/[&<>\"']/g, (m) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[m]));
+
+  // ===== 一覧の描画 =====
+  async function reload() {
+    const q = $("#q")?.value?.trim() || "";
+    const data = await getJSON(`/owner/api/people/list?u=${u}&p=${p}&page=${page}&size=${size}&q=${encodeURIComponent(q)}`);
+    listTbody.innerHTML = "";
+    for (const it of data.items || []) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${it.id}</td><td>${escapeHtml(it.name)}</td>`;
+      tr.onclick = () => select(it.id);
+      if (cur?.id === it.id) tr.classList.add("active");
+      listTbody.appendChild(tr);
+    }
+  }
+
+  // ===== 明細の取得/セット =====
+  async function select(id) {
+    const data = await getJSON(`/owner/api/people/get?u=${u}&p=${p}&id=${id}`);
+    cur = data;
+    $("#f-id").value        = data.id ?? "";
+    $("#f-name").value      = data.name ?? "";
+    $("#f-birthday").value  = data.birthday ?? "";
+    $("#f-joined_on").value = data.joined_on ?? "";
+    $("#f-left_on").value   = data.left_on ?? "";
+    $("#f-x").value         = data.x ?? "";
+    $("#f-instagram").value = data.instagram ?? "";
+    $("#f-threads").value   = data.threads ?? "";
+    $("#f-facebook").value  = data.facebook ?? "";
+    $("#f-youtube").value   = data.youtube ?? "";
+    $("#f-tiktok").value    = data.tiktok ?? "";
+    $("#preview").textContent = data.preview ?? "";
+    $$("#list tr").forEach(tr =>
+      tr.classList.toggle("active", Number(tr.firstChild.textContent) === id)
+    );
+  }
+
+  // ===== 新規/保存/削除 =====
+  function newItem() {
+    cur = {
+      id: "", name: "", birthday: "", joined_on: "", left_on: "",
+      x: "", instagram: "", threads: "", facebook: "", youtube: "", tiktok: "",
+      preview: ""
+    };
+    $("#f-id").value        = "";
+    $("#f-name").value      = "";
+    $("#f-birthday").value  = "";
+    $("#f-joined_on").value = "";
+    $("#f-left_on").value   = "";
+    $("#f-x").value         = "";
+    $("#f-instagram").value = "";
+    $("#f-threads").value   = "";
+    $("#f-facebook").value  = "";
+    $("#f-youtube").value   = "";
+    $("#f-tiktok").value    = "";
+    $("#preview").textContent = "";
+    $("#f-name").focus();
+  }
+
+  async function save() {
+    const name = $("#f-name").value.trim();
+    if (!name) return;
+
+    const payload = {
+      name,
+      birthday: $("#f-birthday").value.trim() || null,
+      joined_on: $("#f-joined_on").value.trim() || null,
+      left_on: $("#f-left_on").value.trim() || null,
+      x: $("#f-x").value.trim() || null,
+      instagram: $("#f-instagram").value.trim() || null,
+      threads: $("#f-threads").value.trim() || null,
+      facebook: $("#f-facebook").value.trim() || null,
+      youtube: $("#f-youtube").value.trim() || null,
+      tiktok: $("#f-tiktok").value.trim() || null,
+      preview: $("#preview").textContent || null
+    };
+
+    try {
+      if (!cur?.id) {
+        cur = await postJSON(`/owner/api/people/create?u=${u}&p=${p}`, payload);
+      } else {
+        await postJSON(`/owner/api/people/update?u=${u}&p=${p}`, { id: cur.id, ...payload });
+      }
+      await reload();
+      window.dispatchEvent(new CustomEvent("master-changed", { detail: { kind: "people" } }));
+    } catch {}
+  }
+
+  async function del() {
+    if (!cur?.id) return;
+    if (!confirm(`ID ${cur.id} を削除します。よろしいですか？`)) return;
+    try {
+      await postJSON(`/owner/api/people/delete?u=${u}&p=${p}`, { id: cur.id });
+      cur = null;
+      newItem();
+      await reload();
+      window.dispatchEvent(new CustomEvent("master-changed", { detail: { kind: "people" } }));
+    } catch (e) {}
+  }
+
+  // ===== ハンドラ結線 =====
+  $("#btn-search").onclick = () => { page = 1; reload(); };
+  $("#btn-reload").onclick = () => reload();
+  $("#btn-new").onclick    = () => newItem();
+  $("#btn-save").onclick   = () => save();
+  $("#btn-delete").onclick = () => del();
+
+  // ===== 初期ロード =====
+  await reload();
+  newItem();
+</script>
+</body>
+</html>

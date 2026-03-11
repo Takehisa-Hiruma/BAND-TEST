@@ -843,15 +843,87 @@
       // initSelectsFromCache(mount); // ← マスターキャッシュからセレクトを構築する処理があれば
     }
 
-    // マスター画面（最初はプレースホルダでOK）
-    function renderMaster(mount, kind) {
-      mount.innerHTML = `
-        <div style="padding:16px">
-          <h2>Master: ${kind}</h2>
-          <p>ここに ${kind} の CRUD 画面を作っていきます。</p>
+    // // マスター画面（最初はプレースホルダでOK）
+    // function renderMaster(mount, kind) {
+    //   mount.innerHTML = `
+    //     <div style="padding:16px">
+    //       <h2>Master: ${kind}</h2>
+    //       <p>ここに ${kind} の CRUD 画面を作っていきます。</p>
+    //     </div>
+    //   `;
+    // }
+
+    async function renderMaster(mount, kind){
+      mount.innerHTML = `<div style="padding:16px"><h2>${kind}管理</h2><p>読み込み中…</p></div>`;
+
+      const API_BASE = (location.hostname==='127.0.0.1'||location.hostname==='localhost')?'http://127.0.0.1:8787':'';
+      const u = new URLSearchParams(location.search).get("u");
+      const p = new URLSearchParams(location.search).get("p");
+
+      // API エンドポイント対応表
+      const apiMap = {
+        people: '/owner/api/people',
+        acts: '/owner/api/acts',
+        venue: '/owner/api/venue',
+        roles: '/owner/api/roles',
+        era: '/owner/api/era',
+        tour: '/owner/api/tour',
+        form: '/owner/api/form',
+        song: '/owner/api/songs'
+      };
+      const apiUrl = API_BASE + (apiMap[kind]||'/owner/api/people') + `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`;
+
+      // データ取得
+      let items = [];
+      try{
+        const res = await fetch(apiUrl,{cache:'no-store'});
+        items = res.ok ? await res.json() : [];
+      }catch(e){ console.error(e); }
+
+      // テーブル生成
+      const tableHtml = `
+        <div style="margin-top:12px">
+          <button id="btn-new-${kind}">新規</button>
+          <button id="btn-del-${kind}">削除</button>
+          <table border="1" cellpadding="4" cellspacing="0" style="margin-top:8px;width:100%">
+            <thead><tr><th>ID</th><th>名前</th></tr></thead>
+            <tbody id="tbl-${kind}"></tbody>
+          </table>
         </div>
       `;
+      mount.innerHTML = `<h2>${kind}管理</h2>` + tableHtml;
+
+      const tbody = document.getElementById(`tbl-${kind}`);
+      function renderTable(){
+        tbody.innerHTML = items.map(x=>`<tr data-id="${x.id}"><td>${x.id}</td><td>${x.name||x.label||x.id}</td></tr>`).join('');
+        tbody.querySelectorAll('tr[data-id]').forEach(tr=>{
+          tr.onclick=()=>{ tbody.querySelectorAll('.sel').forEach(z=>z.classList.remove('sel')); tr.classList.add('sel'); };
+        });
+      }
+      renderTable();
+
+      // ボタン操作
+      document.getElementById(`btn-new-${kind}`).onclick=async()=>{
+        const name = prompt("新規の名前を入力");
+        if(!name) return;
+        const body = {name};
+        const res = await fetch(`${API_BASE}/owner/api/${kind}/create?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`,{
+          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
+        });
+        if(res.ok){ const r = await res.json(); items.push(r); renderTable(); }
+      };
+      document.getElementById(`btn-del-${kind}`).onclick=async()=>{
+        const sel = tbody.querySelector('tr.sel');
+        if(!sel){ alert("行を選択"); return; }
+        const id = sel.dataset.id;
+        const res = await fetch(`${API_BASE}/owner/api/${kind}/delete?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&id=${id}`,{method:'POST'});
+        if(res.ok){ items = items.filter(x=>x.id!=id); renderTable(); }
+      };
     }
+
+
+
+
 
     // 表示切り替え（クエリパラメータで超シンプルに分岐）
     const app = document.getElementById("app");

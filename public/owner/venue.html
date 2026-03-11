@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Songs Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/common.css">
+<style>
+/* ページ骨格（360px 左固定＋右側）*/
+html, body { height: 100%; }
+body { 
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 0;
+}
+
+/* 左エリア：上が自然固定、下だけスクロール */
+aside {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;        /* ★ これが必須 */
+}
+
+aside .list-scroll {
+  flex: 1;               /* ★ 残り全部を受け取る */
+  min-height: 0;         /* ★ "スクロール子" の必須 */
+  overflow: auto;        /* ★ 下だけスクロール */
+}
+
+/* 表デザイン（押し出し防止） */
+aside table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+aside th, aside td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>
+</head>
+<body>
+  <aside>
+    <h3>Venue</h3>
+
+    <div class="row">
+      <input id="q" type="search" placeholder="会場を検索" style="width:200px">
+      <button id="btn-search">検索</button>
+      <button id="btn-reload">再読込</button>
+    </div>
+
+    <hr>
+
+    <div class="list-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:64px">ID</th><th>Venue</th></tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+  </aside>
+
+  <main>
+    <header class="toolbar">
+      <button id="btn-new">新規</button>
+      <button id="btn-save">保存</button>
+      <button id="btn-delete">削除</button>
+    </header>
+
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Name <input id="f-title" type="text" style="width:320px"></label></div>
+      <div class="row"><label>URL  <input id="f-url"  type="text" style="width:360px"></label></div>
+      <div class="row"><label>Note <input id="f-note" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Preview</label> <div id="preview"></div></div>
+      <div id="audit" class="hint" hidden></div>
+    </section>
+  </main>
+
+
+
+<script type="module">
+  const u = new URLSearchParams(location.search).get("u");
+  const p = new URLSearchParams(location.search).get("p");
+  if (!u || !p) location.href = "./index.html";
+
+  const API_BASE = (location.hostname==="127.0.0.1"||location.hostname==="localhost")
+                   ? "http://127.0.0.1:8787" : "";
+
+  const $  = s=>document.querySelector(s);
+  const $$ = s=>Array.from(document.querySelectorAll(s));
+  const listTbody = $("#list");
+  let cur=null, page=1, size=50;
+
+  const getJSON = async (path)=>{
+    const r = await fetch(`${API_BASE}${path}`);
+    if(!r.ok) throw await r.json().catch(()=>({reason:r.statusText}));
+    return r.json();
+  };
+
+  const postJSON = async (path, body)=>{
+    const r = await fetch(`${API_BASE}${path}`, {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(body||{})
+    });
+    if(!r.ok){
+      const data = await r.json().catch(()=>({reason:r.statusText}));
+      const e = new Error(data.reason||"error");
+      e.status=r.status; e.data=data; throw e;
+    }
+    return r.json();
+  };
+
+  const escapeHtml = s=>(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+  // ===== 一覧描画 =====
+  async function reload(){
+    const q = $("#q")?.value?.trim()||"";
+    const data = await getJSON(`/owner/api/venues/list?u=${u}&p=${p}&page=${page}&size=${size}&q=${encodeURIComponent(q)}`);
+    listTbody.innerHTML="";
+    for(const it of data.items||[]){
+      const tr = document.createElement("tr");
+      tr.innerHTML=`<td>${it.id}</td><td>${escapeHtml(it.name)}</td>`;
+      tr.onclick=()=>select(it.id);
+      if(cur?.id===it.id) tr.classList.add("active");
+      listTbody.appendChild(tr);
+    }
+  }
+
+  // ===== 選択 =====
+  async function select(id){
+    const data = await getJSON(`/owner/api/venues/get?u=${u}&p=${p}&id=${id}`);
+    cur=data;
+    $("#f-id").value=data.id??"";
+    $("#f-title").value=data.name??"";
+    $("#f-url").value=data.url??"";
+    $("#f-note").value=data.note??"";
+    $$("#list tr").forEach(tr=>tr.classList.toggle("active", Number(tr.firstChild.textContent)===id));
+  }
+
+  // ===== CRUD =====
+  function newItem(){
+    cur={id:"",name:"",url:"",note:""};
+    $("#f-id").value="";
+    $("#f-title").value="";
+    $("#f-url").value="";
+    $("#f-note").value="";
+    $("#f-title").focus();
+  }
+
+  async function save(){
+    const name=$("#f-title").value.trim();
+    const url=$("#f-url").value.trim()||null;
+    const note=$("#f-note").value.trim()||null;
+    if(!name) return;
+    try{
+      if(!cur?.id){
+        cur=await postJSON(`/owner/api/venues/create?u=${u}&p=${p}`,{name,url,note});
+      }else{
+        await postJSON(`/owner/api/venues/update?u=${u}&p=${p}`,{id:cur.id,name,url,note});
+      }
+      await reload();
+    }catch{}
+  }
+
+  async function del(){
+    if(!cur?.id) return;
+    if(!confirm(`ID ${cur.id} を削除します。よろしいですか？`)) return;
+    try{
+      await postJSON(`/owner/api/venues/delete?u=${u}&p=${p}`,{id:cur.id});
+      cur=null;
+      newItem();
+      await reload();
+    }catch{}
+  }
+
+  // ===== ハンドラ =====
+  $("#btn-search").onclick=()=>{ page=1; reload(); };
+  $("#btn-reload").onclick=()=>reload();
+  $("#btn-new").onclick=()=>newItem();
+  $("#btn-save").onclick=()=>save();
+  $("#btn-delete").onclick=()=>del();
+
+  // ===== 初期ロード =====
+  await reload();
+  newItem();
+</script>
+</body>
+</html>
