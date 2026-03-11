@@ -1,0 +1,48 @@
+:root{
+  --gap:8px; --bd:#ddd; --bd2:#eee; --fg:#222; --muted:#555; --hl:#0ea5e9;
+  --left-col:520px; --split:6px; --row1:35%; --row2:35%;
+}
+
+/* 基本 */
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  margin:0;
+  font:14px system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  color:var(--fg);
+  background:#fff;
+}
+
+/* 左サイドバー（共通） */
+aside{border-right:1px solid #e5e7eb; padding:10px; overflow:auto}
+nav h3{margin:10px 0 6px; font-size:12px; color:#555}
+nav a{display:block; padding:6px 8px; color:#111; text-decoration:none; border-radius:6px}
+nav a:hover{background:#f3f4f6}
+
+/* 共通ヘッダ/ツールバー/ステータス */
+header, .toolbar{display:flex; gap:var(--gap); align-items:center}
+header{border-bottom:1px solid var(--bd); padding:8px 12px}
+header .status, .status{color:var(--muted)}
+
+/* 共通フォーム/ボタン */
+label{display:flex; align-items:center; gap:6px}
+input[type="text"], input[type="date"], input[type="number"], select{font:inherit; padding:4px 6px}
+input[type="text"]{width:100%}
+button{font:inherit; padding:6px 10px; border:1px solid var(--bd); background:#fff; border-radius:4px; cursor:pointer}
+button.primary{background:var(--hl); color:#fff; border-color:var(--hl)}
+button:disabled{opacity:.5; cursor:not-allowed}
+
+/* 共通ユーティリティ */
+.box{padding:10px}
+.box h3{margin:0 0 8px 0; font-size:15px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.row{display:flex; gap:10px; align-items:center; margin:6px 0}
+.flex-row{display:flex; gap:8px; align-items:center}
+.muted{color:var(--muted)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+
+/* 共通テーブル */
+table{width:100%; border-collapse:collapse}
+th, td{border-bottom:1px solid var(--bd2); padding:6px 8px; text-align:left}
+tbody tr[data-id].sel{background:#f0f9ff}
+tbody tr[data-id]:hover{background:#f7fbff}

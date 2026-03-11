@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Songs Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="./css/common.css">
+<!-- <style>
+  html,body{height:100%;margin:0;font:14px system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif}
+  body{display:grid;grid-template-columns:360px 1fr;min-height:0}
+  aside{border-right:1px solid #e5e7eb;padding:10px;overflow:auto}
+  main{min-height:0;overflow:hidden;display:flex;flex-direction:column}
+  header.toolbar{display:flex;gap:8px;align-items:center;padding:8px;border-bottom:1px solid #e5e7eb}
+  .status{margin-left:auto;color:#666}
+  .row{display:flex;gap:8px;align-items:center;margin:6px 0}
+  table{border-collapse:collapse;width:100%}
+  th,td{border-bottom:1px solid #eee;padding:6px 8px;text-align:left}
+  tbody tr.active{background:#f1f5f9}
+  .right-pane{padding:12px;overflow:auto;display:flex;flex-direction:column;gap:10px}
+  .hint{color:#666;font-size:12px}
+  .danger{color:#b91c1c}
+  .success{color:#065f46}
+</style> -->
+<style>
+/* songs 専用レイアウト（必要なら） */
+body{display:grid; grid-template-columns:360px 1fr; min-height:0}
+main#app{min-height:0; overflow:hidden}
+</style>
+</head>
+<body>
+  <aside>
+    <h3>Songs</h3>
+    <div class="row">
+      <input id="q" type="search" placeholder="曲名を検索" style="width:200px">
+      <button id="btn-search">検索</button>
+      <button id="btn-reload">再読込</button>
+    </div>
+    <div class="row">
+      並び: 
+      <select id="order">
+        <option value="title.asc">Title ▲</option>
+        <option value="title.desc">Title ▼</option>
+        <option value="id.asc">ID ▲</option>
+        <option value="id.desc">ID ▼</option>
+      </select>
+    </div>
+    <div class="row">
+      <button id="btn-new">新規</button>
+      <button id="btn-delete">削除</button>
+    </div>
+    <div class="row">
+      <button id="btn-export">Export CSV</button>
+      <label>
+        Import CSV <input id="csv-file" type="file" accept=".csv" style="width:160px">
+      </label>
+      <button id="btn-import">実行</button>
+    </div>
+    <div class="row hint">Delは「セトリで使用中」の場合は失敗します。</div>
+    <hr>
+    <div style="overflow:auto;max-height:calc(100vh - 260px)">
+      <table>
+        <thead><tr><th style="width:64px">ID</th><th>Title</th></tr></thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+    <div class="row">
+      <button id="prev">◀</button>
+      <span id="pager"></span>
+      <button id="next">▶</button>
+    </div>
+  </aside>
+
+  <main>
+    <header class="toolbar">
+      <button id="btn-back" onclick="history.back()">← 戻る</button>
+      <button id="btn-save">保存（Ctrl/Cmd+S）</button>
+      <span id="status" class="status">Ready</span>
+    </header>
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Title <input id="f-title" type="text" style="width:320px"></label></div>
+      <div class="hint">保存前に他の人が変更していた場合は衝突エラーになります（楽観ロック）。</div>
+      <div class="row"><label>最終更新 <input id="f-updated" type="text" readonly style="width:280px"></label></div>
+      <div class="row"><label>更新者 <input id="f-updated-by" type="text" readonly style="width:200px"></label></div>
+      <div class="row">
+        <button id="btn-audit">変更履歴を見る</button>
+      </div>
+      <div id="audit" class="hint" hidden></div>
+    </section>
+  </main>
+
+<script type="module">
+  // ===== コンテキスト =====
+  const u = new URLSearchParams(location.search).get("u");
+  const p = new URLSearchParams(location.search).get("p");
+  if (!u || !p) location.href = "./index.html";
+
+  const API_BASE =
+    (location.hostname === "127.0.0.1" || location.hostname === "localhost")
+      ? "http://127.0.0.1:8787"
+      : "";
+
+  // ===== 小物 =====
+  const $  = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  const status = $("#status");
+  const listTbody = $("#list");
+  let cur = null, page=1, size=50, order="title.asc", q="";
+
+  const getJSON = async (path) => {
+    const r = await fetch(`${API_BASE}${path}`);
+    if (!r.ok) throw await r.json().catch(()=>({reason:r.statusText}));
+    return r.json();
+  };
+  const postJSON = async (path, body) => {
+    const r = await fetch(`${API_BASE}${path}`, {method:"POST", headers:{'Content-Type':'application/json'}, body: JSON.stringify(body||{})});
+    if (!r.ok) {
+      const data = await r.json().catch(()=>({reason:r.statusText}));
+      const e = new Error(data.reason||"error"); e.status=r.status; e.data=data; throw e;
+    }
+    return r.json();
+  };
+  const setStatus = (msg, cls="") => { status.className = `status ${cls}`; status.textContent = msg; };
+
+  // ===== 一覧の描画 =====
+  async function reload() {
+    setStatus("Loading...");
+    order = $("#order").value;
+    q = $("#q").value.trim();
+    const data = await getJSON(`/owner/api/songs/list?u=${u}&p=${p}&q=${encodeURIComponent(q)}&page=${page}&size=${size}&order=${order}`);
+    listTbody.innerHTML = "";
+    for (const it of data.items) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${it.id}</td><td>${escapeHtml(it.title)}</td>`;
+      tr.onclick = ()=> select(it.id);
+      if (cur?.id === it.id) tr.classList.add("active");
+      listTbody.appendChild(tr);
+    }
+    $("#pager").textContent = `${data.items.length} / page`;
+    setStatus("Loaded");
+  }
+
+  function escapeHtml(s){return (s??"").replace(/[&<>"']/g,m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]))}
+
+  // ===== 明細の取得/セット =====
+  async function select(id) {
+    const data = await getJSON(`/owner/api/songs/get?u=${u}&p=${p}&id=${id}`);
+    cur = data;
+    $("#f-id").value = data.id;
+    $("#f-title").value = data.title;
+    $("#f-updated").value = data.updated_at || "";
+    $("#f-updated-by").value = data.updated_by || "";
+    $$("#list tr").forEach(tr=> tr.classList.toggle("active", Number(tr.firstChild.textContent)===id));
+  }
+
+  // ===== 新規/保存/削除 =====
+  function newItem(){
+    cur = { id:"", title:"", updated_at:"" };
+    $("#f-id").value = "";
+    $("#f-title").value = "";
+    $("#f-updated").value = "";
+    $("#f-updated-by").value = "";
+    setStatus("New item");
+    $("#f-title").focus();
+  }
+
+  async function save(){
+    const title = $("#f-title").value.trim();
+    if (!title) { setStatus("タイトルは必須です", "danger"); $("#f-title").focus(); return; }
+    try {
+      if (!cur?.id) {
+        const res = await postJSON(`/owner/api/songs/create?u=${u}&p=${p}`, { title });
+        cur = res;
+      } else {
+        await postJSON(`/owner/api/songs/update?u=${u}&p=${p}`, { id: cur.id, title, if_unmodified_since: cur.updated_at });
+      }
+      setStatus("保存しました", "success");
+      await reload();
+      // イベント画面へ通知（曲セレクト更新）
+      window.dispatchEvent(new CustomEvent('master-changed', { detail:{ kind:'songs' } }));
+    } catch(e) {
+      if (e.status === 412) {
+        setStatus("他の人が先に変更しました。再読み込みしてやり直してください。", "danger");
+      } else if (e.status === 400) {
+        setStatus(`入力エラー: ${e.data?.reason||''}`, "danger");
+      } else {
+        setStatus(`保存に失敗: ${e.message}`, "danger");
+      }
+    }
+  }
+
+  async function del(){
+    if (!cur?.id) return;
+    if (!confirm(`ID ${cur.id} を削除します。よろしいですか？`)) return;
+    try {
+      await postJSON(`/owner/api/songs/delete?u=${u}&p=${p}`, { id: cur.id });
+      setStatus("削除しました", "success");
+      cur = null; newItem();
+      await reload();
+      window.dispatchEvent(new CustomEvent('master-changed', { detail:{ kind:'songs' } }));
+    } catch(e) {
+      if (e.status === 409) setStatus("この曲はセトリで使用中のため削除できません。", "danger");
+      else setStatus(`削除に失敗: ${e.message}`, "danger");
+    }
+  }
+
+  // ===== 監査ログ（任意） =====
+  async function showAudit(){
+    try{
+      const a = await getJSON(`/owner/api/songs/audit?u=${u}&p=${p}&id=${cur?.id}`);
+      const el = $("#audit");
+      el.hidden = false;
+      el.innerHTML = a.items.map(x => `• ${x.ts} ${x.who} ${x.action} <code>${escapeHtml(JSON.stringify(x.before))}</code> → <code>${escapeHtml(JSON.stringify(x.after))}</code>`).join("<br>");
+    }catch{ /* 無くてもOK */ }
+  }
+
+  // ===== CSV =====
+  async function exportCsv(){
+    location.href = `${API_BASE}/owner/api/songs/export.csv?u=${u}&p=${p}`;
+  }
+  async function importCsv(){
+    const f = $("#csv-file").files[0]; if(!f){ alert("CSVを選択してください"); return; }
+    const body = await f.text();
+    const r = await fetch(`${API_BASE}/owner/api/songs/import.csv?u=${u}&p=${p}`, { method:"POST", headers:{'Content-Type':'text/csv'}, body });
+    if (!r.ok) { alert("インポート失敗"); return; }
+    alert("インポート完了"); reload();
+  }
+
+  // ===== ショートカット =====
+  document.addEventListener("keydown", (e)=>{
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="s") { e.preventDefault(); save(); }
+    if (e.key==="Enter" && document.activeElement.id==="f-title") { e.preventDefault(); save(); }
+  });
+
+  // ===== ハンドラ結線 =====
+  $("#btn-search").onclick = ()=>{ page=1; reload(); };
+  $("#btn-reload").onclick = ()=> reload();
+  $("#order").onchange = ()=>{ page=1; reload(); };
+  $("#prev").onclick = ()=>{ if (page>1) { page--; reload(); } };
+  $("#next").onclick = ()=>{ page++; reload(); };
+  $("#btn-new").onclick = newItem;
+  $("#btn-save").onclick = save;
+  $("#btn-delete").onclick = del;
+  $("#btn-audit").onclick = showAudit;
+  $("#btn-export").onclick = exportCsv;
+  $("#btn-import").onclick = importCsv;
+
+  // ===== 初期ロード =====
+  await reload();
+  newItem();
+</script>
+</body>
+</html>

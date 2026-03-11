@@ -103,32 +103,6 @@ def main():
         # データ本体
         write_json(PRJ_DATA / "events.json", events)
 
-        # # ルートの軽いメタ
-        # meta = {
-        #     "schema_version": "0.1",
-        #     "build": {
-        #         "generated_at": datetime.now(timezone.utc).isoformat(),
-        #         "records": {"events": len(events)}
-        #     },
-        #     "paths": {
-        #         "events": "./data/events.json",
-        #         "image":  "./image/"
-        #     }
-        # }
-        # write_json(PRJ_ROOT / "index.json", meta)
-
-        # # プレースホルダ index.html（任意・既存があればスキップ）
-        # ih = PRJ_ROOT / "index.html"
-        # if not ih.exists():
-        #     ih.write_text(
-        #         """<!doctype html>
-        # <meta charset="utf-8">
-        # <title>Archive</title>
-        # <h1>Archive</h1>
-        # <p>data: <a href="./data/events.json">events.json</a></p>
-        # """,
-        #         encoding="utf-8"
-        #     )
 
     # ----------------------------------------
     # 曲一覧（検索用）

@@ -149,3 +149,94 @@ def get_setlist(event_id:int, u:str, p:str):
     """,(event_id,))
 
     return rows
+
+
+# ---------- Songs API ----------
+
+from pydantic import BaseModel
+from fastapi import HTTPException
+
+class SongCreate(BaseModel):
+    title: str
+
+class SongUpdate(BaseModel):
+    id: int
+    title: str
+    if_unmodified_since: str | None = None  # 使わないなら無視してOK
+
+@app.get("/owner/api/songs/list")
+def songs_list(u: str, p: str, q: str = ""):
+    db = db_path(u, p)
+    with sqlite3.connect(db) as conn:
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        if q:
+            rows = qall(cur, """
+                SELECT id, title
+                FROM songs
+                WHERE title LIKE '%' || ? || '%'
+                ORDER BY title COLLATE NOCASE, id
+            """, (q,))
+        else:
+            rows = qall(cur, """
+                SELECT id, title
+                FROM songs
+                ORDER BY title COLLATE NOCASE, id
+            """)
+    return {"items": rows}
+
+@app.get("/owner/api/songs/get")
+def songs_get(u: str, p: str, id: int):
+    db = db_path(u, p)
+    with sqlite3.connect(db) as conn:
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT id, title FROM songs WHERE id=?", (id,))
+        row = cur.fetchone()
+        if not row:
+            raise HTTPException(404, f"song not found: {id}")
+        # 最終更新メタが無い場合は空で返す（楽観ロックは後で拡張）
+        return {"id": row["id"], "title": row["title"], "updated_at": None, "updated_by": None}
+
+@app.post("/owner/api/songs/create")
+def songs_create(body: SongCreate, u: str, p: str):
+    title = (body.title or "").strip()
+    if not title:
+        raise HTTPException(400, "title is required")
+    db = db_path(u, p)
+    with sqlite3.connect(db) as conn:
+        cur = conn.cursor()
+        cur.execute("INSERT INTO songs(title) VALUES (?)", (title,))
+        conn.commit()
+        new_id = cur.lastrowid
+    return {"id": new_id, "title": title, "updated_at": None}
+
+@app.post("/owner/api/songs/update")
+def songs_update(body: SongUpdate, u: str, p: str):
+    title = (body.title or "").strip()
+    if not title:
+        raise HTTPException(400, "title is required")
+    db = db_path(u, p)
+    with sqlite3.connect(db) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT COUNT(1) FROM songs WHERE id=?", (body.id,))
+        if cur.fetchone()[0] == 0:
+            raise HTTPException(404, f"song not found: {body.id}")
+        cur.execute("UPDATE songs SET title=? WHERE id=?", (title, body.id))
+        conn.commit()
+    return {"ok": True, "updated_at": None}
+
+@app.post("/owner/api/songs/delete")
+def songs_delete(u: str, p: str, id: int):
+    db = db_path(u, p)
+    with sqlite3.connect(db) as conn:
+        cur = conn.cursor()
+        # 使用中チェック（setlist に参照があれば 409）
+        cur.execute("SELECT EXISTS(SELECT 1 FROM setlist WHERE song_id=?)", (id,))
+        in_use = cur.fetchone()[0] == 1
+        if in_use:
+            # UI側で「セトリで使用中のため削除できません」と出す想定
+            raise HTTPException(status_code=409, detail={"ok": False, "reason": "in_use", "in_use_by": ["setlist"]})
+        cur.execute("DELETE FROM songs WHERE id=?", (id,))
+        conn.commit()
+    return {"ok": True}
