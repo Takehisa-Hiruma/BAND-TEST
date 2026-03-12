@@ -5,196 +5,24 @@
   <title>Owner Editor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/editor.css">
   <link rel="stylesheet" href="./css/master.css">
-  <style id="editor-local">
-  :root{
-    --gap:8px; --bd:#ddd; --bd2:#eee; --fg:#222; --muted:#555; --hl:#0ea5e9;
-    --left-col:520px; --split:6px; --row1:30%; --row2:30%;
-  }
 
-  /* ベース */
-  #event-editor *{ box-sizing:border-box }
-  html,body{ height:100% }
-  body{
-    font:14px system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
-    margin:0; color:var(--fg); background:#fff;
-    display:grid; grid-template-columns:240px 1fr; min-height:0;     /* editor 固有レイアウト */
-  }
-  main#app{ min-height:0; overflow:hidden }
 
-  /* 2カラム（左：フォーム+一覧 / 中央：縦スプリッタ / 右：3段） */
-  #event-editor #wrap{
-    display:grid;
-    grid-template-columns: var(--left-col) var(--split) 1fr;
-    gap:0;
-    height:100vh;              /* ヘッダ無し想定。ヘッダありなら calc(100vh - 44px) に変更 */
-    overflow:hidden;
-  }
+<style>
 
-  /* 左ペイン */
-  #event-editor #left{
-    display:grid; grid-template-rows:auto 1fr; border-right:1px solid var(--bd2);
-    min-height:0;
-  }
-  #event-editor #listBox{ display:flex; flex-direction:column; min-height:0 }
-  #event-editor #listBox .list-scroller{ flex:1; min-height:0; overflow:auto; padding:10px }
+  #wrap { display:grid; grid-template-columns:360px 1fr; height:100%; overflow:hidden; }
+  #left { display:flex; flex-direction:column; border-right:1px solid #ccc; min-height:0; }
+  #left .list-scroll { flex:1; min-height:0; overflow:auto; }
+  #right { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+  .right-pane { flex:1; padding:12px; overflow:auto; display:flex; flex-direction:column; gap:8px; }
+  .row { display:flex; gap:8px; align-items:center; margin:4px 0; }
+  label { display:flex; gap:6px; align-items:center; }
+  input[type="text"], input[type="date"], select { padding:4px 6px; font:inherit; width:100%; }
+  button { padding:6px 10px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; }
+  button.primary { background:#0ea5e9; color:#fff; border-color:#0ea5e9; }
 
-  #event-editor .box{ padding:10px }
-  #event-editor .box h3{ margin:0 0 8px 0; font-size:15px }
-  #event-editor .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px }
-  #event-editor .row{ display:flex; gap:10px; align-items:center; margin:6px 0 }
-  #event-editor label{ display:flex; align-items:center; gap:6px }
-  #event-editor input[type="text"], 
-  #event-editor input[type="date"], 
-  #event-editor input[type="number"], 
-  #event-editor select{ font:inherit; padding:4px 6px }
-  #event-editor input[type="text"]{ width:100% }
-  #event-editor .toolbar{ display:flex; gap:8px; align-items:center; justify-content:space-between; margin-top:8px }
-  #event-editor button{ font:inherit; padding:6px 10px; border:1px solid var(--bd); background:#fff; border-radius:4px; cursor:pointer }
-  #event-editor button.primary{ background:#0ea5e9; color:#fff; border-color:#0ea5e9 }
-  #event-editor button:disabled{ opacity:.5; cursor:not-allowed }
-
-  /* 一覧テーブル（左） */
-  #event-editor #search{ display:flex; gap:8px; align-items:center; border-top:1px solid var(--bd2); padding:10px }
-  #event-editor table{ width:100%; border-collapse:collapse; table-layout:fixed }
-  #event-editor th, #event-editor td{
-    border-bottom:1px solid var(--bd2); padding:6px 8px; text-align:left;
-    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-  }
-  #event-editor tbody tr[data-id].sel{ background:#f0f9ff }
-  #event-editor tbody tr[data-id]:hover{ background:#f7fbff }
-
-  /* 右ペイン：縦3段 */
-  #event-editor #right{
-    display:grid;
-    grid-template-rows:
-      minmax(0, var(--row1))
-      var(--split)
-      minmax(0, var(--row2))
-      var(--split)
-      minmax(0, 1fr);
-    min-height:0; height:100%; overflow:hidden;
-  }
-  /* 潰れ防止（ネスト要素含む） */
-  #event-editor #right, 
-  #event-editor #right *{ min-width:0; min-height:0 }
-
-  /* 右ペイン内のボックス */
-  #event-editor .panel{ display:flex; flex-direction:column; min-height:0; border-bottom:1px solid var(--bd2) }
-  #event-editor .panel:last-child{ border-bottom:none }
-  #event-editor .panel h3{ margin:10px; font-size:15px }
-  #event-editor .panel .inner{ flex:1; min-height:0; padding:0 10px 10px 10px; display:flex; flex-direction:column; gap:8px }
-  #event-editor .flex-row{ display:flex; gap:8px; align-items:center }
-  #event-editor .muted{ color:var(--muted) }
-  #event-editor .mono{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace }
-  #event-editor .list-box{ flex:1; min-height:0; display:flex; gap:8px }
-  #event-editor .list-box .scroller{ flex:1; min-height:0; overflow:auto; border:1px solid var(--bd2) }
-
-  /* スプリッタ */
-  #event-editor .splitter-v{ width:var(--split); cursor:col-resize; background:transparent }
-  #event-editor .splitter-v::after{ content:""; display:block; width:2px; height:100%; margin:0 auto; background:#e5e7eb }
-  #event-editor .splitter-v:hover::after{ background:#cbd5e1 }
-  #event-editor .splitter-h{ height:var(--split); cursor:row-resize; background:transparent }
-  #event-editor .splitter-h::after{ content:""; display:block; height:2px; width:100%; margin:auto 0; background:#e5e7eb }
-  #event-editor .splitter-h:hover::after{ background:#cbd5e1 }
-  </style>
-  <style>
-    /* ページ骨格（左：360px固定／右：可変） */
-    html, body { height: 100%; }
-    body {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      min-height: 0;
-    }
-
-    /* 左ペイン：上は自然固定、下だけスクロール */
-    aside { display: flex; flex-direction: column; min-height: 0; }
-    aside .list-scroll { flex: 1; min-height: 0; overflow: auto; }
-
-    /* 右ペイン */
-    main { min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
-    .right-pane { padding: 12px; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
-
-    /* 表（押し出し防止） */
-    aside table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-    aside th, aside td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    tbody tr.active { background: #f1f5f9; }
-    #wrap{
-      display:grid;
-      grid-template-columns: var(--left-col) var(--split) 1fr;
-      gap:0;
-      height:100vh;              /* ヘッダ無し想定。ヘッダありなら calc(100vh - 44px) に変更 */
-      overflow:hidden;
-    }
-
-    /* 左ペイン */
-    #left{
-      display:grid; grid-template-rows:auto 1fr; border-right:1px solid var(--bd2);
-      min-height:0;
-    }
-    #listBox{ display:flex; flex-direction:column; min-height:0 }
-    #listBox .list-scroller{ flex:1; min-height:0; overflow:auto; padding:10px }
-
-    .box{ padding:10px }
-    .box h3{ margin:0 0 8px 0; font-size:15px }
-    .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px }
-    .row{ display:flex; gap:10px; align-items:center; margin:6px 0 }
-    label{ display:flex; align-items:center; gap:6px }
-    input[type="text"], 
-    input[type="date"], 
-    input[type="number"], 
-    select{ font:inherit; padding:4px 6px }
-    input[type="text"]{ width:100% }
-    .toolbar{ display:flex; gap:8px; align-items:center; justify-content:space-between; margin-top:8px }
-    button{ font:inherit; padding:6px 10px; border:1px solid var(--bd); background:#fff; border-radius:4px; cursor:pointer }
-    button.primary{ background:#0ea5e9; color:#fff; border-color:#0ea5e9 }
-    button:disabled{ opacity:.5; cursor:not-allowed }
-
-    /* 一覧テーブル（左） */
-    #search{ display:flex; gap:8px; align-items:center; border-top:1px solid var(--bd2); padding:10px }
-    table{ width:100%; border-collapse:collapse; table-layout:fixed }
-    th, #event-editor td{
-      border-bottom:1px solid var(--bd2); padding:6px 8px; text-align:left;
-      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-    }
-    tbody tr[data-id].sel{ background:#f0f9ff }
-    tbody tr[data-id]:hover{ background:#f7fbff }
-
-    /* 右ペイン：縦3段 */
-    #right{
-      display:grid;
-      grid-template-rows:
-        minmax(0, var(--row1))
-        var(--split)
-        minmax(0, var(--row2))
-        var(--split)
-        minmax(0, 1fr);
-      min-height:0; height:100%; overflow:hidden;
-    }
-    /* 潰れ防止（ネスト要素含む） */
-    #right, 
-    #right *{ min-width:0; min-height:0 }
-
-    /* 右ペイン内のボックス */
-    .panel{ display:flex; flex-direction:column; min-height:0; border-bottom:1px solid var(--bd2) }
-    .panel:last-child{ border-bottom:none }
-    .panel h3{ margin:10px; font-size:15px }
-    .panel .inner{ flex:1; min-height:0; padding:0 10px 10px 10px; display:flex; flex-direction:column; gap:8px }
-    .flex-row{ display:flex; gap:8px; align-items:center }
-    .muted{ color:var(--muted) }
-    .mono{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace }
-    .list-box{ flex:1; min-height:0; display:flex; gap:8px }
-    .list-box .scroller{ flex:1; min-height:0; overflow:auto; border:1px solid var(--bd2) }
-
-    /* スプリッタ */
-    .splitter-v{ width:var(--split); cursor:col-resize; background:transparent }
-    .splitter-v::after{ content:""; display:block; width:2px; height:100%; margin:0 auto; background:#e5e7eb }
-    .splitter-v:hover::after{ background:#cbd5e1 }
-    .splitter-h{ height:var(--split); cursor:row-resize; background:transparent }
-    .splitter-h::after{ content:""; display:block; height:2px; width:100%; margin:auto 0; background:#e5e7eb }
-    .splitter-h:hover::after{ background:#cbd5e1 }
-  </style>
-
+</style>
 
 </head>
 
@@ -421,70 +249,66 @@
 
 
 
-  <template id="people-tpl">
+<div id="mount-point"></div>
+
+<template id="people-tpl">
 
   <div id="wrap">
 
+    <!-- 左ペイン -->
     <div id="left">
+      <h3>People</h3>
 
-  <aside>
-    <h3>People</h3>
+      <div class="row">
+        <input id="people-q" type="search" placeholder="メンバー名を検索" style="width:200px">
+        <button id="people-btn-search">検索</button>
+        <button id="people-btn-reload">再読込</button>
+      </div>
 
-    <div class="row">
-      <input id="q" type="search" placeholder="メンバー名を検索" style="width:200px">
-      <button id="btn-search">検索</button>
-      <button id="btn-reload">再読込</button>
+      <hr>
+
+      <div class="list-scroll">
+        <table>
+          <thead>
+            <tr><th style="width:64px">ID</th><th>Name</th></tr>
+          </thead>
+          <tbody id="people-list"></tbody>
+        </table>
+      </div>
     </div>
 
-    <hr>
+    <!-- 右ペイン -->
+    <div id="right">
+      <header class="toolbar">
+        <button id="people-btn-new">新規</button>
+        <button id="people-btn-save">保存</button>
+        <button id="people-btn-delete">削除</button>
+      </header>
 
-    <div class="list-scroll">
-      <table>
-        <thead>
-          <tr><th style="width:64px">ID</th><th>Name</th></tr>
-        </thead>
-        <tbody id="list"></tbody>
-      </table>
+      <section class="right-pane">
+        <div class="row"><label>ID <input id="people-f-id" type="text" readonly style="width:80px"></label></div>
+        <div class="row"><label>Name <input id="people-f-name" type="text" style="width:320px"></label></div>
+        <div class="row"><label>Birthday <input id="people-f-birthday" type="date" style="width:180px"></label></div>
+        <div class="row"><label>Joined <input id="people-f-joined_on" type="date" style="width:180px"></label></div>
+        <div class="row"><label>Left <input id="people-f-left_on" type="date" style="width:180px"></label></div>
+
+        <hr>
+
+        <div class="row"><label>X <input id="people-f-x" type="text" style="width:360px"></label></div>
+        <div class="row"><label>Instagram <input id="people-f-instagram" type="text" style="width:360px"></label></div>
+        <div class="row"><label>Threads <input id="people-f-threads" type="text" style="width:360px"></label></div>
+        <div class="row"><label>Facebook <input id="people-f-facebook" type="text" style="width:360px"></label></div>
+        <div class="row"><label>YouTube <input id="people-f-youtube" type="text" style="width:360px"></label></div>
+        <div class="row"><label>TikTok <input id="people-f-tiktok" type="text" style="width:360px"></label></div>
+
+        <hr>
+
+        <div class="row"><label>Preview <span id="people-preview"></span></label></div>
+      </section>
     </div>
-  </aside>
 
   </div>
-  
-
-    <div id="split-h" class="splitter-v"></div>
-
-    <div id="right">
-  <main>
-    <header class="toolbar">
-      <button id="btn-new">新規</button>
-      <button id="btn-save">保存</button>
-      <button id="btn-delete">削除</button>
-    </header>
-
-    <section class="right-pane">
-      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
-      <div class="row"><label>Name <input id="f-name" type="text" style="width:320px"></label></div>
-      <div class="row"><label>Birthday <input id="f-birthday" type="date" style="width:180px"></label></div>
-      <div class="row"><label>Joined <input id="f-joined_on" type="date" style="width:180px"></label></div>
-      <div class="row"><label>Left <input id="f-left_on" type="date" style="width:180px"></label></div>
-
-      <hr>
-
-      <div class="row"><label>X <input id="f-x" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Instagram <input id="f-instagram" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Threads <input id="f-threads" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Facebook <input id="f-facebook" type="text" style="width:360px"></label></div>
-      <div class="row"><label>YouTube <input id="f-youtube" type="text" style="width:360px"></label></div>
-      <div class="row"><label>TikTok <input id="f-tiktok" type="text" style="width:360px"></label></div>
-
-      <hr>
-
-      <div class="row"><label>Preview <span id="preview"></span></label></div>
-      <div id="audit" class="hint" hidden></div>
-    </section>
-  </main>
-</div>
-  </template>
+</template>
 
   <template id="acts-tpl">
   <aside>
@@ -603,6 +427,8 @@
 
 
 
+
+
 <script type="module">
     // ===== コンテキスト =====
     const u = new URLSearchParams(location.search).get("u");
@@ -618,7 +444,6 @@
     const status = $("#status");
     const leftTbody = $("#tbl");
     let events = [], cur = null;
-
 
     // ===== スプリッタ配線 =====
     function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
@@ -1124,15 +949,6 @@
       // initSelectsFromCache(mount); // ← マスターキャッシュからセレクトを構築する処理があれば
     }
 
-    // // マスター画面（最初はプレースホルダでOK）
-    // function renderMaster(mount, kind) {
-    //   mount.innerHTML = `
-    //     <div style="padding:16px">
-    //       <h2>Master: ${kind}</h2>
-    //       <p>ここに ${kind} の CRUD 画面を作っていきます。</p>
-    //     </div>
-    //   `;
-    // }
 
     async function renderMaster(mount, kind){
       mount.innerHTML = `<div style="padding:16px"><h2>${kind}管理</h2><p>読み込み中…</p></div>`;
@@ -1202,10 +1018,6 @@
       };
     }
 
-
-
-
-
     // 表示切り替え（クエリパラメータで超シンプルに分岐）
     const app = document.getElementById("app");
     if (!view) {
@@ -1213,6 +1025,7 @@
     } else {
       renderMaster(app, view);
     }
+
   </script>
 </body>
 </html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>People Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/common.css">
+<style>
+  html, body { height: 100%; margin:0; }
+  #wrap {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+  /* 左ペイン */
+  #left { display: flex; flex-direction: column; border-right:1px solid #ccc; min-height:0; }
+  #left .list-scroll { flex:1; min-height:0; overflow:auto; }
+  /* 表 */
+  #left table { width:100%; border-collapse: collapse; table-layout: fixed; }
+  #left th, #left td { padding:6px 8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-bottom:1px solid #ccc; }
+  /* 右ペイン */
+  #right { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+  .right-pane { flex:1; padding:12px; overflow:auto; display:flex; flex-direction:column; gap:8px; }
+  .row { display:flex; gap:8px; align-items:center; margin:4px 0; }
+  label { display:flex; gap:6px; align-items:center; }
+  input[type="text"], input[type="date"], select { padding:4px 6px; font:inherit; }
+  input[type="text"] { width:100%; }
+  button { padding:6px 10px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; }
+  button.primary { background:#0ea5e9; color:#fff; border-color:#0ea5e9; }
+</style>
+</head>
+<body>
+
+<div id="wrap">
+
+  <!-- 左ペイン -->
+  <div id="left">
+    <h3>People</h3>
+
+    <div class="row">
+      <input id="people-q" type="search" placeholder="メンバー名を検索" style="width:200px">
+      <button id="people-btn-search">検索</button>
+      <button id="people-btn-reload">再読込</button>
+    </div>
+
+    <hr>
+
+    <div class="list-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:64px">ID</th><th>Name</th></tr>
+        </thead>
+        <tbody id="people-list"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 右ペイン -->
+  <div id="right">
+    <header class="toolbar">
+      <button id="people-btn-new">新規</button>
+      <button id="people-btn-save">保存</button>
+      <button id="people-btn-delete">削除</button>
+    </header>
+
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="people-f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Name <input id="people-f-name" type="text" style="width:320px"></label></div>
+      <div class="row"><label>Birthday <input id="people-f-birthday" type="date" style="width:180px"></label></div>
+      <div class="row"><label>Joined <input id="people-f-joined_on" type="date" style="width:180px"></label></div>
+      <div class="row"><label>Left <input id="people-f-left_on" type="date" style="width:180px"></label></div>
+
+      <hr>
+
+      <div class="row"><label>X <input id="people-f-x" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Instagram <input id="people-f-instagram" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Threads <input id="people-f-threads" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Facebook <input id="people-f-facebook" type="text" style="width:360px"></label></div>
+      <div class="row"><label>YouTube <input id="people-f-youtube" type="text" style="width:360px"></label></div>
+      <div class="row"><label>TikTok <input id="people-f-tiktok" type="text" style="width:360px"></label></div>
+
+      <hr>
+
+      <div class="row"><label>Preview <span id="people-preview"></span></label></div>
+    </section>
+  </div>
+
+</div>
+
+<script type="module">
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+
+  let cur = null;
+
+  // 一覧描画
+  async function reload() {
+    // ここに fetch API 呼び出しを追加
+    const data = []; // サンプル用空配列
+    const tbody = $("#people-list");
+    tbody.innerHTML = "";
+    data.forEach(it => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${it.id}</td><td>${it.name}</td>`;
+      tr.onclick = () => select(it.id);
+      tbody.appendChild(tr);
+    });
+  }
+
+  // 明細セット
+  function select(id) {
+    // ここに fetch 取得結果をセット
+  }
+
+  // 新規
+  function newItem() { cur = {}; }
+
+  // 保存
+  function save() {}
+
+  // 削除
+  function del() {}
+
+  // ハンドラ
+  $("#people-btn-search").onclick = () => reload();
+  $("#people-btn-reload").onclick = () => reload();
+  $("#people-btn-new").onclick = () => newItem();
+  $("#people-btn-save").onclick = () => save();
+  $("#people-btn-delete").onclick = () => del();
+
+  // 初期ロード
+  reload();
+  newItem();
+</script>
+
+</body>
+</html>
