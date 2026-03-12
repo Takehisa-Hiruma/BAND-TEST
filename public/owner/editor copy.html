@@ -135,7 +135,6 @@
 
       <h3>マスター</h3>
       <a id="link-people" href="#">People（メンバー）</a>
-      <a id="link-acts" href="#">Acts（アーティスト）</a>
       <a id="link-song" href="#">Song（曲）</a>
       <a id="link-venue" href="#">Venue（会場）</a>
       <a id="link-role" href="#">Role（役割）</a>
@@ -144,10 +143,30 @@
       <a id="link-form" href="#">Form</a>
     </nav>
 
+    <div class="list-scroll">
+      <table>
+        <thead><tr><th style="width:64px">ID</th><th>Name</th></tr></thead>
+        <tbody id="list"></tbody> <!-- ← JS でここに一覧を描画する -->
+      </table>
+    </div>
+
   </aside>
 
   <!-- ここに Event Editor（テンプレ） or マスター画面を差し込む -->
-  <main id="app"></main>
+  <main id="app">
+    
+    <header class="toolbar">
+      <button id="btn-new">新規</button>
+      <button id="btn-save">保存</button>
+      <button id="btn-delete">削除</button>
+      <span class="status" id="status"></span>
+    </header>
+
+    <section class="right-pane" id="detail">
+      <!-- ← JS でここにフォームを描画する -->
+    </section>
+
+  </main>
 
   <!-- ▼▼ あなたの Editor（bodyの中身）を“そのまま”置く箱：エスケープ不要 ▼▼ -->
   <template id="event-editor-tpl">
@@ -340,190 +359,16 @@
     </div>
   </div>
 
-</div>
-
-</template>
-  <!-- ▲▲ エスケープ不要で貼ってOK ▲▲ -->
 
 
 
-  <template id="people-tpl">
+  <script type="module">
 
-  <aside>
-    <h3>People</h3>
-
-    <div class="row">
-      <input id="q" type="search" placeholder="メンバー名を検索" style="width:200px">
-      <button id="btn-search">検索</button>
-      <button id="btn-reload">再読込</button>
-    </div>
-
-    <hr>
-
-    <div class="list-scroll">
-      <table>
-        <thead>
-          <tr><th style="width:64px">ID</th><th>Name</th></tr>
-        </thead>
-        <tbody id="list"></tbody>
-      </table>
-    </div>
-  </aside>
-
-  <main>
-    <header class="toolbar">
-      <button id="btn-new">新規</button>
-      <button id="btn-save">保存</button>
-      <button id="btn-delete">削除</button>
-    </header>
-
-    <section class="right-pane">
-      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
-      <div class="row"><label>Name <input id="f-name" type="text" style="width:320px"></label></div>
-      <div class="row"><label>Birthday <input id="f-birthday" type="date" style="width:180px"></label></div>
-      <div class="row"><label>Joined <input id="f-joined_on" type="date" style="width:180px"></label></div>
-      <div class="row"><label>Left <input id="f-left_on" type="date" style="width:180px"></label></div>
-
-      <hr>
-
-      <div class="row"><label>X <input id="f-x" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Instagram <input id="f-instagram" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Threads <input id="f-threads" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Facebook <input id="f-facebook" type="text" style="width:360px"></label></div>
-      <div class="row"><label>YouTube <input id="f-youtube" type="text" style="width:360px"></label></div>
-      <div class="row"><label>TikTok <input id="f-tiktok" type="text" style="width:360px"></label></div>
-
-      <hr>
-
-      <div class="row"><label>Preview <span id="preview"></span></label></div>
-      <div id="audit" class="hint" hidden></div>
-    </section>
-  </main>
-
-  </template>
-
-  <template id="acts-tpl">
-  <aside>
-    <h3>Act</h3>
-    <div class="row">
-      <input id="q" type="search" placeholder="Actを検索" style="width:200px">
-      <button id="btn-search">検索</button>
-      <button id="btn-reload">再読込</button>
-    </div>
-    <hr>
-    <div class="list-scroll">
-      <table>
-        <thead>
-          <tr><th style="width:64px">ID</th><th>Act</th></tr>
-        </thead>
-        <tbody id="list"></tbody>
-      </table>
-    </div>
-  </aside>
-
-  <main>
-    <header class="toolbar">
-      <button id="btn-new">新規</button>
-      <button id="btn-save">保存</button>
-      <button id="btn-delete">削除</button>
-    </header>
-    <section class="right-pane">
-      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
-      <div class="row"><label>Act Name <input id="f-title" type="text" style="width:320px"></label></div>
-      <div class="row"><label>URL <input id="f-url" type="text" style="width:360px"></label></div>
-
-      <div class="row"><label>X <input id="f-x" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Instagram <input id="f-instagram" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Threads <input id="f-threads" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Facebook <input id="f-facebook" type="text" style="width:360px"></label></div>
-      <div class="row"><label>YouTube <input id="f-youtube" type="text" style="width:360px"></label></div>
-      <div class="row"><label>TikTok <input id="f-tiktok" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Preview</label> <div id="preview"></div></div>
-      <div id="audit" class="hint" hidden></div>
-    </section>
-  </main>
-  </template>
-
-  <template id="venue-tpl">
-  <aside>
-    <h3>Venue</h3>
-
-    <div class="row">
-      <input id="q" type="search" placeholder="会場を検索" style="width:200px">
-      <button id="btn-search">検索</button>
-      <button id="btn-reload">再読込</button>
-    </div>
-
-    <hr>
-
-    <div class="list-scroll">
-      <table>
-        <thead>
-          <tr><th style="width:64px">ID</th><th>Venue</th></tr>
-        </thead>
-        <tbody id="list"></tbody>
-      </table>
-    </div>
-  </aside>
-
-  <main>
-    <header class="toolbar">
-      <button id="btn-new">新規</button>
-      <button id="btn-save">保存</button>
-      <button id="btn-delete">削除</button>
-    </header>
-
-    <section class="right-pane">
-      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
-      <div class="row"><label>Name <input id="f-title" type="text" style="width:320px"></label></div>
-      <div class="row"><label>URL  <input id="f-url"  type="text" style="width:360px"></label></div>
-      <div class="row"><label>Note <input id="f-note" type="text" style="width:360px"></label></div>
-      <div class="row"><label>Preview</label> <div id="preview"></div></div>
-      <div id="audit" class="hint" hidden></div>
-    </section>
-  </main>
-  </template>
-
-  <template id="song-tpl">
-  <aside>
-    <h3>Songs</h3>
-
-    <div class="row">
-      <input id="q" type="search" placeholder="曲名を検索" style="width:200px">
-      <button id="btn-search">検索</button>
-      <button id="btn-reload">再読込</button>
-    </div>
-
-    <hr>
-
-    <div class="list-scroll">
-      <table>
-        <thead><tr><th style="width:64px">ID</th><th>Title</th></tr></thead>
-        <tbody id="list"></tbody>
-      </table>
-    </div>
-  </aside>
-  <main>
-    <header class="toolbar">
-      <button id="btn-new">新規</button>
-      <button id="btn-save">保存</button>
-      <button id="btn-delete">削除</button>
-    </header>
-    <section class="right-pane">
-      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
-      <div class="row"><label>Title <input id="f-title" type="text" style="width:320px"></label></div>
-      <div id="audit" class="hint" hidden></div>
-    </section>
-  </main>
-  </template>
-
-
-  
-<script type="module">
     // ===== コンテキスト =====
     const u = new URLSearchParams(location.search).get("u");
     const p = new URLSearchParams(location.search).get("p");
     if (!u || !p) location.href = "./index.html";
+    
 
     const API_BASE =
       (location.hostname === "127.0.0.1" || location.hostname === "localhost")
@@ -531,9 +376,127 @@
         : "";
 
     const $ = s => document.querySelector(s);
+    const escapeHtml = s => (s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     const status = $("#status");
     const leftTbody = $("#tbl");
     let events = [], cur = null;
+
+    // const params = new URLSearchParams(location.search);
+    // const u = params.get("u"); const p = params.get("p");
+    // if (!u || !p) { alert("u,p が必要です"); location.href = "./index.html"; }
+
+    // const API_BASE = (location.hostname === "127.0.0.1" || location.hostname === "localhost")
+    //   ? "http://127.0.0.1:8787" : "";
+
+    // const $ = s => document.querySelector(s);
+    // const escapeHtml = s => (s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+
+    async function reloadPeople() {
+      const res = await fetch(`${API_BASE}/owner/api/people?u=${u}&p=${p}`, { cache:'no-store' });
+      const items = res.ok ? await res.json() : [];
+      const tbody = $("#list");
+      if(!tbody) return; // #list が無ければ何もしない
+      tbody.innerHTML = items.map(it =>
+        `<tr data-id="${it.id}"><td style="width:64px">${it.id}</td><td>${escapeHtml(it.name)}</td></tr>`
+      ).join('');
+      tbody.querySelectorAll('tr[data-id]').forEach(tr=>{
+        tr.onclick = () => selectPeople(Number(tr.dataset.id));
+      });
+    }
+
+    async function selectPeople(id) {
+      const res = await fetch(`${API_BASE}/owner/api/people/get?u=${u}&p=${p}&id=${id}`);
+      const d = await res.json();
+      renderPeopleForm(d);
+      document.querySelectorAll('#list tr[data-id]').forEach(tr=>{
+        tr.classList.toggle('active', Number(tr.dataset.id)===id);
+      });
+    }
+
+    function renderPeopleForm(d={}) {
+      const detail = $("#detail");
+      if(!detail) return; // #detail が無ければ何もしない
+      detail.innerHTML = `
+        <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px" value="${d.id??''}"></label></div>
+        <div class="row"><label>Name <input id="f-name" type="text" style="width:320px" value="${escapeHtml(d.name||'')}"></label></div>
+        <div class="row"><label>Birthday <input id="f-birthday" type="text" style="width:180px" value="${escapeHtml(d.birthday||'')}"></label></div>
+        <div class="row"><label>Joined <input id="f-joined_on" type="date" style="width:180px" value="${d.joined_on||''}"></label></div>
+        <div class="row"><label>Left <input id="f-left_on" type="date" style="width:180px" value="${d.left_on||''}"></label></div>
+        <hr>
+        <div class="row"><label>X <input id="f-x" type="text" style="width:360px" value="${escapeHtml(d.x||'')}"></label></div>
+        <div class="row"><label>Instagram <input id="f-instagram" type="text" style="width:360px" value="${escapeHtml(d.instagram||'')}"></label></div>
+        <div class="row"><label>Threads <input id="f-threads" type="text" style="width:360px" value="${escapeHtml(d.threads||'')}"></label></div>
+        <div class="row"><label>Facebook <input id="f-facebook" type="text" style="width:360px" value="${escapeHtml(d.facebook||'')}"></label></div>
+        <div class="row"><label>YouTube <input id="f-youtube" type="text" style="width:360px" value="${escapeHtml(d.youtube||'')}"></label></div>
+        <div class="row"><label>TikTok <input id="f-tiktok" type="text" style="width:360px" value="${escapeHtml(d.tiktok||'')}"></label></div>
+      `;
+    }
+
+    async function savePeople() {
+      const id = $("#f-id")?.value.trim();
+      const payload = {
+        name: $("#f-name")?.value.trim() || "",
+        birthday: $("#f-birthday")?.value.trim() || null,
+        joined_on: $("#f-joined_on")?.value || null,
+        left_on: $("#f-left_on")?.value || null,
+        x: $("#f-x")?.value.trim() || null,
+        instagram: $("#f-instagram")?.value.trim() || null,
+        threads: $("#f-threads")?.value.trim() || null,
+        facebook: $("#f-facebook")?.value.trim() || null,
+        youtube: $("#f-youtube")?.value.trim() || null,
+        tiktok: $("#f-tiktok")?.value.trim() || null,
+      };
+      if(!payload.name){ alert('name 必須'); return; }
+      const url = id
+        ? `${API_BASE}/owner/api/people/update?u=${u}&p=${p}`
+        : `${API_BASE}/owner/api/people/create?u=${u}&p=${p}`;
+      const body = id ? { id: Number(id), ...payload } : payload;
+      const r = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+      if(!r.ok){ alert('保存エラー'); return; }
+      await reloadPeople();
+    }
+
+    async function deletePeople() {
+      const id = Number($("#f-id")?.value);
+      if(!id) return;
+      if(!confirm(`ID ${id} を削除します。`)) return;
+      const r = await fetch(`${API_BASE}/owner/api/people/delete?u=${u}&p=${p}`, {
+        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({id})
+      });
+      if(r.status===409){ alert('使用中のため削除できません'); return; }
+      await reloadPeople(); renderPeopleForm({});
+    }
+
+    // ボタン結線（ボタンが無ければ何もしない）
+    $("#btn-new")   && ($("#btn-new").onclick    = () => renderPeopleForm({}));
+    $("#btn-save")  && ($("#btn-save").onclick   = savePeople);
+    $("#btn-delete")&& ($("#btn-delete").onclick = deletePeople);
+
+    // 初回
+    // await reloadPeople();
+    // renderPeopleForm({});
+
+
+
+
+
+
+    // // ===== コンテキスト =====
+    // const u = new URLSearchParams(location.search).get("u");
+    // const p = new URLSearchParams(location.search).get("p");
+    // if (!u || !p) location.href = "./index.html";
+    
+
+    // const API_BASE =
+    //   (location.hostname === "127.0.0.1" || location.hostname === "localhost")
+    //     ? "http://127.0.0.1:8787"
+    //     : "";
+
+    // const $ = s => document.querySelector(s);
+    // const status = $("#status");
+    // const leftTbody = $("#tbl");
+    // let events = [], cur = null;
 
 
     // ===== スプリッタ配線 =====
@@ -641,7 +604,7 @@
       yy = yy.padStart(4,"0"); mm = mm.padStart(2,"0"); dd = dd.padStart(2,"0");
       return `${yy}-${mm}-${dd}`;
     }
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+    // function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
     // ===== マスタ（venues / eras / tours / people / roles / acts / songs） =====
     let venues=[], eras=[], tours=[], people=[], roles=[], acts=[], songs=[];
@@ -995,6 +958,15 @@
       renderSetlist(); status.textContent="（setlist: 更新・未保存）";
     }
   </script>
+</div>
+
+
+
+
+
+  </template>
+  <!-- ▲▲ エスケープ不要で貼ってOK ▲▲ -->
+
   <script>
     // クエリから u/p を取得し、ナビゲーションのリンクに反映
     const params = new URLSearchParams(location.search);
@@ -1017,7 +989,6 @@
     setHref("link-event",  withUP(""));
     setHref("link-back",   `./index.html?u=${encodeURIComponent(uu)}`);
     setHref("link-people", withUP("view=people"));
-    setHref("link-acts", withUP("view=acts"));
     setHref("link-song",   withUP("view=song"));
     setHref("link-venue",  withUP("view=venue"));
     setHref("link-role",   withUP("view=role"));
@@ -1130,5 +1101,10 @@
       renderMaster(app, view);
     }
   </script>
+
+
+
+
+
 </body>
 </html>

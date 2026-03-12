@@ -1,9 +1,25 @@
 # /owner/api/master_api.py
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import sqlite3
 
 app = FastAPI(title="Master CRUD API")
+
+
+origins = [
+    "http://127.0.0.1:5500",   # Live Server / 静的サイトのローカル起動
+    # "http://localhost:5500", # localhost で開く場合はこちらも入れる
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --------------------- 共通 ---------------------
 def db_path(u: str, p: str):

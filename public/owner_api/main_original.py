@@ -15,6 +15,19 @@ def db_open(u, p):
     return con
 
 
+
+# ---- Master CRUD: 共通モデル ----
+
+class MasterCreate(BaseModel):
+    name: str
+    memo: str | None = None
+
+class MasterUpdate(BaseModel):
+    id: int
+    name: str
+    memo: str | None = None
+
+
 ROOT = Path(__file__).resolve().parents[2]  # <repo-root> を想定
 DBROOT = ROOT / "db"
 EXPORTER = ROOT / "cloud_export_json.py"

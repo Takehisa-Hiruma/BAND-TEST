@@ -1,0 +1,19 @@
+/* ページ骨格（左：360px固定／右：可変） */
+body {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 0;
+}
+
+/* 左ペイン：上は自然固定、下だけスクロール */
+aside { display: flex; flex-direction: column; min-height: 0; }
+aside .list-scroll { flex: 1; min-height: 0; overflow: auto; }
+
+/* 右ペイン */
+main { min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
+.right-pane { padding: 12px; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+
+/* 表（押し出し防止） */
+aside table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+aside th, aside td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+tbody tr.active { background: #f1f5f9; }
