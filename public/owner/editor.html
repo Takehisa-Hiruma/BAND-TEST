@@ -49,9 +49,9 @@
   <!-- 左サイドバー（u/p のクエリを引き回す） -->
   <aside>
     <nav>
+      <a id="link-back" href="./index.html">← プロジェクト一覧に戻る</a>
       <h3>イベント</h3>
       <a id="link-event" href="#">イベント編集</a>
-      <a id="link-back" href="./index.html">← プロジェクト一覧に戻る</a>
 
       <h3>マスター</h3>
       <a id="link-people" href="#">People（メンバー）</a>
@@ -78,197 +78,193 @@
   <!-- ▼▼ あなたの Editor（bodyの中身）を“そのまま”置く箱：エスケープ不要 ▼▼ -->
   <template id="event-editor-tpl">
 
+  <!-- <div class="view" data-view="event"> -->
+  <div class="view">
+    <header>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="btn-back">← 一覧へ</button>
+        <button id="btn-save" class="primary">保存</button>
+        <button id="btn-publish">公開反映</button>
+      </div>
+      <span id="status" class="status"></span>
+    </header>
 
-
-
-
-<div>
-  <header>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button id="btn-back">← 一覧へ</button>
-      <button id="btn-save" class="primary">保存</button>
-      <button id="btn-publish">公開反映</button>
-    </div>
-    <span id="status" class="status"></span>
-  </header>
-
-  <div id="wrap">
-    <!-- 左：フォーム + 一覧 -->
-    <div id="left">
-      <!-- フォーム -->
-      <div class="box" id="formBox">
-        <h3>イベント編集</h3>
-        <div class="grid2">
-          <div>
-            <div class="row"><label>日付 <input id="f-date" type="date"></label></div>
-            <div class="row"><label>タイトル <input id="f-title" type="text" placeholder="Title"></label></div>
-            <div class="row"><label>サブ <input id="f-sub" type="text" placeholder="Subtitle / Note"></label></div>
+    <div id="wrap">
+      <!-- 左：フォーム + 一覧 -->
+      <div id="left">
+        <!-- フォーム -->
+        <div class="box" id="formBox">
+          <h3>イベント編集</h3>
+          <div class="grid2">
+            <div>
+              <div class="row"><label>日付 <input id="f-date" type="date"></label></div>
+              <div class="row"><label>タイトル <input id="f-title" type="text" placeholder="Title"></label></div>
+              <div class="row"><label>サブ <input id="f-sub" type="text" placeholder="Subtitle / Note"></label></div>
+            </div>
+            <div>
+              <div class="row">
+                <label>会場
+                  <select id="f-venue-select" style="min-width:220px"></select>
+                </label>
+              </div>
+              <div class="row">
+                <label>Era
+                  <select id="f-era-select" style="min-width:160px"></select>
+                </label>
+              </div>
+              <div class="row">
+                <label>Tour/Series
+                  <select id="f-tour-select" style="min-width:160px"></select>
+                </label>
+              </div>
+              <div class="row">
+                <label>形態
+                  <select id="f-form-select" style="min-width:120px">
+                    <option value=""></option>
+                    <option value="BAND">BAND</option>
+                    <option value="IDOL">IDOL</option>
+                  </select>
+                </label>
+              </div>
+            </div>
           </div>
-          <div>
-            <div class="row">
-              <label>会場
-                <select id="f-venue-select" style="min-width:220px"></select>
+          <div class="toolbar">
+            <div class="flex-row">
+              <button id="btn-reload-setlist">セトリをリロード</button>
+            </div>
+            <div class="flex-row">
+              <button id="btn-open-public">Web参照</button>
+              <button id="btn-publish2">Publish JSON</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 一覧 -->
+        <div id="listBox" style="display:flex;flex-direction:column;min-height:0">
+          <div id="search">
+            <div class="flex-row">
+              <span>検索:</span>
+              <input id="q" type="text" placeholder="タイトル / 会場" style="width:200px">
+              <button id="btn-filter">検索</button>
+            </div>
+            <div style="margin-left:auto" class="flex-row">
+              <button id="btn-new">新規</button>
+              <button id="btn-del">削除</button>
+            </div>
+          </div>
+          <!-- <div style="padding:10px;overflow:auto">
+            <table>
+              <thead><tr><th style="width:90px">日付</th><th>タイトル</th><th style="width:160px">会場</th><th style="width:80px">形態</th></tr></thead>
+              <tbody id="tbl"></tbody>
+            </table>
+          </div> -->
+          <div class="list-scroller">
+            <table>
+              <thead><tr><th style="width:90px">日付</th><th>タイトル</th><th style="width:160px">会場</th><th style="width:80px">形態</th></tr></thead>
+              <tbody id="tbl"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 左右のスプリッタ（縦） -->
+      <div id="split-h" class="splitter-v" aria-label="resize columns"></div>
+
+      <!-- 右：縦3段（lineup / bandsevent / setlist） -->
+      <div id="right">
+        <!-- lineup -->
+        <section class="panel" id="panel-lineup">
+          <h3>出演者（イベント全体：lineup）</h3>
+          <div class="inner">
+            <div class="list-box">
+              <div class="scroller">
+                <table>
+                  <thead><tr><th style="width:160px">メンバー</th><th style="width:160px">役割</th></tr></thead>
+                  <tbody id="lineup-body"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="flex-row">
+              <label>メンバー
+                <select id="ln-member" style="min-width:200px"></select>
+              </label>
+              <label>役割
+                <select id="ln-role" style="min-width:140px"></select>
               </label>
             </div>
-            <div class="row">
-              <label>Era
-                <select id="f-era-select" style="min-width:160px"></select>
+            <div class="flex-row">
+              <button id="ln-add">追加</button>
+              <button id="ln-del">削除</button>
+              <button id="ln-up">▲上へ</button>
+              <button id="ln-down">▼下へ</button>
+              <button id="ln-update">更新</button>
+            </div>
+          </div>
+        </section>
+        <!-- 右内スプリッタ（横）1 -->
+        <div id="split-v1" class="splitter-h" aria-label="resize row 1-2"></div>
+        <!-- bandsevent -->
+        <section class="panel" id="panel-band">
+          <h3>対バン（bandsevent）</h3>
+          <div class="inner">
+            <div class="list-box">
+              <div class="scroller">
+                <table>
+                  <thead><tr><th style="width:40px">#</th><th>バンド名</th></tr></thead>
+                  <tbody id="band-body"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="flex-row">
+              <label>バンド名
+                <select id="band-name" style="min-width:220px"></select>
               </label>
             </div>
-            <div class="row">
-              <label>Tour/Series
-                <select id="f-tour-select" style="min-width:160px"></select>
-              </label>
+            <div class="flex-row">
+              <button id="band-add">追加</button>
+              <button id="band-del">削除</button>
+              <button id="band-up">▲上へ</button>
+              <button id="band-down">▼下へ</button>
             </div>
-            <div class="row">
-              <label>形態
-                <select id="f-form-select" style="min-width:120px">
-                  <option value=""></option>
-                  <option value="BAND">BAND</option>
-                  <option value="IDOL">IDOL</option>
+          </div>
+        </section>
+        <!-- 右内スプリッタ（横）2 -->
+        <div id="split-v2" class="splitter-h" aria-label="resize row 2-3"></div>
+        <!-- setlist -->
+        <section class="panel" id="panel-setlist">
+          <h3>セトリ編集（seqは常に1..N）</h3>
+          <div class="inner">
+            <div class="list-box">
+              <div class="scroller">
+                <table>
+                  <thead><tr><th style="width:40px">#</th><th>曲名</th><th style="width:180px">補足</th></tr></thead>
+                  <tbody id="setlist-body"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="flex-row">
+              <label>曲<select id="sl-song" style="min-width:240px"></select></label>
+              <label>Section
+                <select id="sl-section" style="min-width:120px">
+                  <option value=""></option><option value="main">main</option><option value="encore">encore</option><option value="MC">MC</option><option value="SE">SE</option><option value="Video">Video</option>
                 </select>
               </label>
+              <label>Version <input id="sl-version" type="text" style="width:120px"></label>
+            </div>
+            <div class="flex-row">
+              <button id="sl-add">追加</button>
+              <button id="sl-del">削除</button>
+              <button id="sl-up">▲上へ</button>
+              <button id="sl-down">▼下へ</button>
+              <button id="sl-update">更新</button>
             </div>
           </div>
-        </div>
-        <div class="toolbar">
-          <div class="flex-row">
-            <button id="btn-reload-setlist">セトリをリロード</button>
-          </div>
-          <div class="flex-row">
-            <button id="btn-open-public">Web参照</button>
-            <button id="btn-publish2">Publish JSON</button>
-          </div>
-        </div>
+        </section>
       </div>
-
-      <!-- 一覧 -->
-      <div id="listBox" style="display:flex;flex-direction:column;min-height:0">
-        <div id="search">
-          <div class="flex-row">
-            <span>検索:</span>
-            <input id="q" type="text" placeholder="タイトル / 会場" style="width:200px">
-            <button id="btn-filter">検索</button>
-          </div>
-          <div style="margin-left:auto" class="flex-row">
-            <button id="btn-new">新規</button>
-            <button id="btn-del">削除</button>
-          </div>
-        </div>
-        <!-- <div style="padding:10px;overflow:auto">
-          <table>
-            <thead><tr><th style="width:90px">日付</th><th>タイトル</th><th style="width:160px">会場</th><th style="width:80px">形態</th></tr></thead>
-            <tbody id="tbl"></tbody>
-          </table>
-        </div> -->
-        <div class="list-scroller">
-          <table>
-            <thead><tr><th style="width:90px">日付</th><th>タイトル</th><th style="width:160px">会場</th><th style="width:80px">形態</th></tr></thead>
-            <tbody id="tbl"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- 左右のスプリッタ（縦） -->
-    <div id="split-h" class="splitter-v" aria-label="resize columns"></div>
-
-    <!-- 右：縦3段（lineup / bandsevent / setlist） -->
-    <div id="right">
-      <!-- lineup -->
-      <section class="panel" id="panel-lineup">
-        <h3>出演者（イベント全体：lineup）</h3>
-        <div class="inner">
-          <div class="list-box">
-            <div class="scroller">
-              <table>
-                <thead><tr><th style="width:160px">メンバー</th><th style="width:160px">役割</th></tr></thead>
-                <tbody id="lineup-body"></tbody>
-              </table>
-            </div>
-          </div>
-          <div class="flex-row">
-            <label>メンバー
-              <select id="ln-member" style="min-width:200px"></select>
-            </label>
-            <label>役割
-              <select id="ln-role" style="min-width:140px"></select>
-            </label>
-          </div>
-          <div class="flex-row">
-            <button id="ln-add">追加</button>
-            <button id="ln-del">削除</button>
-            <button id="ln-up">▲上へ</button>
-            <button id="ln-down">▼下へ</button>
-            <button id="ln-update">更新</button>
-          </div>
-        </div>
-      </section>
-      <!-- 右内スプリッタ（横）1 -->
-      <div id="split-v1" class="splitter-h" aria-label="resize row 1-2"></div>
-      <!-- bandsevent -->
-      <section class="panel" id="panel-band">
-        <h3>対バン（bandsevent）</h3>
-        <div class="inner">
-          <div class="list-box">
-            <div class="scroller">
-              <table>
-                <thead><tr><th style="width:40px">#</th><th>バンド名</th></tr></thead>
-                <tbody id="band-body"></tbody>
-              </table>
-            </div>
-          </div>
-          <div class="flex-row">
-            <label>バンド名
-              <select id="band-name" style="min-width:220px"></select>
-            </label>
-          </div>
-          <div class="flex-row">
-            <button id="band-add">追加</button>
-            <button id="band-del">削除</button>
-            <button id="band-up">▲上へ</button>
-            <button id="band-down">▼下へ</button>
-          </div>
-        </div>
-      </section>
-      <!-- 右内スプリッタ（横）2 -->
-      <div id="split-v2" class="splitter-h" aria-label="resize row 2-3"></div>
-      <!-- setlist -->
-      <section class="panel" id="panel-setlist">
-        <h3>セトリ編集（seqは常に1..N）</h3>
-        <div class="inner">
-          <div class="list-box">
-            <div class="scroller">
-              <table>
-                <thead><tr><th style="width:40px">#</th><th>曲名</th><th style="width:180px">補足</th></tr></thead>
-                <tbody id="setlist-body"></tbody>
-              </table>
-            </div>
-          </div>
-          <div class="flex-row">
-            <label>曲<select id="sl-song" style="min-width:240px"></select></label>
-            <label>Section
-              <select id="sl-section" style="min-width:120px">
-                <option value=""></option><option value="main">main</option><option value="encore">encore</option><option value="MC">MC</option><option value="SE">SE</option><option value="Video">Video</option>
-              </select>
-            </label>
-            <label>Version <input id="sl-version" type="text" style="width:120px"></label>
-          </div>
-          <div class="flex-row">
-            <button id="sl-add">追加</button>
-            <button id="sl-del">削除</button>
-            <button id="sl-up">▲上へ</button>
-            <button id="sl-down">▼下へ</button>
-            <button id="sl-update">更新</button>
-          </div>
-        </div>
-      </section>
     </div>
   </div>
 
-</div>
-
-</template>
+  </template>
   <!-- ▲▲ エスケープ不要で貼ってOK ▲▲ -->
 
 
@@ -286,9 +282,12 @@
       <h3>People</h3>
 
       <div class="row">
-        <input id="people-q" type="search" placeholder="メンバー名を検索" style="width:200px">
+        <div style="position:relative; flex:1;">
+        <input id="people-q" type="search" placeholder="メンバー名を検索" style="width:100%;">
+        <button id="people-btn-clear" style="position:absolute; right:4px; top:4px; padding:0 6px;">×</button>
+        </div>
+
         <button id="people-btn-search">検索</button>
-        <button id="people-btn-reload">再読込</button>
       </div>
 </div>
       <hr>
@@ -305,14 +304,16 @@
 
     <!-- 右ペイン -->
     <div id="right" style="display:flex; flex-direction:column; gap:8px; min-height:0; height:100%; overflow:auto;">
-      <header class="toolbar">
+      <header class="toolbar" style="display:flex; gap:8px; justify-content:flex-start;">
         <button id="people-btn-new">新規</button>
         <button id="people-btn-save">保存</button>
         <button id="people-btn-delete">削除</button>
       </header>
 
       <section class="right-pane">
-        <div class="row"><label>ID <input id="people-f-id" type="text" readonly style="width:80px"></label></div>
+        <!-- <div class="row"><label>ID <input id="people-f-id" type="text" readonly style="width:80px"></label></div> -->
+        <!-- 置き換え後（入力欄に見せない） -->
+        <div class="row"><label>ID<span id="people-f-id-badge" class="id-badge" title="自動採番（編集不可）">—</span><input id="people-f-id" type="hidden"></label></div>
         <div class="row"><label>Name <input id="people-f-name" type="text" style="width:320px"></label></div>
         <div class="row"><label>Birthday <input id="people-f-birthday" type="date" style="width:180px"></label></div>
         <div class="row"><label>Joined <input id="people-f-joined_on" type="date" style="width:180px"></label></div>
@@ -329,7 +330,15 @@
 
         <hr>
 
-        <div class="row"><label>Preview <span id="people-preview"></span></label></div>
+        <div class="row"><label>Preview 
+    <span id="people-preview" style="display:inline-block; min-width:160px; min-height:120px;">
+      <img id="people-preview-img"
+           alt="Preview image"
+           style="max-width:160px; max-height:120px; object-fit:cover;
+                  border:1px solid #e5e7eb; border-radius:4px; display:none;">
+      <span id="people-preview-nop" style="color:#9ca3af;">（画像なし）</span>
+    </span>
+      </label></div>
       </section>
     </div>
   </div>
@@ -486,6 +495,12 @@
       if (status) {
         status.textContent = 'event: ready';
       }
+      // Event 画面がマウント済みの時だけ、結線を実行（People等では何もしない）
+      const viewName = (root?.closest?.('[data-view]') || root)?.getAttribute?.('data-view')?.trim()?.toLowerCase();
+      if (viewName === 'event') {
+        wireLeftUi && wireLeftUi();
+        wireSplitters && wireSplitters();
+      }
     }
 
     function mountPeople() {
@@ -497,6 +512,26 @@
       peopleInit(root);
     }
 
+/*
+// TODO: 画像プレビュー（people_<id>.webp があれば表示）
+function trySetPeoplePreview(root, id, basePath = '/assets/people') {
+  const img = root.querySelector('#people-preview-img');
+  const nop = root.querySelector('#people-preview-nop');
+  if (!img || !nop) return;
+
+  const url = `${basePath}/people_${id}.webp`;
+
+  // onload / onerror で存在確認 → 切り替え
+  img.onload  = () => { img.style.display = '';  nop.style.display = 'none'; };
+  img.onerror = () => { img.style.display = 'none'; nop.style.display = ''; img.removeAttribute('src'); };
+
+  // 先に非表示でsrc設定（読み込み完了で表示）
+  img.style.display = 'none';
+  img.src = url;
+}
+*/
+
+
     function peopleInit(root) {
       // 表示確認（後で本来の描画に差し替え）
       const status = root.querySelector('#status');
@@ -504,7 +539,14 @@
         status.hidden = false;
         status.textContent = 'people: ready';
       }
-
+      // peopleInit(root) の中に追加（status の表示のすぐ下など）
+      const setId = (val) => {
+        const hidden = root.querySelector('#people-f-id');           // ← hidden に保持
+        const badge  = root.querySelector('#people-f-id-badge');     // ← 表示用バッジ
+        const v = (val ?? '').toString();
+        if (hidden) hidden.value = v;
+        if (badge)  badge.textContent = v || '—';
+      };
     // --- ここから追記：People の一覧をロードして #people-list に描画 ---
     (async () => {
       const tbody = root.querySelector('#people-list');
@@ -566,6 +608,15 @@
         set('#people-f-facebook',   d.facebook);
         set('#people-f-youtube',    d.youtube);
         set('#people-f-tiktok',     d.tiktok);
+        setId(d.id);
+        // …フォーム反映の最後の後ろに置く（コメントアウトのまま）
+        /*
+        // TODO: 画像プレビュー有効化（コメント解除で動作）
+        if (d?.id != null) {
+          trySetPeoplePreview(root, d.id);  // people_<id>.webp を探して表示
+        }
+        */
+
 
         const prev = root.querySelector('#people-preview');
         if (prev) {
@@ -641,7 +692,141 @@
         }
       };
     })();
+    // People 検索：ボタン/Enter で一覧リロードを呼ぶ
+    (() => {
+      const q   = root.querySelector('#people-q');
+      const clear = root.querySelector('#people-btn-clear');
+      const btn = root.querySelector('#people-btn-search');
+
+      if (btn) btn.onclick = () => reloadPeopleList();
+
+      if (q) q.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          reloadPeopleList();
+        }
+      });
+    // クリア（×）
+    if (clear) clear.onclick = () => {
+      if (q) q.value = '';
+      reloadPeopleList();   // 全件表示
+    };
+    })();
+    // People 再読込：通常は検索語を維持して取り直し／Shift+クリックで検索語クリア
+    (() => {
+      const btn = root.querySelector('#people-btn-reload');
+      if (!btn) return;
+
+      btn.onclick = (e) => {
+        if (e.shiftKey) {
+          const q = root.querySelector('#people-q');
+          if (q) q.value = '';
+        }
+        reloadPeopleList(); // 既存の再取得→正規化→フィルタ→描画が走る
+      };
+    })();
+
+
+        // People 削除：選択（または右フォームのID）→ 確認 → delete → 一覧再読込＆フォームクリア
+    (() => {
+      const delBtn = root.querySelector('#people-btn-delete');
+      if (!delBtn) return;
+
+      delBtn.onclick = async () => {
+        const st     = root.querySelector('#status');
+        const tbody  = root.querySelector('#people-list');
+        const active = tbody?.querySelector('tr[data-id].active');
+
+        // 右フォーム優先→無ければ選択行
+        const idStr  = root.querySelector('#people-f-id')?.value?.trim() || active?.getAttribute('data-id');
+        const id     = Number(idStr);
+        if (!id) {
+          if (st) { st.hidden = false; st.textContent = '削除対象を選択してください'; }
+          return;
+        }
+
+        if (!confirm(`ID ${id} を削除します。よろしいですか？`)) return;
+
+        try {
+          const url = `${API_BASE}/owner/api/people/delete?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`;
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type':'application/json' },
+            body: JSON.stringify({ id })
+          });
+          if (!res.ok) throw new Error('delete failed');
+
+          // フォームをクリア
+          ['#people-f-id','#people-f-name','#people-f-birthday','#people-f-joined_on',
+          '#people-f-left_on','#people-f-x','#people-f-instagram','#people-f-threads',
+          '#people-f-facebook','#people-f-youtube','#people-f-tiktok'].forEach(sel=>{
+            const el = root.querySelector(sel); if (el) el.value = '';
+          });
+          const prev = root.querySelector('#people-preview'); if (prev) prev.textContent = '';
+          setId('');
+          // 選択ハイライト解除
+          active?.classList.remove('active');
+
+          // 一覧を再読込（非同期・スクロールは既存の復元処理が働く）
+          reloadPeopleList();
+
+          if (st) { st.hidden = false; st.textContent = '削除OK'; }
+        } catch (e) {
+          if (st) { st.hidden = false; st.textContent = '削除エラー'; }
+        }
+      };
+    })();
+
+
+    // People 新規：選択解除 → 右フォームをクリア → フォーカスを Name に
+    (() => {
+      const newBtn = root.querySelector('#people-btn-new');
+      if (!newBtn) return;
+
+      newBtn.onclick = () => {
+        // 選択解除（左リストの active を外す）
+        const tbody  = root.querySelector('#people-list');
+        tbody?.querySelectorAll('tr[data-id].active').forEach(el => el.classList.remove('active'));
+
+        // フォームクリア（ID空＝保存時は create になる）
+        const set = (sel, v='') => { const el = root.querySelector(sel); if (el) el.value = v; };
+        set('#people-f-id');           // ← 空にする（重要）
+        set('#people-f-name');
+        set('#people-f-birthday');
+        set('#people-f-joined_on');
+        set('#people-f-left_on');
+        set('#people-f-x');
+        set('#people-f-instagram');
+        set('#people-f-threads');
+        set('#people-f-facebook');
+        set('#people-f-youtube');
+        set('#people-f-tiktok');
+
+        const prev = root.querySelector('#people-preview');
+        if (prev) prev.textContent = '';
+        /*
+        // TODO: 新規・削除時はプレビューをクリア
+        trySetPeoplePreview(root, ''); // → onerror で「画像なし」を表示
+        */
+        // ステータス表示（任意）
+        const st = root.querySelector('#status');
+        if (st) { st.hidden = false; st.textContent = '新規作成モード'; }
+
+        // 入力開始しやすくフォーカス
+        root.querySelector('#people-f-name')?.focus();
+      };
+    })();
+
+
+
+
+
     // --- ここまで追記 ---
+
+
+
+
+
     // --- ここから追記：People 一覧の再読み込み（＋スクロール有効化） ---
     let __peopleListSeq = 0;  // ★ 追加：一覧リロードの世代カウンタ
     async function reloadPeopleList() {
@@ -678,8 +863,13 @@
         : (data && Array.isArray(data.data))  ? data.data
         : [];
 
+      // ★ 追加：検索語（#people-q）で絞り込み（name に含む・大文字小文字無視）
+      const q = (root.querySelector('#people-q')?.value || '').trim().toLowerCase();
+      const list = q ? items.filter(it => (it.name || '').toLowerCase().includes(q)) : items;
+
       // 描画（ここで初めて書き換える）
-      tbody.innerHTML = items.map(it =>
+      // tbody.innerHTML = items.map(it =>
+      tbody.innerHTML = list.map(it =>
         `<tr data-id="${it.id}">
           <td style="width:64px">${it.id}</td>
           <td>${escapeHtml(it.name || '')}</td>
