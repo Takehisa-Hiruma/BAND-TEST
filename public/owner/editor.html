@@ -22,12 +22,30 @@
   button { padding:6px 10px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; }
   button.primary { background:#0ea5e9; color:#fff; border-color:#0ea5e9; }
 
+  /* People ビューのレイアウトを強制（他CSSより優先） */
+  .view[data-view="people"] #wrap {
+    display: grid !important;
+    grid-template-columns: 360px 1fr !important;
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  .view[data-view="people"] #right {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    overflow: auto !important;
+  }
+
 </style>
 
 </head>
 
 <body id="event-editor">
 
+  
   <!-- 左サイドバー（u/p のクエリを引き回す） -->
   <aside>
     <nav>
@@ -48,8 +66,14 @@
 
   </aside>
 
+
+  
+
+
   <!-- ここに Event Editor（テンプレ） or マスター画面を差し込む -->
-  <main id="app"></main>
+  <!-- <main id="app"></main> -->
+  <!-- <main id="app" style="min-height:0; height:100%;"></main> -->
+  <main id="app" style="min-height:0; height:100vh;"></main>
 
   <!-- ▼▼ あなたの Editor（bodyの中身）を“そのまま”置く箱：エスケープ不要 ▼▼ -->
   <template id="event-editor-tpl">
@@ -249,14 +273,16 @@
 
 
 
-<div id="mount-point"></div>
-
 <template id="people-tpl">
 
-  <div id="wrap">
+  <div class="view" data-view="people">
+
+  <span id="status" class="status" hidden></span>
+  <div id="wrap" style="display:grid; grid-template-columns:360px 1fr; min-height:0; height:100%;">
 
     <!-- 左ペイン -->
-    <div id="left">
+    <div id="left" style="display:flex; flex-direction:column; min-height:0;">
+    <div style="flex:0 0 auto;">
       <h3>People</h3>
 
       <div class="row">
@@ -264,10 +290,10 @@
         <button id="people-btn-search">検索</button>
         <button id="people-btn-reload">再読込</button>
       </div>
-
+</div>
       <hr>
 
-      <div class="list-scroll">
+      <div class="list-scroll" style="flex:1 1 auto; min-height:0; height:0; overflow:auto;">
         <table>
           <thead>
             <tr><th style="width:64px">ID</th><th>Name</th></tr>
@@ -278,7 +304,7 @@
     </div>
 
     <!-- 右ペイン -->
-    <div id="right">
+    <div id="right" style="display:flex; flex-direction:column; gap:8px; min-height:0; height:100%; overflow:auto;">
       <header class="toolbar">
         <button id="people-btn-new">新規</button>
         <button id="people-btn-save">保存</button>
@@ -306,7 +332,7 @@
         <div class="row"><label>Preview <span id="people-preview"></span></label></div>
       </section>
     </div>
-
+  </div>
   </div>
 </template>
 
@@ -314,6 +340,7 @@
   <aside>
     <h3>Act</h3>
     <div class="row">
+
       <input id="q" type="search" placeholder="Actを検索" style="width:200px">
       <button id="btn-search">検索</button>
       <button id="btn-reload">再読込</button>
@@ -426,9 +453,6 @@
   </template>
 
 
-
-
-
 <script type="module">
     // ===== コンテキスト =====
     const u = new URLSearchParams(location.search).get("u");
@@ -440,6 +464,274 @@
         ? "http://127.0.0.1:8787"
         : "";
 
+
+
+    const host = document.getElementById('app');
+    host.innerHTML = '';
+    host.appendChild(document.getElementById('event-editor-tpl').content.cloneNode(true));
+
+    // --- ここから追記（event/people を差し込む関数） ---
+    function mountEvent() {
+      host.innerHTML = '';
+      host.appendChild(
+        document.getElementById('event-editor-tpl').content.cloneNode(true)
+      );
+      const root = host.firstElementChild;
+      eventInit(root);
+    }
+
+    function eventInit(root) {
+      // ここでは表示確認だけ。後で本来の初期化（一覧ロード等）に差し替えます。
+      const status = root.querySelector('#status');
+      if (status) {
+        status.textContent = 'event: ready';
+      }
+    }
+
+    function mountPeople() {
+      host.innerHTML = '';
+      host.appendChild(
+        document.getElementById('people-tpl').content.cloneNode(true)
+      );
+      const root = host.firstElementChild;
+      peopleInit(root);
+    }
+
+    function peopleInit(root) {
+      // 表示確認（後で本来の描画に差し替え）
+      const status = root.querySelector('#status');
+      if (status) {
+        status.hidden = false;
+        status.textContent = 'people: ready';
+      }
+
+    // --- ここから追記：People の一覧をロードして #people-list に描画 ---
+    (async () => {
+      const tbody = root.querySelector('#people-list');
+      if (!tbody) return;
+
+      // 一覧取得（u/p と API_BASE はあなたの先頭定義をそのまま利用）
+      const url = `${API_BASE}/owner/api/people?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&ts=${Date.now()}`;
+      let items = [];
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        items = res.ok ? await res.json() : [];
+      } catch (_) {
+        items = [];
+      }
+
+      // 描画（escapeHtml はあなたの定義をそのまま利用）
+      tbody.innerHTML = items.map(it =>
+        `<tr data-id="${it.id}"><td style="width:64px">${it.id}</td><td>${escapeHtml(it.name || '')}</td></tr>`
+      ).join('') || `<tr><td colspan="2">（0件）</td></tr>`;
+    })();
+    // --- ここまで追記 ---
+        
+    // --- ここから追記：一覧クリック → 詳細取得 → 右フォームへ反映 ---
+    (() => {
+      const tbody = root.querySelector('#people-list');
+      if (!tbody) return;
+
+      tbody.addEventListener('click', async (e) => {
+        const tr = e.target.closest('tr[data-id]');
+        if (!tr) return;
+
+        const id = Number(tr.getAttribute('data-id'));
+        if (!id) return;
+
+        // 1) 詳細取得
+        const url = `${API_BASE}/owner/api/people/get?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&id=${id}`;
+        let d = null;
+        try {
+          const res = await fetch(url, { cache: 'no-store' });
+          if (res.ok) d = await res.json();
+        } catch (_) {
+          d = null;
+        }
+        if (!d) return;
+
+        // 2) 右フォームへ反映（root配下のみ）
+        const set = (sel, v) => {
+          const el = root.querySelector(sel);
+          if (el) el.value = v ?? '';
+        };
+        set('#people-f-id',         d.id);
+        set('#people-f-name',       d.name);
+        set('#people-f-birthday',   d.birthday);
+        set('#people-f-joined_on',  d.joined_on);
+        set('#people-f-left_on',    d.left_on);
+        set('#people-f-x',          d.x);
+        set('#people-f-instagram',  d.instagram);
+        set('#people-f-threads',    d.threads);
+        set('#people-f-facebook',   d.facebook);
+        set('#people-f-youtube',    d.youtube);
+        set('#people-f-tiktok',     d.tiktok);
+
+        const prev = root.querySelector('#people-preview');
+        if (prev) {
+          prev.textContent = [
+            d.name || '',
+            d.x ? `X:${d.x}` : '',
+            d.instagram ? `IG:${d.instagram}` : '',
+            d.youtube ? `YT:${d.youtube}` : ''
+          ].filter(Boolean).join(' | ');
+        }
+
+        // 3) 選択行の視覚化（任意）
+        tbody.querySelectorAll('tr[data-id].active').forEach(el => el.classList.remove('active'));
+        tr.classList.add('active');
+      });
+    })();
+    // --- ここまで追記 ---
+
+    // --- ここから追記：People 保存ボタンの最小結線 ---
+    (() => {
+      const saveBtn = root.querySelector('#people-btn-save');
+      if (!saveBtn) return;
+
+      saveBtn.onclick = async () => {
+        // 1) 右フォームの値を root 配下から集める
+        const get = (sel) => (root.querySelector(sel)?.value?.trim() || null);
+        const id         = root.querySelector('#people-f-id')?.value?.trim();
+
+        const payload = {
+          name:       get('#people-f-name') || '',
+          birthday:   get('#people-f-birthday'),
+          joined_on:  get('#people-f-joined_on'),
+          left_on:    get('#people-f-left_on'),
+          x:          get('#people-f-x'),
+          instagram:  get('#people-f-instagram'),
+          threads:    get('#people-f-threads'),
+          facebook:   get('#people-f-facebook'),
+          youtube:    get('#people-f-youtube'),
+          tiktok:     get('#people-f-tiktok'),
+          // preview はUI専用のため送らない
+        };
+        if (!payload.name) {
+          const st = root.querySelector('#status');
+          if (st) { st.hidden = false; st.textContent = 'name は必須です'; }
+          return;
+        }
+
+        // 2) API にPOST（update or create）
+        const isUpdate = !!id;
+        const url = isUpdate
+          ? `${API_BASE}/owner/api/people/update?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`
+          : `${API_BASE}/owner/api/people/create?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`;
+
+        const body = isUpdate ? { id: Number(id), ...payload } : payload;
+
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+          const ok = res.ok;
+          const st = root.querySelector('#status');
+          if (st) {
+            st.hidden = false;
+            reloadPeopleList();  // ★ 保存後に一覧を再読み込み
+            st.textContent = ok ? (isUpdate ? '保存OK（update）' : '保存OK（create）') : '保存失敗';
+          }
+          // ※ この“1手”では一覧の再読み込みはしません（次の手で入れます）
+        } catch (e) {
+          const st = root.querySelector('#status');
+          if (st) { st.hidden = false; st.textContent = '保存エラー'; }
+        }
+      };
+    })();
+    // --- ここまで追記 ---
+    // --- ここから追記：People 一覧の再読み込み（＋スクロール有効化） ---
+    let __peopleListSeq = 0;  // ★ 追加：一覧リロードの世代カウンタ
+    async function reloadPeopleList() {
+      const tbody = root.querySelector('#people-list');
+      if (!tbody) return;
+
+
+      // スクロール領域を確保（list-scroll に overflow を当てる）
+      const scroller = root.querySelector('.list-scroll');
+      const mySeq = ++__peopleListSeq;
+      const prevScroll = scroller ? scroller.scrollTop : 0;
+      const prevActive = tbody.querySelector('tr[data-id].active');
+      const prevId = prevActive ? Number(prevActive.getAttribute('data-id')) : null;
+      // if (scroller) {
+      //   scroller.style.minHeight = '0';
+      //   scroller.style.overflow  = 'auto';
+      // }
+
+      // 一覧取得
+      const url = `${API_BASE}/owner/api/people?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&ts=${Date.now()}`;
+      // ---- ここから置き換え（取得 → 正規化） ----
+      let data = null;
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        data = res.ok ? await res.json() : null;
+      } catch (_) {
+        data = null;
+      }
+
+      // 配列 or {items:[…]} or {data:[…]} を吸収
+      const items = Array.isArray(data)
+        ? data
+        : (data && Array.isArray(data.items)) ? data.items
+        : (data && Array.isArray(data.data))  ? data.data
+        : [];
+
+      // 描画（ここで初めて書き換える）
+      tbody.innerHTML = items.map(it =>
+        `<tr data-id="${it.id}">
+          <td style="width:64px">${it.id}</td>
+          <td>${escapeHtml(it.name || '')}</td>
+        </tr>`
+      ).join('');
+
+      // ★ 直後：選択とスクロール位置の復元
+      if (prevId != null) {
+        const tr = tbody.querySelector(`tr[data-id="${prevId}"]`);
+        if (tr) tr.classList.add('active');
+      }
+      if (scroller) scroller.scrollTop = prevScroll;
+
+    }
+
+    // 初期表示でも一度リロード（一覧→右クリック反映の流れを安定化）
+    reloadPeopleList();
+    // --- ここまで追記 ---
+
+
+
+
+
+      const list = root.querySelector('#people-list');
+      if (list) {
+        list.innerHTML = '<tr><td colspan="2">（仮）ここに一覧が出ます</td></tr>';
+      }
+    }
+
+    const startView = new URLSearchParams(location.search).get('view') || 'event';
+    (startView === 'people' ? mountPeople : mountEvent)();
+
+    // --- ここまで追記 ---
+
+
+    // イベント編集
+    document.getElementById('link-event').onclick = (e) => {
+      e.preventDefault();
+      const href = `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&view=event`;
+      history.pushState({ view: 'event' }, '', href);
+      mountEvent();
+    };
+
+    // People
+    document.getElementById('link-people').onclick = (e) => {
+      e.preventDefault();
+      const href = `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&view=people`;
+      history.pushState({ view: 'people' }, '', href);
+      mountPeople();
+    };
+
+
     const $ = s => document.querySelector(s);
     const status = $("#status");
     const leftTbody = $("#tbl");
@@ -450,6 +742,8 @@
     function px(n){ return `${Math.round(n)}px`; }
 
     function wireSplitters(){
+      const vroot = document.getElementById('app')?.firstElementChild;
+      if (!vroot || vroot.getAttribute('data-view') !== 'event') return;
       // 左右：#split-h で --left-col を更新
       const gripH = document.getElementById('split-h');
       if (gripH){
@@ -611,8 +905,8 @@
       events = events.map(e=>({...e, date: normDate(e.date||"")}));
       await loadMasters();
       render(events);
-      wireLeftUi();
-      wireSplitters();
+      // wireLeftUi();
+      // wireSplitters();
     })();
 
 
@@ -622,13 +916,21 @@
       return vId ? (venueById.get(vId) || vId) : (x.venue || "");
     }
     function render(arr){
-      const q = $("#q").value.trim();
+      // const q = $("#q").value.trim();
+      // ★ Event 画面以外では何もしない（People等で呼ばれても安全）
+      const root = document.getElementById('app')?.firstElementChild;
+      if (!root || root.getAttribute('data-view') !== 'event') return;
+      // ★ 参照は root 配下だけ、かつ安全に
+      const q = root.querySelector('#q')?.value?.trim() || '';
+      const tbody = root.querySelector('#tbl');
+      if (!tbody) return;
+
       const filtered = q ? arr.filter(x => (x.title||"").includes(q) || (resolveVenueName(x)||"").includes(q)) : arr;
       const sorted = [...filtered].sort((a,b)=>{
         const da=new Date(a.date||"0000-00-00"), db=new Date(b.date||"0000-00-00");
         return db - da; // 降順
       });
-      leftTbody.innerHTML = sorted.map(x=>{
+      tbody.innerHTML = sorted.map(x=>{
         const name = resolveVenueName(x);
         const form = x.form || "";
         return `<tr data-id="${x.id}">
@@ -666,6 +968,8 @@
     }
 
     function wireLeftUi(){
+      const vroot = document.getElementById('app')?.firstElementChild;
+      if (!vroot || vroot.getAttribute('data-view') !== 'event') return;
       $("#btn-back").onclick = ()=>location.href=`./index.html?u=${encodeURIComponent(u)}`;
       $("#btn-filter").onclick = ()=>render(events);
       $("#q").oninput = ()=>render(events);
@@ -903,129 +1207,6 @@
       setlistRows[i].version = $("#sl-version").value||"";
       renderSetlist(); status.textContent="（setlist: 更新・未保存）";
     }
-  </script>
-  <script>
-    // クエリから u/p を取得し、ナビゲーションのリンクに反映
-    const params = new URLSearchParams(location.search);
-    const uu = params.get("u") || "sample";        // ← 復活（コメント解除）
-    const pp = params.get("p") || "metalsound";    // ← 復活（コメント解除）
-    const view = params.get("view"); // undefined ならイベント編集を表示
-
-    // HTMLエンティティは不要。JS内はそのまま & を使う
-    const withUP = (qs = "") => {
-      const base = `?u=${encodeURIComponent(uu)}&p=${encodeURIComponent(pp)}`;  // ← &amp; を & に修正
-      return qs ? `${base}&${qs}` : base;                                     // ← 同様に & を使う
-    };
-
-    // $ は使わず、素直に getElementById で設定（衝突リスクをゼロに）
-    function setHref(id, href) {
-      const el = document.getElementById(id);
-      if (el) el.setAttribute("href", href);
-    }
-
-    setHref("link-event",  withUP(""));
-    setHref("link-back",   `./index.html?u=${encodeURIComponent(uu)}`);
-    setHref("link-people", withUP("view=people"));
-    setHref("link-acts", withUP("view=acts"));
-    setHref("link-song",   withUP("view=song"));
-    setHref("link-venue",  withUP("view=venue"));
-    setHref("link-role",   withUP("view=role"));
-    setHref("link-era",    withUP("view=era"));
-    setHref("link-tour",   withUP("view=tour"));
-    setHref("link-form",   withUP("view=form"));
-
-
-    // Event Editor をテンプレから差し込んで初期化
-    function renderEventEditor(mount, ctx) {
-      // ensureEventEditorStyle();
-      mount.innerHTML = ""; // クリア
-      const tpl = document.getElementById("event-editor-tpl");
-      mount.appendChild(tpl.content.cloneNode(true));
-
-      // ここでスプリッタ等の初期化、セレクト構築などを実行
-      const statusEl = mount.querySelector("#status");
-      if (statusEl) statusEl.textContent = `tenant=${ctx.u} / project=${ctx.p}`;
-      // setupSplitters(mount); // ← 以前の分割バーJSがあればここで呼ぶ
-      // initSelectsFromCache(mount); // ← マスターキャッシュからセレクトを構築する処理があれば
-    }
-
-
-    async function renderMaster(mount, kind){
-      mount.innerHTML = `<div style="padding:16px"><h2>${kind}管理</h2><p>読み込み中…</p></div>`;
-
-      const API_BASE = (location.hostname==='127.0.0.1'||location.hostname==='localhost')?'http://127.0.0.1:8787':'';
-      const u = new URLSearchParams(location.search).get("u");
-      const p = new URLSearchParams(location.search).get("p");
-
-      // API エンドポイント対応表
-      const apiMap = {
-        people: '/owner/api/people',
-        acts: '/owner/api/acts',
-        venue: '/owner/api/venue',
-        roles: '/owner/api/roles',
-        era: '/owner/api/era',
-        tour: '/owner/api/tour',
-        form: '/owner/api/form',
-        song: '/owner/api/songs'
-      };
-      const apiUrl = API_BASE + (apiMap[kind]||'/owner/api/people') + `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`;
-
-      // データ取得
-      let items = [];
-      try{
-        const res = await fetch(apiUrl,{cache:'no-store'});
-        items = res.ok ? await res.json() : [];
-      }catch(e){ console.error(e); }
-
-      // テーブル生成
-      const tableHtml = `
-        <div style="margin-top:12px">
-          <button id="btn-new-${kind}">新規</button>
-          <button id="btn-del-${kind}">削除</button>
-          <table border="1" cellpadding="4" cellspacing="0" style="margin-top:8px;width:100%">
-            <thead><tr><th>ID</th><th>名前</th></tr></thead>
-            <tbody id="tbl-${kind}"></tbody>
-          </table>
-        </div>
-      `;
-      mount.innerHTML = `<h2>${kind}管理</h2>` + tableHtml;
-
-      const tbody = document.getElementById(`tbl-${kind}`);
-      function renderTable(){
-        tbody.innerHTML = items.map(x=>`<tr data-id="${x.id}"><td>${x.id}</td><td>${x.name||x.label||x.id}</td></tr>`).join('');
-        tbody.querySelectorAll('tr[data-id]').forEach(tr=>{
-          tr.onclick=()=>{ tbody.querySelectorAll('.sel').forEach(z=>z.classList.remove('sel')); tr.classList.add('sel'); };
-        });
-      }
-      renderTable();
-
-      // ボタン操作
-      document.getElementById(`btn-new-${kind}`).onclick=async()=>{
-        const name = prompt("新規の名前を入力");
-        if(!name) return;
-        const body = {name};
-        const res = await fetch(`${API_BASE}/owner/api/${kind}/create?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`,{
-          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
-        });
-        if(res.ok){ const r = await res.json(); items.push(r); renderTable(); }
-      };
-      document.getElementById(`btn-del-${kind}`).onclick=async()=>{
-        const sel = tbody.querySelector('tr.sel');
-        if(!sel){ alert("行を選択"); return; }
-        const id = sel.dataset.id;
-        const res = await fetch(`${API_BASE}/owner/api/${kind}/delete?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&id=${id}`,{method:'POST'});
-        if(res.ok){ items = items.filter(x=>x.id!=id); renderTable(); }
-      };
-    }
-
-    // 表示切り替え（クエリパラメータで超シンプルに分岐）
-    const app = document.getElementById("app");
-    if (!view) {
-      renderEventEditor(app, { u: uu, p: pp });
-    } else {
-      renderMaster(app, view);
-    }
-
   </script>
 </body>
 </html>
