@@ -42,6 +42,8 @@
 </style>
 
 </head>
+<script src="people.js"></script>
+<script src="master.js"></script>
 <body id="event-editor">
 
   
@@ -55,9 +57,9 @@
       <h3>マスター</h3>
       <a id="link-people" href="#">People（メンバー）</a>
       <a id="link-acts" href="#">Acts（アーティスト）</a>
-      <a id="link-songs" href="#">Song（曲）</a>
+      <a id="link-song" href="#">Song（曲）</a>
       <a id="link-venue" href="#">Venue（会場）</a>
-      <a id="link-roles" href="#">Role（役割）</a>
+      <a id="link-role" href="#">Role（役割）</a>
       <a id="link-era" href="#">Era</a>
       <a id="link-tour" href="#">Tour</a>
       <a id="link-form" href="#">Form</a>
@@ -344,64 +346,566 @@
   </div>
 </template>
 
+  <template id="acts-tpl">
+  <aside>
+    <h3>Act</h3>
+    <div class="row">
 
-
-<template id="acts-tpl">
-  <div class="view" data-view="acts">
-    <span id="status" class="status" hidden></span>
-    <div id="wrap-acts" style="display:grid; grid-template-columns:360px 1fr; min-height:0; height:100%;">
-
-      <!-- 左ペイン -->
-      <div id="left" style="display:flex; flex-direction:column; min-height:0;">
-        <h3>Acts</h3>
-        <div class="row">
-          <input id="acts-q" type="search" placeholder="Actを検索" style="width:200px">
-          <button id="acts-btn-search">検索</button>
-          <button id="acts-btn-reload">再読込</button>
-        </div>
-        <hr>
-        <div class="list-scroll">
-          <table>
-            <thead>
-              <tr><th style="width:64px">ID</th><th>Act</th></tr>
-            </thead>
-            <tbody id="acts-list"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- 右ペイン -->
-      <div id="right" style="display:flex; flex-direction:column; gap:8px; min-height:0; height:100%; overflow:auto;">
-        <header class="toolbar" style="display:flex; gap:8px; justify-content:flex-start;">
-          <button id="acts-btn-new">新規</button>
-          <button id="acts-btn-save">保存</button>
-          <button id="acts-btn-delete">削除</button>
-        </header>
-        <section class="right-pane">
-          <div class="row"><label>ID <input id="acts-f-id" type="text" readonly style="width:80px"></label></div>
-          <div class="row"><label>Act Name <input id="acts-f-title" type="text" style="width:320px"></label></div>
-          <div class="row"><label>URL <input id="acts-f-url" type="text" style="width:360px"></label></div>
-          <div class="row"><label>X <input id="acts-f-x" type="text" style="width:360px"></label></div>
-          <div class="row"><label>Instagram <input id="acts-f-instagram" type="text" style="width:360px"></label></div>
-          <div class="row"><label>Threads <input id="acts-f-threads" type="text" style="width:360px"></label></div>
-          <div class="row"><label>Facebook <input id="acts-f-facebook" type="text" style="width:360px"></label></div>
-          <div class="row"><label>YouTube <input id="acts-f-youtube" type="text" style="width:360px"></label></div>
-          <div class="row"><label>TikTok <input id="acts-f-tiktok" type="text" style="width:360px"></label></div>
-          <div class="row"><label>Preview</label> <div id="acts-preview"></div></div>
-          <div id="acts-audit" class="hint" hidden></div>
-        </section>
-      </div>
+      <input id="q" type="search" placeholder="Actを検索" style="width:200px">
+      <button id="btn-search">検索</button>
+      <button id="btn-reload">再読込</button>
     </div>
-  </div>
-</template>
+    <hr>
+    <div class="list-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:64px">ID</th><th>Act</th></tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+  </aside>
 
-<!-- editor.html の body 最下部あたり -->
+  <main>
+    <header class="toolbar">
+      <button id="btn-new">新規</button>
+      <button id="btn-save">保存</button>
+      <button id="btn-delete">削除</button>
+    </header>
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Act Name <input id="f-title" type="text" style="width:320px"></label></div>
+      <div class="row"><label>URL <input id="f-url" type="text" style="width:360px"></label></div>
 
-</body>
+      <div class="row"><label>X <input id="f-x" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Instagram <input id="f-instagram" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Threads <input id="f-threads" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Facebook <input id="f-facebook" type="text" style="width:360px"></label></div>
+      <div class="row"><label>YouTube <input id="f-youtube" type="text" style="width:360px"></label></div>
+      <div class="row"><label>TikTok <input id="f-tiktok" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Preview</label> <div id="preview"></div></div>
+      <div id="audit" class="hint" hidden></div>
+    </section>
+  </main>
+  </template>
 
-<script>
+  <template id="venue-tpl">
+  <aside>
+    <h3>Venue</h3>
+
+    <div class="row">
+      <input id="q" type="search" placeholder="会場を検索" style="width:200px">
+      <button id="btn-search">検索</button>
+      <button id="btn-reload">再読込</button>
+    </div>
+
+    <hr>
+
+    <div class="list-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:64px">ID</th><th>Venue</th></tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+  </aside>
+
+  <main>
+    <header class="toolbar">
+      <button id="btn-new">新規</button>
+      <button id="btn-save">保存</button>
+      <button id="btn-delete">削除</button>
+    </header>
+
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Name <input id="f-title" type="text" style="width:320px"></label></div>
+      <div class="row"><label>URL  <input id="f-url"  type="text" style="width:360px"></label></div>
+      <div class="row"><label>Note <input id="f-note" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Preview</label> <div id="preview"></div></div>
+      <div id="audit" class="hint" hidden></div>
+    </section>
+  </main>
+  </template>
+
+  <template id="song-tpl">
+  <aside>
+    <h3>Songs</h3>
+
+    <div class="row">
+      <input id="q" type="search" placeholder="曲名を検索" style="width:200px">
+      <button id="btn-search">検索</button>
+      <button id="btn-reload">再読込</button>
+    </div>
+
+    <hr>
+
+    <div class="list-scroll">
+      <table>
+        <thead><tr><th style="width:64px">ID</th><th>Title</th></tr></thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+  </aside>
+  <main>
+    <header class="toolbar">
+      <button id="btn-new">新規</button>
+      <button id="btn-save">保存</button>
+      <button id="btn-delete">削除</button>
+    </header>
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Title <input id="f-title" type="text" style="width:320px"></label></div>
+      <div id="audit" class="hint" hidden></div>
+    </section>
+  </main>
+  </template>
 
 
+
+<script type="module">
+    // URLパラメータ取得
+    const u = new URLSearchParams(location.search).get("u");
+    const p = new URLSearchParams(location.search).get("p");
+    if (!u || !p) location.href = "./index.html";
+
+    // API_BASE 判定
+    const API_BASE =
+      (location.hostname === "127.0.0.1" || location.hostname === "localhost")
+        ? "http://127.0.0.1:8787"
+        : "";
+
+    // app 初期マウント
+    const host = document.getElementById('app');
+    host.innerHTML = '';
+    host.appendChild(document.getElementById('event-editor-tpl').content.cloneNode(true));
+
+    // 画面マウント
+    function mountEvent() {
+      host.innerHTML = '';
+      host.appendChild(
+        document.getElementById('event-editor-tpl').content.cloneNode(true)
+      );
+      const root = host.firstElementChild;
+      eventInit(root);
+    }
+
+    function eventInit(root) {
+      // ここでは表示確認だけ。後で本来の初期化（一覧ロード等）に差し替えます。
+      const status = root.querySelector('#status');
+      if (status) {
+        status.textContent = 'event: ready';
+      }
+      // Event 画面がマウント済みの時だけ、結線を実行（People等では何もしない）
+      const viewName = (root?.closest?.('[data-view]') || root)?.getAttribute?.('data-view')?.trim()?.toLowerCase();
+      if (viewName === 'event') {
+        wireLeftUi && wireLeftUi();
+        wireSplitters && wireSplitters();
+      }
+    }
+
+    function mountPeople() {
+      host.innerHTML = '';
+      host.appendChild(
+        document.getElementById('people-tpl').content.cloneNode(true)
+      );
+      const root = host.firstElementChild;
+      peopleInit(root);
+    }
+
+/*
+// TODO: 画像プレビュー（people_<id>.webp があれば表示）
+function trySetPeoplePreview(root, id, basePath = '/assets/people') {
+  const img = root.querySelector('#people-preview-img');
+  const nop = root.querySelector('#people-preview-nop');
+  if (!img || !nop) return;
+
+  const url = `${basePath}/people_${id}.webp`;
+
+  // onload / onerror で存在確認 → 切り替え
+  img.onload  = () => { img.style.display = '';  nop.style.display = 'none'; };
+  img.onerror = () => { img.style.display = 'none'; nop.style.display = ''; img.removeAttribute('src'); };
+
+  // 先に非表示でsrc設定（読み込み完了で表示）
+  img.style.display = 'none';
+  img.src = url;
+}
+*/
+
+
+    // function peopleInit(root) {
+    //   // 表示確認（後で本来の描画に差し替え）
+    //   const status = root.querySelector('#status');
+    //   if (status) {
+    //     status.hidden = false;
+    //     status.textContent = 'people: ready';
+    //   }
+    //   // peopleInit(root) の中に追加（status の表示のすぐ下など）
+    //   const setId = (val) => {
+    //     const hidden = root.querySelector('#people-f-id');           // ← hidden に保持
+    //     const badge  = root.querySelector('#people-f-id-badge');     // ← 表示用バッジ
+    //     const v = (val ?? '').toString();
+    //     if (hidden) hidden.value = v;
+    //     if (badge)  badge.textContent = v || '—';
+    //   };
+    //   // --- ここから追記：People の一覧をロードして #people-list に描画 ---
+    //   (async () => {
+    //     const tbody = root.querySelector('#people-list');
+    //     if (!tbody) return;
+
+    //     // 一覧取得（u/p と API_BASE はあなたの先頭定義をそのまま利用）
+    //     const url = `${API_BASE}/owner/api/people?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&ts=${Date.now()}`;
+    //     let items = [];
+    //     try {
+    //       const res = await fetch(url, { cache: 'no-store' });
+    //       items = res.ok ? await res.json() : [];
+    //     } catch (_) {
+    //       items = [];
+    //     }
+
+    //     // 描画（escapeHtml はあなたの定義をそのまま利用）
+    //     tbody.innerHTML = items.map(it =>
+    //       `<tr data-id="${it.id}"><td style="width:64px">${it.id}</td><td>${escapeHtml(it.name || '')}</td></tr>`
+    //     ).join('') || `<tr><td colspan="2">（0件）</td></tr>`;
+    //   })();
+    //   // --- ここまで追記 ---
+        
+    //   // --- ここから追記：一覧クリック → 詳細取得 → 右フォームへ反映 ---
+    //   (() => {
+    //     const tbody = root.querySelector('#people-list');
+    //     if (!tbody) return;
+
+    //     tbody.addEventListener('click', async (e) => {
+    //       const tr = e.target.closest('tr[data-id]');
+    //       if (!tr) return;
+
+    //       const id = Number(tr.getAttribute('data-id'));
+    //       if (!id) return;
+
+    //       // 1) 詳細取得
+    //       const url = `${API_BASE}/owner/api/people/get?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&id=${id}`;
+    //       let d = null;
+    //       try {
+    //         const res = await fetch(url, { cache: 'no-store' });
+    //         if (res.ok) d = await res.json();
+    //       } catch (_) {
+    //         d = null;
+    //       }
+    //       if (!d) return;
+
+    //       // 2) 右フォームへ反映（root配下のみ）
+    //       const set = (sel, v) => {
+    //         const el = root.querySelector(sel);
+    //         if (el) el.value = v ?? '';
+    //       };
+    //       set('#people-f-id',         d.id);
+    //       set('#people-f-name',       d.name);
+    //       set('#people-f-birthday',   d.birthday);
+    //       set('#people-f-joined_on',  d.joined_on);
+    //       set('#people-f-left_on',    d.left_on);
+    //       set('#people-f-x',          d.x);
+    //       set('#people-f-instagram',  d.instagram);
+    //       set('#people-f-threads',    d.threads);
+    //       set('#people-f-facebook',   d.facebook);
+    //       set('#people-f-youtube',    d.youtube);
+    //       set('#people-f-tiktok',     d.tiktok);
+    //       setId(d.id);
+    //       // …フォーム反映の最後の後ろに置く（コメントアウトのまま）
+    //       /*
+    //       // TODO: 画像プレビュー有効化（コメント解除で動作）
+    //       if (d?.id != null) {
+    //         trySetPeoplePreview(root, d.id);  // people_<id>.webp を探して表示
+    //       }
+    //       */
+
+
+    //       const prev = root.querySelector('#people-preview');
+    //       if (prev) {
+    //         prev.textContent = [
+    //           d.name || '',
+    //           d.x ? `X:${d.x}` : '',
+    //           d.instagram ? `IG:${d.instagram}` : '',
+    //           d.youtube ? `YT:${d.youtube}` : ''
+    //         ].filter(Boolean).join(' | ');
+    //       }
+
+    //       // 3) 選択行の視覚化（任意）
+    //       tbody.querySelectorAll('tr[data-id].active').forEach(el => el.classList.remove('active'));
+    //       tr.classList.add('active');
+    //     });
+    //   })();
+    //   // --- ここまで追記 ---
+
+    //   // --- ここから追記：People 保存ボタンの最小結線 ---
+    //   (() => {
+    //     const saveBtn = root.querySelector('#people-btn-save');
+    //     if (!saveBtn) return;
+
+    //     saveBtn.onclick = async () => {
+    //       // 1) 右フォームの値を root 配下から集める
+    //       const get = (sel) => (root.querySelector(sel)?.value?.trim() || null);
+    //       const id         = root.querySelector('#people-f-id')?.value?.trim();
+
+    //       const payload = {
+    //         name:       get('#people-f-name') || '',
+    //         birthday:   get('#people-f-birthday'),
+    //         joined_on:  get('#people-f-joined_on'),
+    //         left_on:    get('#people-f-left_on'),
+    //         x:          get('#people-f-x'),
+    //         instagram:  get('#people-f-instagram'),
+    //         threads:    get('#people-f-threads'),
+    //         facebook:   get('#people-f-facebook'),
+    //         youtube:    get('#people-f-youtube'),
+    //         tiktok:     get('#people-f-tiktok'),
+    //         // preview はUI専用のため送らない
+    //       };
+    //       if (!payload.name) {
+    //         const st = root.querySelector('#status');
+    //         if (st) { st.hidden = false; st.textContent = 'name は必須です'; }
+    //         return;
+    //       }
+
+    //       // 2) API にPOST（update or create）
+    //       const isUpdate = !!id;
+    //       const url = isUpdate
+    //         ? `${API_BASE}/owner/api/people/update?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`
+    //         : `${API_BASE}/owner/api/people/create?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`;
+
+    //       const body = isUpdate ? { id: Number(id), ...payload } : payload;
+
+    //       try {
+    //         const res = await fetch(url, {
+    //           method: 'POST',
+    //           headers: { 'Content-Type': 'application/json' },
+    //           body: JSON.stringify(body),
+    //         });
+    //         const ok = res.ok;
+    //         const st = root.querySelector('#status');
+    //         if (st) {
+    //           st.hidden = false;
+    //           reloadPeopleList();  // ★ 保存後に一覧を再読み込み
+    //           st.textContent = ok ? (isUpdate ? '保存OK（update）' : '保存OK（create）') : '保存失敗';
+    //         }
+    //         // ※ この“1手”では一覧の再読み込みはしません（次の手で入れます）
+    //       } catch (e) {
+    //         const st = root.querySelector('#status');
+    //         if (st) { st.hidden = false; st.textContent = '保存エラー'; }
+    //       }
+    //     };
+    //   })();
+    //   // People 検索：ボタン/Enter で一覧リロードを呼ぶ
+    //   (() => {
+    //     const q   = root.querySelector('#people-q');
+    //     const clear = root.querySelector('#people-btn-clear');
+    //     const btn = root.querySelector('#people-btn-search');
+
+    //     if (btn) btn.onclick = () => reloadPeopleList();
+
+    //     if (q) q.addEventListener('keydown', (e) => {
+    //       if (e.key === 'Enter') {
+    //         e.preventDefault();
+    //         reloadPeopleList();
+    //       }
+    //     });
+    //   // クリア（×）
+    //   if (clear) clear.onclick = () => {
+    //     if (q) q.value = '';
+    //     reloadPeopleList();   // 全件表示
+    //   };
+    //   })();
+    //   // People 再読込：通常は検索語を維持して取り直し／Shift+クリックで検索語クリア
+    //   (() => {
+    //     const btn = root.querySelector('#people-btn-reload');
+    //     if (!btn) return;
+
+    //     btn.onclick = (e) => {
+    //       if (e.shiftKey) {
+    //         const q = root.querySelector('#people-q');
+    //         if (q) q.value = '';
+    //       }
+    //       reloadPeopleList(); // 既存の再取得→正規化→フィルタ→描画が走る
+    //     };
+    //   })();
+
+
+    //       // People 削除：選択（または右フォームのID）→ 確認 → delete → 一覧再読込＆フォームクリア
+    //   (() => {
+    //     const delBtn = root.querySelector('#people-btn-delete');
+    //     if (!delBtn) return;
+
+    //     delBtn.onclick = async () => {
+    //       const st     = root.querySelector('#status');
+    //       const tbody  = root.querySelector('#people-list');
+    //       const active = tbody?.querySelector('tr[data-id].active');
+
+    //       // 右フォーム優先→無ければ選択行
+    //       const idStr  = root.querySelector('#people-f-id')?.value?.trim() || active?.getAttribute('data-id');
+    //       const id     = Number(idStr);
+    //       if (!id) {
+    //         if (st) { st.hidden = false; st.textContent = '削除対象を選択してください'; }
+    //         return;
+    //       }
+
+    //       if (!confirm(`ID ${id} を削除します。よろしいですか？`)) return;
+
+    //       try {
+    //         const url = `${API_BASE}/owner/api/people/delete?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`;
+    //         const res = await fetch(url, {
+    //           method: 'POST',
+    //           headers: { 'Content-Type':'application/json' },
+    //           body: JSON.stringify({ id })
+    //         });
+    //         if (!res.ok) throw new Error('delete failed');
+
+    //         // フォームをクリア
+    //         ['#people-f-id','#people-f-name','#people-f-birthday','#people-f-joined_on',
+    //         '#people-f-left_on','#people-f-x','#people-f-instagram','#people-f-threads',
+    //         '#people-f-facebook','#people-f-youtube','#people-f-tiktok'].forEach(sel=>{
+    //           const el = root.querySelector(sel); if (el) el.value = '';
+    //         });
+    //         const prev = root.querySelector('#people-preview'); if (prev) prev.textContent = '';
+    //         setId('');
+    //         // 選択ハイライト解除
+    //         active?.classList.remove('active');
+
+    //         // 一覧を再読込（非同期・スクロールは既存の復元処理が働く）
+    //         reloadPeopleList();
+
+    //         if (st) { st.hidden = false; st.textContent = '削除OK'; }
+    //       } catch (e) {
+    //         if (st) { st.hidden = false; st.textContent = '削除エラー'; }
+    //       }
+    //     };
+    //   })();
+
+
+    //   // People 新規：選択解除 → 右フォームをクリア → フォーカスを Name に
+    //   (() => {
+    //     const newBtn = root.querySelector('#people-btn-new');
+    //     if (!newBtn) return;
+
+    //     newBtn.onclick = () => {
+    //       // 選択解除（左リストの active を外す）
+    //       const tbody  = root.querySelector('#people-list');
+    //       tbody?.querySelectorAll('tr[data-id].active').forEach(el => el.classList.remove('active'));
+
+    //       // フォームクリア（ID空＝保存時は create になる）
+    //       const set = (sel, v='') => { const el = root.querySelector(sel); if (el) el.value = v; };
+    //       set('#people-f-id');           // ← 空にする（重要）
+    //       set('#people-f-name');
+    //       set('#people-f-birthday');
+    //       set('#people-f-joined_on');
+    //       set('#people-f-left_on');
+    //       set('#people-f-x');
+    //       set('#people-f-instagram');
+    //       set('#people-f-threads');
+    //       set('#people-f-facebook');
+    //       set('#people-f-youtube');
+    //       set('#people-f-tiktok');
+
+    //       const prev = root.querySelector('#people-preview');
+    //       if (prev) prev.textContent = '';
+    //       /*
+    //       // TODO: 新規・削除時はプレビューをクリア
+    //       trySetPeoplePreview(root, ''); // → onerror で「画像なし」を表示
+    //       */
+    //       // ステータス表示（任意）
+    //       const st = root.querySelector('#status');
+    //       if (st) { st.hidden = false; st.textContent = '新規作成モード'; }
+
+    //       // 入力開始しやすくフォーカス
+    //       root.querySelector('#people-f-name')?.focus();
+    //     };
+    //   })();
+
+
+
+
+
+    //   // --- ここまで追記 ---
+
+
+
+
+
+    //   // --- ここから追記：People 一覧の再読み込み（＋スクロール有効化） ---
+    //   let __peopleListSeq = 0;  // ★ 追加：一覧リロードの世代カウンタ
+    //   async function reloadPeopleList() {
+    //     const tbody = root.querySelector('#people-list');
+    //     if (!tbody) return;
+
+
+    //     // スクロール領域を確保（list-scroll に overflow を当てる）
+    //     const scroller = root.querySelector('.list-scroll');
+    //     const mySeq = ++__peopleListSeq;
+    //     const prevScroll = scroller ? scroller.scrollTop : 0;
+    //     const prevActive = tbody.querySelector('tr[data-id].active');
+    //     const prevId = prevActive ? Number(prevActive.getAttribute('data-id')) : null;
+    //     // if (scroller) {
+    //     //   scroller.style.minHeight = '0';
+    //     //   scroller.style.overflow  = 'auto';
+    //     // }
+
+    //     // 一覧取得
+    //     const url = `${API_BASE}/owner/api/people?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&ts=${Date.now()}`;
+    //     // ---- ここから置き換え（取得 → 正規化） ----
+    //     let data = null;
+    //     try {
+    //       const res = await fetch(url, { cache: 'no-store' });
+    //       data = res.ok ? await res.json() : null;
+    //     } catch (_) {
+    //       data = null;
+    //     }
+
+    //     // 配列 or {items:[…]} or {data:[…]} を吸収
+    //     const items = Array.isArray(data)
+    //       ? data
+    //       : (data && Array.isArray(data.items)) ? data.items
+    //       : (data && Array.isArray(data.data))  ? data.data
+    //       : [];
+
+    //     // ★ 追加：検索語（#people-q）で絞り込み（name に含む・大文字小文字無視）
+    //     const q = (root.querySelector('#people-q')?.value || '').trim().toLowerCase();
+    //     const list = q ? items.filter(it => (it.name || '').toLowerCase().includes(q)) : items;
+
+    //     // 描画（ここで初めて書き換える）
+    //     // tbody.innerHTML = items.map(it =>
+    //     tbody.innerHTML = list.map(it =>
+    //       `<tr data-id="${it.id}">
+    //         <td style="width:64px">${it.id}</td>
+    //         <td>${escapeHtml(it.name || '')}</td>
+    //       </tr>`
+    //     ).join('');
+
+    //     // ★ 直後：選択とスクロール位置の復元
+    //     if (prevId != null) {
+    //       const tr = tbody.querySelector(`tr[data-id="${prevId}"]`);
+    //       if (tr) tr.classList.add('active');
+    //     }
+    //     if (scroller) scroller.scrollTop = prevScroll;
+
+    //   }
+
+    //   // 初期表示でも一度リロード（一覧→右クリック反映の流れを安定化）
+    //   reloadPeopleList();
+    //   // --- ここまで追記 ---
+
+    //     const list = root.querySelector('#people-list');
+    //     if (list) {
+    //       list.innerHTML = '<tr><td colspan="2">（仮）ここに一覧が出ます</td></tr>';
+    //     }
+    //   }
+
+
+
+
+
+
+    const startView = new URLSearchParams(location.search).get('view') || 'event';
+    (startView === 'people' ? mountPeople : mountEvent)();
+
+    // --- ここまで追記 ---
 
 
     // イベント編集
@@ -420,54 +924,6 @@
       mountPeople();
     };
 
-    // Acts
-    document.getElementById('link-acts').onclick = (e) => {
-      e.preventDefault();
-      const href = `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&view=acts`;
-      history.pushState({ view: 'acts' }, '', href);
-      mountActs();
-    };
-
-
-    // Venue
-    document.getElementById('link-venue').onclick = (e) => {
-      e.preventDefault();
-      const href = `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&view=venue`;
-      history.pushState({ view: 'venue' }, '', href);
-      mountVenue();
-    };
-
-    // Songs
-    document.getElementById('link-songs').onclick = (e) => {
-      e.preventDefault();
-      const href = `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&view=songs`;
-      history.pushState({ view: 'songs' }, '', href);
-      mountSongs();
-    };
-
-    // Roles
-    document.getElementById('link-roles').onclick = (e) => {
-      e.preventDefault();
-      const href = `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&view=roles`;
-      history.pushState({ view: 'roles' }, '', href);
-      mountRoles();
-    };
-
-    // Era
-    document.getElementById('link-era').onclick = (e) => {
-      e.preventDefault();
-      const href = `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&view=era`;
-      history.pushState({ view: 'era' }, '', href);
-      mountEra();
-    };
-
-    // Tour
-    document.getElementById('link-tour').onclick = (e) => {
-      e.preventDefault();
-      const href = `?u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}&view=tour`;
-      history.pushState({ view: 'tour' }, '', href);
-      mountTour();
-    };
 
     const $ = s => document.querySelector(s);
     const status = $("#status");
@@ -944,17 +1400,6 @@
       setlistRows[i].version = $("#sl-version").value||"";
       renderSetlist(); status.textContent="（setlist: 更新・未保存）";
     }
-
-</script>
-
-<!-- <script src="editor.js"></script> -->
-<!-- <script src="master.js"></script> -->
-<script src="people.js"></script>
-<script src="acts.js"></script>
-<script src="songs.js"></script>
-<script src="venue.js"></script>
-<script src="roles.js"></script>
-<script src="era.js"></script>
-<script src="tour.js"></script>
-<script src="common.js"></script>
+  </script>
+</body>
 </html>

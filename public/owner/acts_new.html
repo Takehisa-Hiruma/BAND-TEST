@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Acts Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/common.css">
+<style>
+  html, body { height: 100%; margin:0; }
+  #wrap {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+  /* 左ペイン */
+  #left { display: flex; flex-direction: column; border-right:1px solid #ccc; min-height:0; }
+  #left .list-scroll { flex:1; min-height:0; overflow:auto; }
+  /* 表 */
+  #left table { width:100%; border-collapse: collapse; table-layout: fixed; }
+  #left th, #left td { padding:6px 8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-bottom:1px solid #ccc; }
+  /* 右ペイン */
+  #right { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+  .right-pane { flex:1; padding:12px; overflow:auto; display:flex; flex-direction:column; gap:8px; }
+  .row { display:flex; gap:8px; align-items:center; margin:4px 0; }
+  label { display:flex; gap:6px; align-items:center; }
+  input[type="text"], input[type="date"], select { padding:4px 6px; font:inherit; }
+  input[type="text"] { width:100%; }
+  button { padding:6px 10px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; }
+  button.primary { background:#0ea5e9; color:#fff; border-color:#0ea5e9; }
+</style>
+</head>
+<body>
+
+<div id="wrap">
+
+  <!-- 左ペイン -->
+  <div id="left">
+    <h3>Acts</h3>
+
+    <div class="row">
+      <input id="acts-q" type="search" placeholder="Actを検索" style="width:200px">
+      <button id="acts-btn-search">検索</button>
+      <button id="acts-btn-reload">再読込</button>
+    </div>
+
+    <hr>
+
+    <div class="list-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:64px">ID</th><th>Act</th></tr>
+        </thead>
+        <tbody id="acts-list"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 右ペイン -->
+  <div id="right">
+    <header class="toolbar">
+      <button id="acts-btn-new">新規</button>
+      <button id="acts-btn-save">保存</button>
+      <button id="acts-btn-delete">削除</button>
+    </header>
+
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="acts-f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Act Name <input id="acts-f-title" type="text" style="width:320px"></label></div>
+      <div class="row"><label>URL <input id="acts-f-url" type="text" style="width:360px"></label></div>
+      <!-- SNS -->
+      <div class="row"><label>X <input id="acts-f-x" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Instagram <input id="acts-f-instagram" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Threads <input id="acts-f-threads" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Facebook <input id="acts-f-facebook" type="text" style="width:360px"></label></div>
+      <div class="row"><label>YouTube <input id="acts-f-youtube" type="text" style="width:360px"></label></div>
+      <div class="row"><label>TikTok <input id="acts-f-tiktok" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Preview</label> <div id="acts-preview"></div></div>
+      <div id="acts-audit" class="hint" hidden></div>
+    </section>
+  </div>
+
+</div>
+
+<script type="module">
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+
+  let cur = null, page = 1, size = 50;
+
+  // 一覧描画
+  async function reload() {
+    const q = $("#acts-q")?.value?.trim() || "";
+    const data = await fetch(`/owner/api/acts/list?u=${new URLSearchParams(location.search).get("u")}&p=${new URLSearchParams(location.search).get("p")}&page=${page}&size=${size}&q=${encodeURIComponent(q)}`)
+                    .then(r => r.json());
+    const tbody = $("#acts-list");
+    tbody.innerHTML = "";
+    for (const it of data.items || []) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${it.id}</td><td>${it.name}</td>`;
+      tr.onclick = () => select(it.id);
+      if (cur?.id === it.id) tr.classList.add("active");
+      tbody.appendChild(tr);
+    }
+  }
+
+  // 明細セット
+  async function select(id) {
+    const data = await fetch(`/owner/api/acts/get?u=${new URLSearchParams(location.search).get("u")}&p=${new URLSearchParams(location.search).get("p")}&id=${id}`)
+                      .then(r => r.json());
+    cur = data;
+    $("#acts-f-id").value        = data.id ?? "";
+    $("#acts-f-title").value     = data.name ?? "";
+    $("#acts-f-url").value       = data.url ?? "";
+    $("#acts-f-x").value         = data.x ?? "";
+    $("#acts-f-instagram").value = data.instagram ?? "";
+    $("#acts-f-threads").value   = data.threads ?? "";
+    $("#acts-f-facebook").value  = data.facebook ?? "";
+    $("#acts-f-youtube").value   = data.youtube ?? "";
+    $("#acts-f-tiktok").value    = data.tiktok ?? "";
+    $("#acts-preview").textContent = data.preview ?? "";
+    $$("#acts-list tr").forEach(tr =>
+      tr.classList.toggle("active", Number(tr.firstChild.textContent) === id)
+    );
+  }
+
+  // 新規
+  function newItem() {
+    cur = { id:"", name:"", url:"", x:"", instagram:"", threads:"", facebook:"", youtube:"", tiktok:"", preview:"" };
+    $("#acts-f-id").value        = "";
+    $("#acts-f-title").value     = "";
+    $("#acts-f-url").value       = "";
+    $("#acts-f-x").value         = "";
+    $("#acts-f-instagram").value = "";
+    $("#acts-f-threads").value   = "";
+    $("#acts-f-facebook").value  = "";
+    $("#acts-f-youtube").value   = "";
+    $("#acts-f-tiktok").value    = "";
+    $("#acts-preview").textContent = "";
+    $("#acts-f-title").focus();
+  }
+
+  // 保存
+  async function save() {
+    const name = $("#acts-f-title").value.trim();
+    if (!name) return;
+    const payload = {
+      name,
+      url: $("#acts-f-url").value.trim() || null,
+      x: $("#acts-f-x").value.trim() || null,
+      instagram: $("#acts-f-instagram").value.trim() || null,
+      threads: $("#acts-f-threads").value.trim() || null,
+      facebook: $("#acts-f-facebook").value.trim() || null,
+      youtube: $("#acts-f-youtube").value.trim() || null,
+      tiktok: $("#acts-f-tiktok").value.trim() || null,
+      preview: $("#acts-preview").textContent || null
+    };
+    if (!cur?.id) {
+      cur = await fetch(`/owner/api/acts/create?u=${new URLSearchParams(location.search).get("u")}&p=${new URLSearchParams(location.search).get("p")}`, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)}).then(r=>r.json());
+    } else {
+      await fetch(`/owner/api/acts/update?u=${new URLSearchParams(location.search).get("u")}&p=${new URLSearchParams(location.search).get("p")}`, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ id: cur.id, ...payload})});
+    }
+    await reload();
+    window.dispatchEvent(new CustomEvent("master-changed", { detail: { kind: "acts" } }));
+  }
+
+  // 削除
+  async function del() {
+    if (!cur?.id) return;
+    if (!confirm(`ID ${cur.id} を削除します。よろしいですか？`)) return;
+    await fetch(`/owner/api/acts/delete?u=${new URLSearchParams(location.search).get("u")}&p=${new URLSearchParams(location.search).get("p")}`, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ id: cur.id})});
+    newItem();
+    await reload();
+    window.dispatchEvent(new CustomEvent("master-changed", { detail: { kind: "acts" } }));
+  }
+
+  // ハンドラ
+  $("#acts-btn-search").onclick = () => { page=1; reload(); };
+  $("#acts-btn-reload").onclick = () => reload();
+  $("#acts-btn-new").onclick    = () => newItem();
+  $("#acts-btn-save").onclick   = () => save();
+  $("#acts-btn-delete").onclick = () => del();
+
+  // 初期ロード
+  reload();
+  newItem();
+</script>
+
+</body>
+</html>

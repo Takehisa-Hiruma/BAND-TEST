@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Venues Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/common.css">
+<style>
+  html, body { height: 100%; margin:0; }
+  #wrap {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+  /* 左ペイン */
+  #left { display: flex; flex-direction: column; border-right:1px solid #ccc; min-height:0; }
+  #left .list-scroll { flex:1; min-height:0; overflow:auto; }
+  /* 表 */
+  #left table { width:100%; border-collapse: collapse; table-layout: fixed; }
+  #left th, #left td { padding:6px 8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-bottom:1px solid #ccc; }
+  /* 右ペイン */
+  #right { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+  .right-pane { flex:1; padding:12px; overflow:auto; display:flex; flex-direction:column; gap:8px; }
+  .row { display:flex; gap:8px; align-items:center; margin:4px 0; }
+  label { display:flex; gap:6px; align-items:center; }
+  input[type="text"], input[type="date"], select { padding:4px 6px; font:inherit; }
+  input[type="text"] { width:100%; }
+  button { padding:6px 10px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; }
+  button.primary { background:#0ea5e9; color:#fff; border-color:#0ea5e9; }
+</style>
+</head>
+<body>
+
+<div id="wrap">
+
+  <!-- 左ペイン -->
+  <div id="left">
+    <h3>Venues</h3>
+
+    <div class="row">
+      <input id="venues-q" type="search" placeholder="会場を検索" style="width:200px">
+      <button id="venues-btn-search">検索</button>
+      <button id="venues-btn-reload">再読込</button>
+    </div>
+
+    <hr>
+
+    <div class="list-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:64px">ID</th><th>Venue</th></tr>
+        </thead>
+        <tbody id="venues-list"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 右ペイン -->
+  <div id="right">
+    <header class="toolbar">
+      <button id="venues-btn-new">新規</button>
+      <button id="venues-btn-save">保存</button>
+      <button id="venues-btn-delete">削除</button>
+    </header>
+
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="venues-f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Name <input id="venues-f-title" type="text" style="width:320px"></label></div>
+      <div class="row"><label>URL <input id="venues-f-url" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Note <input id="venues-f-note" type="text" style="width:360px"></label></div>
+      <div class="row"><label>Preview</label> <div id="venues-preview"></div></div>
+      <div id="venues-audit" class="hint" hidden></div>
+    </section>
+  </div>
+
+</div>
+
+<script type="module">
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+
+  let cur = null, page = 1, size = 50;
+
+  // 一覧描画
+  async function reload() {
+    const q = $("#venues-q")?.value?.trim() || "";
+    const u = new URLSearchParams(location.search).get("u");
+    const p = new URLSearchParams(location.search).get("p");
+    const data = await fetch(`/owner/api/venues/list?u=${u}&p=${p}&page=${page}&size=${size}&q=${encodeURIComponent(q)}`)
+                      .then(r => r.json());
+    const tbody = $("#venues-list");
+    tbody.innerHTML = "";
+    for (const it of data.items || []) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${it.id}</td><td>${it.name}</td>`;
+      tr.onclick = () => select(it.id);
+      if(cur?.id === it.id) tr.classList.add("active");
+      tbody.appendChild(tr);
+    }
+  }
+
+  // 明細セット
+  async function select(id) {
+    const u = new URLSearchParams(location.search).get("u");
+    const p = new URLSearchParams(location.search).get("p");
+    const data = await fetch(`/owner/api/venues/get?u=${u}&p=${p}&id=${id}`).then(r => r.json());
+    cur = data;
+    $("#venues-f-id").value     = data.id ?? "";
+    $("#venues-f-title").value  = data.name ?? "";
+    $("#venues-f-url").value    = data.url ?? "";
+    $("#venues-f-note").value   = data.note ?? "";
+    $$("#venues-list tr").forEach(tr => tr.classList.toggle("active", Number(tr.firstChild.textContent) === id));
+  }
+
+  // 新規
+  function newItem() {
+    cur = { id:"", name:"", url:"", note:"" };
+    $("#venues-f-id").value    = "";
+    $("#venues-f-title").value = "";
+    $("#venues-f-url").value   = "";
+    $("#venues-f-note").value  = "";
+    $("#venues-f-title").focus();
+  }
+
+  // 保存
+  async function save() {
+    const name = $("#venues-f-title").value.trim();
+    const url = $("#venues-f-url").value.trim() || null;
+    const note = $("#venues-f-note").value.trim() || null;
+    if(!name) return;
+    const u = new URLSearchParams(location.search).get("u");
+    const p = new URLSearchParams(location.search).get("p");
+    if(!cur?.id){
+      cur = await fetch(`/owner/api/venues/create?u=${u}&p=${p}`, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({name,url,note})
+      }).then(r => r.json());
+    } else {
+      await fetch(`/owner/api/venues/update?u=${u}&p=${p}`, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({id:cur.id,name,url,note})
+      });
+    }
+    await reload();
+  }
+
+  // 削除
+  async function del() {
+    if(!cur?.id) return;
+    if(!confirm(`ID ${cur.id} を削除します。よろしいですか？`)) return;
+    const u = new URLSearchParams(location.search).get("u");
+    const p = new URLSearchParams(location.search).get("p");
+    await fetch(`/owner/api/venues/delete?u=${u}&p=${p}`, {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({id:cur.id})
+    });
+    cur = null;
+    newItem();
+    await reload();
+  }
+
+  // ハンドラ
+  $("#venues-btn-search").onclick = () => { page=1; reload(); };
+  $("#venues-btn-reload").onclick = () => reload();
+  $("#venues-btn-new").onclick    = () => newItem();
+  $("#venues-btn-save").onclick   = () => save();
+  $("#venues-btn-delete").onclick = () => del();
+
+  // 初期ロード
+  reload();
+  newItem();
+</script>
+
+</body>
+</html>

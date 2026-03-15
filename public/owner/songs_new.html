@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Songs Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/common.css">
+<style>
+  html, body { height: 100%; margin:0; }
+  #wrap {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #left { display: flex; flex-direction: column; border-right:1px solid #ccc; min-height:0; }
+  #left .list-scroll { flex:1; min-height:0; overflow:auto; }
+  #left table { width:100%; border-collapse: collapse; table-layout: fixed; }
+  #left th, #left td { padding:6px 8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-bottom:1px solid #ccc; }
+  #right { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+  .right-pane { flex:1; padding:12px; overflow:auto; display:flex; flex-direction:column; gap:8px; }
+  .row { display:flex; gap:8px; align-items:center; margin:4px 0; }
+  label { display:flex; gap:6px; align-items:center; }
+  input[type="text"], input[type="date"], select { padding:4px 6px; font:inherit; }
+  input[type="text"] { width:100%; }
+  button { padding:6px 10px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; }
+  button.primary { background:#0ea5e9; color:#fff; border-color:#0ea5e9; }
+  .hint { font-size:0.9em; color:#666; margin-top:4px; }
+</style>
+</head>
+<body>
+
+<div id="wrap">
+
+  <!-- 左ペイン -->
+  <div id="left">
+    <h3>Songs</h3>
+
+    <div class="row">
+      <input id="songs-q" type="search" placeholder="曲名を検索" style="width:200px">
+      <button id="songs-btn-search">検索</button>
+      <button id="songs-btn-reload">再読込</button>
+    </div>
+
+    <hr>
+
+    <div class="list-scroll">
+      <table>
+        <thead><tr><th style="width:64px">ID</th><th>Title</th></tr></thead>
+        <tbody id="songs-list"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 右ペイン -->
+  <div id="right">
+    <header class="toolbar">
+      <button id="songs-btn-new">新規</button>
+      <button id="songs-btn-save">保存</button>
+      <button id="songs-btn-delete">削除</button>
+    </header>
+
+    <section class="right-pane">
+      <div class="row"><label>ID <input id="songs-f-id" type="text" readonly style="width:80px"></label></div>
+      <div class="row"><label>Title <input id="songs-f-title" type="text" style="width:320px"></label></div>
+      <div id="songs-audit" class="hint" hidden></div>
+    </section>
+  </div>
+
+</div>
+
+<script type="module">
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+let cur = null, page = 1, size = 50;
+
+function escapeHtml(s){ return (s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+
+// 一覧描画
+async function reload() {
+  const q = $("#songs-q")?.value?.trim() || "";
+  const u = new URLSearchParams(location.search).get("u");
+  const p = new URLSearchParams(location.search).get("p");
+  const data = await fetch(`/owner/api/songs/list?u=${u}&p=${p}&page=${page}&size=${size}&q=${encodeURIComponent(q)}`)
+                      .then(r => r.json());
+  const tbody = $("#songs-list");
+  tbody.innerHTML = "";
+  for (const it of data.items || []) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${it.id}</td><td>${escapeHtml(it.title)}</td>`;
+    tr.onclick = () => select(it.id);
+    if(cur?.id === it.id) tr.classList.add("active");
+    tbody.appendChild(tr);
+  }
+}
+
+// 明細セット
+async function select(id) {
+  const u = new URLSearchParams(location.search).get("u");
+  const p = new URLSearchParams(location.search).get("p");
+  const data = await fetch(`/owner/api/songs/get?u=${u}&p=${p}&id=${id}`).then(r => r.json());
+  cur = data;
+  $("#songs-f-id").value = data.id;
+  $("#songs-f-title").value = data.title;
+  $$("#songs-list tr").forEach(tr => tr.classList.toggle("active", Number(tr.firstChild.textContent) === id));
+}
+
+// 新規
+function newItem() {
+  cur = { id:"", title:"" };
+  $("#songs-f-id").value = "";
+  $("#songs-f-title").value = "";
+  $("#songs-f-title").focus();
+}
+
+// 保存
+async function save() {
+  const title = $("#songs-f-title").value.trim();
+  if (!title) { alert("タイトルは必須です"); $("#songs-f-title").focus(); return; }
+  const u = new URLSearchParams(location.search).get("u");
+  const p = new URLSearchParams(location.search).get("p");
+  if(!cur?.id){
+    cur = await fetch(`/owner/api/songs/create?u=${u}&p=${p}`, {
+      method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({title})
+    }).then(r => r.json());
+  } else {
+    await fetch(`/owner/api/songs/update?u=${u}&p=${p}`, {
+      method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({id:cur.id,title})
+    });
+  }
+  await reload();
+  window.dispatchEvent(new CustomEvent('master-changed', { detail:{ kind:'songs' } }));
+}
+
+// 削除
+async function del() {
+  if (!cur?.id) return;
+  if (!confirm(`ID ${cur.id} を削除します。よろしいですか？`)) return;
+  const u = new URLSearchParams(location.search).get("u");
+  const p = new URLSearchParams(location.search).get("p");
+  await fetch(`/owner/api/songs/delete?u=${u}&p=${p}`, {
+    method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({id:cur.id})
+  });
+  cur = null; newItem();
+  await reload();
+  window.dispatchEvent(new CustomEvent('master-changed', { detail:{ kind:'songs' } }));
+}
+
+// ハンドラ
+$("#songs-btn-search").onclick = () => { page=1; reload(); };
+$("#songs-btn-reload").onclick = () => reload();
+$("#songs-btn-new").onclick = newItem;
+$("#songs-btn-save").onclick = save;
+$("#songs-btn-delete").onclick = del;
+
+// 初期ロード
+reload();
+newItem();
+</script>
+
+</body>
+</html>
